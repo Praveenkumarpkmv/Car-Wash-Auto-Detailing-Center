@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, viewport-fit=cover">
+    <title>404 — Page Not Found | AquaShine Premium Car Wash & Auto Detailing</title>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='75' font-size='75' text-anchor='middle'%3E🚗%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'navy': '#0A192F',
+                        'aqua': '#00B4D8',
+                        'navy-light': '#112240',
+                        'navy-dark': '#020C1B',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .floating { animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        .floating-slow { animation: float 8s ease-in-out infinite; }
+        .floating-rev { animation: float 7s ease-in-out infinite reverse; }
+
+        [dir="rtl"] .floating,
+        [dir="rtl"] .floating-slow,
+        [dir="rtl"] .floating-rev { animation-direction: reverse; }
+
+        /* ===== MAIN LAYOUT ===== */
+        .err-shell {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #0A192F 0%, #0f2644 50%, #0A192F 100%);
+            overflow: hidden;
+        }
+
+        /* Ambient background blobs */
+        .err-shell::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 180, 216, 0.22) 0%, transparent 70%);
+            pointer-events: none;
+            filter: blur(60px);
+        }
+        .err-shell::after {
+            content: '';
+            position: absolute;
+            bottom: -220px;
+            left: -180px;
+            width: 560px;
+            height: 560px;
+            background: radial-gradient(circle, rgba(0, 180, 216, 0.14) 0%, transparent 70%);
+            pointer-events: none;
+            filter: blur(70px);
+        }
+
+        /* Grid pattern overlay */
+        .err-grid-bg {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 180, 216, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 180, 216, 0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+        }
+
+        /* Floating icons */
+        .err-float-icons {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.12;
+            color: #00B4D8;
+            z-index: 1;
+        }
+        .err-float-icons > div { position: absolute; }
+
+        /* ===== LOGO ===== */
+        .err-logo {
+            position: relative;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            margin-bottom: 50px;
+            transition: transform 0.3s ease;
+        }
+        .err-logo:hover { transform: scale(1.04); }
+        .err-logo-icon {
+            background: linear-gradient(145deg, #00B4D8 0%, #0090b0 100%);
+            width: 52px;
+            height: 52px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 28px rgba(0, 180, 216, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .err-logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.35) 50%, transparent 70%);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+        }
+        .err-logo:hover .err-logo-icon::before { left: 100%; }
+        .err-logo-icon i {
+            color: #0A192F;
+            font-size: 1.55rem;
+            position: relative;
+            z-index: 1;
+        }
+        .err-logo-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .err-logo-title {
+            font-size: 1.55rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: #ffffff;
+            line-height: 1;
+        }
+        .err-logo-title .hl { color: #00B4D8; }
+        .err-logo-sub {
+            font-size: 0.5rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.45);
+            font-weight: 600;
+            margin-top: 3px;
+        }
+
+        /* ===== 404 CARD ===== */
+        .err-card {
+            position: relative;
+            z-index: 5;
+            max-width: 780px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .err-code-wrap {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        .err-code {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(9rem, 22vw, 16rem);
+            font-weight: 700;
+            line-height: 0.85;
+            letter-spacing: -0.06em;
+            background: linear-gradient(180deg, #00B4D8 0%, #0090b0 55%, rgba(0, 180, 216, 0.15) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            filter: drop-shadow(0 12px 60px rgba(0, 180, 216, 0.35));
+            position: relative;
+            display: inline-block;
+            user-select: none;
+        }
+        /* Bubble accent near the 0 */
+        .err-code .zero-wrap {
+            position: relative;
+            display: inline-block;
+        }
+        .err-code .zero-wrap::before {
+            content: '';
+            position: absolute;
+            top: 26%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 26%;
+            height: 26%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.5) 0%, rgba(0,180,216,0.4) 40%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .err-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 22px;
+            border-radius: 40px;
+            background: rgba(0, 180, 216, 0.12);
+            border: 1px solid rgba(0, 180, 216, 0.35);
+            color: #00B4D8;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 26px;
+        }
+        .err-badge-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #00B4D8;
+            animation: errPulse 1.8s ease-in-out infinite;
+        }
+        @keyframes errPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        .err-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 18px;
+        }
+        .err-title .italic { font-style: italic; color: #00B4D8; }
+
+        .err-desc {
+            font-size: 1.02rem;
+            color: rgba(255, 255, 255, 0.68);
+            line-height: 1.75;
+            max-width: 540px;
+            margin: 0 auto 38px;
+        }
+
+        /* ===== ACTIONS ===== */
+        .err-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            justify-content: center;
+            margin-bottom: 56px;
+        }
+        .err-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 34px;
+            border-radius: 60px;
+            background: #00B4D8;
+            color: #0A192F;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 12px 30px -8px rgba(0, 180, 216, 0.5);
+        }
+        .err-btn-primary:hover {
+            background: #0096b5;
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 20px 40px -10px rgba(0, 180, 216, 0.6);
+        }
+        .err-btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 34px;
+            border-radius: 60px;
+            background: transparent;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .err-btn-outline:hover {
+            border-color: #00B4D8;
+            color: #00B4D8;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px -12px rgba(0, 180, 216, 0.4);
+        }
+
+        /* ===== HELPFUL LINKS ===== */
+        .err-links-label {
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+        .err-links-label::before,
+        .err-links-label::after {
+            content: '';
+            width: 44px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .err-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .err-link-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 11px 20px;
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+        .err-link-chip i {
+            color: #00B4D8;
+            font-size: 0.85rem;
+            transition: transform 0.3s ease;
+        }
+        .err-link-chip:hover {
+            background: rgba(0, 180, 216, 0.14);
+            border-color: #00B4D8;
+            color: #00B4D8;
+            transform: translateY(-3px);
+        }
+        .err-link-chip:hover i {
+            transform: scale(1.2);
+        }
+
+        /* ===== CONTACT STRIP (bottom) ===== */
+        .err-contact {
+            position: relative;
+            z-index: 5;
+            margin-top: 52px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 26px;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.55);
+        }
+        .err-contact a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.25s ease;
+        }
+        .err-contact a:hover { color: #00B4D8; }
+        .err-contact a i { color: #00B4D8; }
+        .err-contact-divider {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 640px) {
+            .err-logo { margin-bottom: 36px; }
+            .err-logo-icon { width: 44px; height: 44px; border-radius: 14px; }
+            .err-logo-icon i { font-size: 1.3rem; }
+            .err-logo-title { font-size: 1.25rem; }
+            .err-logo-sub { font-size: 0.42rem; }
+            .err-desc { font-size: 0.95rem; }
+            .err-btn-primary,
+            .err-btn-outline {
+                padding: 13px 24px;
+                font-size: 0.86rem;
+                width: 100%;
+                justify-content: center;
+            }
+            .err-actions { width: 100%; max-width: 340px; margin-left: auto; margin-right: auto; }
+            .err-link-chip { font-size: 0.78rem; padding: 9px 16px; }
+            .err-links-label::before,
+            .err-links-label::after { width: 24px; }
+        }
+
+        @media (max-width: 400px) {
+            .err-logo-sub { display: none; }
+            .err-code { letter-spacing: -0.08em; }
+        }
+    </style>
+</head>
+<body class="dark">
+
+    <!-- ===== FULL SCREEN 404 SHELL ===== -->
+    <main class="err-shell">
+
+        <!-- Ambient decoration layers -->
+        <div class="err-grid-bg"></div>
+
+        <div class="err-float-icons">
+            <div class="floating" style="top: 14%; left: 8%;"><i class="fas fa-car-side fa-4x"></i></div>
+            <div class="floating-slow" style="top: 22%; right: 10%;"><i class="fas fa-soap fa-3x"></i></div>
+            <div class="floating-rev" style="bottom: 20%; left: 12%;"><i class="fas fa-water fa-3x"></i></div>
+            <div class="floating" style="bottom: 14%; right: 14%;"><i class="fas fa-spray-can-sparkles fa-4x"></i></div>
+            <div class="floating-slow" style="top: 48%; left: 4%;"><i class="fas fa-gem fa-3x"></i></div>
+            <div class="floating-rev" style="top: 62%; right: 5%;"><i class="fas fa-shield-alt fa-3x"></i></div>
+        </div>
+
+        <!-- Logo -->
+        <a href="index.html" class="err-logo" aria-label="AquaShine home">
+            <div class="err-logo-icon">
+                <i class="fas fa-car-side"></i>
+            </div>
+            <div class="err-logo-text">
+                <span class="err-logo-title">Aqua<span class="hl">Shine</span></span>
+                <span class="err-logo-sub">Car Wash & Detailing</span>
+            </div>
+        </a>
+
+        <!-- 404 Card -->
+        <div class="err-card">
+
+            <div class="err-code-wrap">
+                <div class="err-code">
+                    4<span class="zero-wrap">0</span>4
+                </div>
+            </div>
+
+            <div class="err-badge">
+                <span class="err-badge-dot"></span>
+                Page Not Found
+            </div>
+
+            <h1 class="err-title">
+                Looks Like This Page <span class="italic">Took a Detour</span>
+            </h1>
+
+            <p class="err-desc">
+                The page you're looking for has been moved, removed, or never existed. Don't worry — your car is still in good hands. Let's get you back on the road.
+            </p>
+
+            <div class="err-actions">
+                <a href="index.html" class="err-btn-primary">
+                    <i class="fas fa-home"></i> Back to Homepage
+                </a>
+                <a href="contact.html" class="err-btn-outline">
+                    <i class="fas fa-headset"></i> Contact Support
+                </a>
+            </div>
+
+            <div class="err-links-label">Popular Destinations</div>
+
+            <div class="err-links">
+                <a href="wash-packages.html" class="err-link-chip">
+                    <i class="fas fa-soap"></i> Wash Packages
+                </a>
+                <a href="auto-detailing.html" class="err-link-chip">
+                    <i class="fas fa-wand-magic-sparkles"></i> Auto Detailing
+                </a>
+                <a href="ceramic-protection.html" class="err-link-chip">
+                    <i class="fas fa-shield-alt"></i> Ceramic Protection
+                </a>
+                <a href="interior-care.html" class="err-link-chip">
+                    <i class="fas fa-couch"></i> Interior Care
+                </a>
+                <a href="pricing.html" class="err-link-chip">
+                    <i class="fas fa-tag"></i> Pricing
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Quick contact strip -->
+        <div class="err-contact">
+            <a href="tel:+18885550199"><i class="fas fa-phone"></i> (888) 555-0199</a>
+            <span class="err-contact-divider"></span>
+            <a href="mailto:info@aquashine.com"><i class="fas fa-envelope"></i> info@aquashine.com</a>
+            <span class="err-contact-divider"></span>
+            <a href="contact.html"><i class="fas fa-map-marker-alt"></i> Visit Our Studio</a>
+        </div>
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, viewport-fit=cover">
+    <title>About Us | AquaShine Premium Car Wash & Auto Detailing</title>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='75' font-size='75' text-anchor='middle'%3E🚗%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'navy': '#0A192F',
+                        'aqua': '#00B4D8',
+                        'navy-light': '#112240',
+                        'navy-dark': '#020C1B',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .floating { animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        [dir="rtl"] .floating { animation-direction: reverse; }
+
+        /* ===== NAVBAR ===== */
+        .navbar-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 50;
+            padding: 18px 24px;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+        .navbar-wrapper.scrolled {
+            padding: 10px 24px;
+            background: rgba(10, 25, 47, 0.97);
+            backdrop-filter: blur(20px) saturate(180%);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+        }
+        .dark .navbar-wrapper.scrolled {
+            background: rgba(2, 12, 27, 0.98);
+        }
+
+        .navbar-inner {
+            max-width: 1540px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        /* ===== LOGO ===== */
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+            text-decoration: none;
+        }
+        .logo-icon {
+            background: linear-gradient(145deg, #00B4D8 0%, #0090b0 100%);
+            width: 50px;
+            height: 50px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 24px rgba(0, 180, 216, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            flex-shrink: 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+        }
+        .logo-icon:hover::before { left: 100%; }
+        .logo-icon:hover { transform: scale(1.05) rotate(-3deg); box-shadow: 0 8px 32px rgba(0, 180, 216, 0.55); }
+        .logo-icon i {
+            color: #0A192F;
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.15);
+        }
+        .logo-text-group {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: #ffffff;
+            line-height: 1;
+            font-family: 'Inter', sans-serif;
+        }
+        .logo-text .highlight { color: #00B4D8; }
+        .logo-sub {
+            font-size: 0.5rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.45);
+            font-weight: 600;
+            display: block;
+            margin-top: 3px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Desktop Navigation */
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            flex: 1;
+            margin: 0 12px;
+        }
+        .nav-link {
+            padding: 7px 12px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.88rem;
+            letter-spacing: 0.01em;
+            color: rgba(255, 255, 255, 0.85);
+            transition: all 0.25s ease;
+            cursor: pointer;
+            white-space: nowrap;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: #00B4D8;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after { width: 60%; }
+        .nav-link:hover { color: #ffffff; }
+        .nav-link.active { color: #00B4D8; font-weight: 600; }
+
+        /* Dropdown */
+        .dropdown-wrapper { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 190px;
+            background: rgba(10, 25, 47, 0.98);
+            backdrop-filter: blur(16px);
+            border-radius: 16px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-50%) translateY(10px);
+            transition: all 0.25s ease;
+            z-index: 1000;
+            border: 1px solid rgba(0, 180, 216, 0.2);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.6);
+        }
+        .dark .dropdown-menu { background: rgba(2, 12, 27, 0.98); }
+        .dropdown-wrapper:hover .dropdown-menu,
+        .dropdown-wrapper.open .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 22px;
+            gap: 10px;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.85);
+            cursor: pointer;
+            border-radius: 10px;
+            margin: 2px 10px;
+            text-decoration: none;
+        }
+        .dropdown-item:hover { background: rgba(0, 180, 216, 0.15); color: #00B4D8; }
+        .dropdown-item.active { background: rgba(0, 180, 216, 0.12); color: #00B4D8; font-weight: 600; }
+
+        /* Right Actions */
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .auth-toggle-wrapper {
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .auth-toggle-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        .auth-toggle-btn:hover {
+            background: rgba(0, 180, 216, 0.2);
+            border-color: #00B4D8;
+            color: #00B4D8;
+            transform: scale(1.05);
+        }
+
+        .auth-dropdown {
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            min-width: 220px;
+            background: rgba(10, 25, 47, 0.98);
+            backdrop-filter: blur(16px);
+            border-radius: 16px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px) scale(0.95);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 1px solid rgba(0, 180, 216, 0.2);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.6);
+        }
+        .dark .auth-dropdown { background: rgba(2, 12, 27, 0.98); }
+        .auth-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        .auth-dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 22px;
+            gap: 14px;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.85);
+            cursor: pointer;
+            border-radius: 10px;
+            margin: 2px 10px;
+            text-decoration: none;
+        }
+        .auth-dropdown-item:hover {
+            background: rgba(0, 180, 216, 0.15);
+            color: #00B4D8;
+        }
+        .auth-dropdown-item i { width: 22px; text-align: center; color: #00B4D8; }
+        .auth-dropdown-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+            margin: 6px 20px;
+        }
+
+        .btn-icon-rounded {
+            width: 40px;
+            height: 40px;
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.8);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.95rem;
+        }
+        .dark .btn-icon-rounded { background: rgba(255, 255, 255, 0.04); color: rgba(255, 255, 255, 0.6); }
+        .btn-icon-rounded:hover { background: #00B4D8; color: #0A192F; border-color: #00B4D8; }
+
+        .mobile-toggle {
+            display: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .mobile-toggle:hover { background: rgba(0, 180, 216, 0.2); border-color: #00B4D8; }
+
+        .mobile-menu {
+            display: none;
+            background: rgba(10, 25, 47, 0.98);
+            backdrop-filter: blur(16px);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 180, 216, 0.15);
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+            margin: 12px 0 0 auto;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8);
+        }
+        .dark .mobile-menu { background: rgba(2, 12, 27, 0.98); }
+        .mobile-menu.open { max-height: 85vh; overflow-y: auto; }
+        .mobile-menu-item {
+            display: block;
+            padding: 14px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-weight: 500;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.85);
+            transition: all 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .mobile-menu-item:last-child { border-bottom: none; }
+        .mobile-menu-item.active { color: #00B4D8; font-weight: 600; background: rgba(0, 180, 216, 0.06); border-left: 3px solid #00B4D8; }
+        .mobile-menu-item:hover { background: rgba(255, 255, 255, 0.04); }
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: rgba(0, 0, 0, 0.15);
+        }
+        .mobile-dropdown-content.show { max-height: 300px; }
+        .mobile-dropdown-item {
+            display: block;
+            padding: 10px 24px 10px 40px;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .mobile-dropdown-item:hover { color: #00B4D8; }
+        .mobile-dropdown-item.active { color: #00B4D8; font-weight: 600; }
+
+        .mobile-actions {
+            padding: 16px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .mobile-actions .btn-mobile-action {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .mobile-actions .btn-mobile-action:hover {
+            background: rgba(0, 180, 216, 0.15);
+            border-color: #00B4D8;
+            color: #00B4D8;
+        }
+        .mobile-actions .btn-mobile-action i { width: 20px; text-align: center; color: #00B4D8; }
+
+        /* Responsive - Laptop View */
+        @media (min-width: 1200px) and (max-width: 1399px) {
+            .navbar-inner { gap: 8px; }
+            .desktop-nav { gap: 2px; margin: 0 4px; }
+            .nav-link { padding: 6px 9px; font-size: 0.82rem; }
+            .logo-text { font-size: 1.35rem; }
+            .logo-icon { width: 44px; height: 44px; }
+        }
+
+        /* Responsive - Tab View (Hamburger appears only here and below) */
+        @media (max-width: 1199px) {
+            .desktop-nav { display: none !important; }
+            .mobile-toggle { display: flex !important; }
+            .mobile-menu { display: block; }
+            .navbar-wrapper { padding: 14px 20px; }
+            .navbar-wrapper.scrolled { padding: 8px 20px; }
+            .logo-icon { width: 44px; height: 44px; border-radius: 14px; }
+            .logo-icon i { font-size: 1.3rem; }
+            .logo-text { font-size: 1.3rem; }
+            .logo-sub { font-size: 0.45rem; }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu {
+                max-width: 100%;
+                margin: 8px 0 0 0;
+                border-radius: 0 0 20px 20px;
+            }
+            .nav-actions .btn-icon-rounded { display: none; }
+            .nav-actions .auth-toggle-wrapper { display: none; }
+            .navbar-wrapper { padding: 10px 16px; }
+            .navbar-wrapper.scrolled { padding: 6px 16px; }
+            .logo-icon { width: 38px; height: 38px; border-radius: 12px; }
+            .logo-icon i { font-size: 1.1rem; }
+            .logo-text { font-size: 1.1rem; }
+            .logo-sub { font-size: 0.4rem; }
+            .mobile-toggle { width: 38px; height: 38px; font-size: 1.05rem; }
+            .mobile-menu-item { font-size: 0.95rem; padding: 12px 20px; }
+            .mobile-actions .btn-mobile-action { font-size: 0.8rem; padding: 8px 16px; }
+        }
+
+        @media (max-width: 480px) {
+            .navbar-wrapper { padding: 8px 12px; }
+            .navbar-wrapper.scrolled { padding: 5px 12px; }
+            .logo-icon { width: 34px; height: 34px; border-radius: 10px; }
+            .logo-icon i { font-size: 1rem; }
+            .logo-text { font-size: 1rem; }
+            .logo-sub { display: none; }
+            .mobile-toggle { width: 34px; height: 34px; font-size: 0.95rem; border-radius: 10px; }
+            .mobile-menu-item { font-size: 0.9rem; padding: 12px 18px; }
+            .mobile-actions .btn-mobile-action { font-size: 0.75rem; padding: 7px 14px; }
+        }
+
+        @media (max-width: 360px) {
+            .navbar-wrapper { padding: 6px 10px; }
+            .logo-icon { width: 28px; height: 28px; border-radius: 8px; }
+            .logo-icon i { font-size: 0.8rem; }
+            .logo-text { font-size: 0.85rem; }
+            .mobile-toggle { width: 30px; height: 30px; font-size: 0.85rem; }
+            .mobile-menu-item { font-size: 0.85rem; padding: 10px 16px; }
+            .mobile-actions .btn-mobile-action { font-size: 0.7rem; padding: 6px 12px; }
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-primary {
+            background: #00B4D8;
+            color: #0A192F;
+            padding: 0.9rem 2.2rem;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-primary:hover { background: #0096b5; transform: scale(1.03); box-shadow: 0 8px 30px rgba(0, 180, 216, 0.45); }
+        .btn-outline {
+            border: 2px solid #00B4D8;
+            background: transparent;
+            color: #00B4D8;
+            padding: 0.85rem 2.2rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .btn-outline:hover { background: #00B4D8; color: #0A192F; }
+
+        /* ===== SECTION DIVIDERS ===== */
+        .section-divider {
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #00B4D8, transparent);
+            margin: 0 auto;
+            width: 200px;
+            border-radius: 4px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            border: 1px solid #00B4D8;
+            color: #00B4D8;
+            background: rgba(0, 180, 216, 0.08);
+        }
+
+        /* ===== TEAM CARDS ===== */
+        .team-card {
+            background: #FFFFFF;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid #E8E8E8;
+            text-align: center;
+        }
+        .dark .team-card {
+            background: #112240;
+            border-color: #1A2A3A;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+        }
+        .team-card:hover {
+            transform: translateY(-10px);
+            border-color: #00B4D8;
+            box-shadow: 0 30px 60px -20px rgba(0, 180, 216, 0.3);
+        }
+        .team-image-wrapper {
+            position: relative;
+            padding-top: 100%;
+            overflow: hidden;
+            background: #f0f7fa;
+        }
+        .dark .team-image-wrapper {
+            background: #0A192F;
+        }
+        .team-image-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .team-card:hover .team-image-wrapper img {
+            transform: scale(1.08);
+        }
+        .team-social-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 16px;
+            background: linear-gradient(0deg, rgba(10,25,47,0.9) 0%, transparent 100%);
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+        }
+        .team-card:hover .team-social-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .team-social-overlay a {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .team-social-overlay a:hover {
+            background: #00B4D8;
+            color: #0A192F;
+            transform: scale(1.1);
+        }
+        .team-content {
+            padding: 24px 20px 28px;
+        }
+        .team-name {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0A192F;
+            margin-bottom: 4px;
+            letter-spacing: -0.02em;
+            transition: color 0.3s ease;
+        }
+        .dark .team-name {
+            color: #ffffff;
+        }
+        .team-card:hover .team-name {
+            color: #00B4D8;
+        }
+        .team-role {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #00B4D8;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 12px;
+        }
+        .team-bio {
+            color: #64748b;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .dark .team-bio {
+            color: #94a3b8;
+        }
+
+        /* ===== STATS ===== */
+        .stat-card {
+            background: #FFFFFF;
+            border-radius: 24px;
+            padding: 32px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid #E8E8E8;
+            transition: all 0.4s ease;
+        }
+        .dark .stat-card {
+            background: #112240;
+            border-color: #1A2A3A;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        .stat-card:hover {
+            transform: translateY(-6px);
+            border-color: #00B4D8;
+            box-shadow: 0 20px 40px -15px rgba(0, 180, 216, 0.3);
+        }
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #0A192F;
+            line-height: 1;
+            letter-spacing: -0.03em;
+        }
+        .dark .stat-number {
+            color: #ffffff;
+        }
+        .stat-number span {
+            color: #00B4D8;
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #64748b;
+            margin-top: 8px;
+        }
+        .dark .stat-label {
+            color: #94a3b8;
+        }
+
+        /* ===== VALUE CARDS ===== */
+        .value-card {
+            background: #FFFFFF;
+            border-radius: 28px;
+            padding: 36px 28px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid #E8E8E8;
+            transition: all 0.4s ease;
+        }
+        .dark .value-card {
+            background: #112240;
+            border-color: #1A2A3A;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        .value-card:hover {
+            transform: translateY(-8px);
+            border-color: #00B4D8;
+            box-shadow: 0 25px 50px -15px rgba(0, 180, 216, 0.3);
+        }
+        .value-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 20px;
+            background: rgba(0, 180, 216, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            transition: all 0.3s ease;
+        }
+        .value-card:hover .value-icon {
+            background: #00B4D8;
+            transform: scale(1.05) rotate(-5deg);
+        }
+        .value-icon i {
+            font-size: 1.6rem;
+            color: #00B4D8;
+            transition: color 0.3s ease;
+        }
+        .value-card:hover .value-icon i {
+            color: #0A192F;
+        }
+        .value-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #0A192F;
+            margin-bottom: 10px;
+        }
+        .dark .value-title {
+            color: #ffffff;
+        }
+        .value-desc {
+            color: #64748b;
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+        .dark .value-desc {
+            color: #94a3b8;
+        }
+
+        /* ===== SOCIAL ICON ===== */
+        .social-icon {
+            width: 44px; height: 44px;
+            background: rgba(255,255,255,0.06);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 60px;
+            transition: all 0.3s;
+            color: #00B4D8;
+            border: 1px solid rgba(0, 180, 216, 0.2);
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        .dark .social-icon { background: rgba(255,255,255,0.04); }
+        .social-icon:hover { background: #00B4D8 !important; color: #0A192F; transform: translateY(-3px); }
+
+        section {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-3xl {
+            width: 100%;
+            max-width: 100%;
+            padding-left: 24px;
+            padding-right: 24px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 640px) {
+            .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-3xl {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-3xl {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-3xl {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .hero-title { font-size: 2.4rem !important; }
+            .section-title { font-size: 2rem !important; }
+            .btn-primary, .btn-outline { padding: 0.7rem 1.4rem; font-size: 0.85rem; }
+            .team-content { padding: 20px 16px 24px; }
+            .team-name { font-size: 1.15rem; }
+        }
+        @media (max-width: 360px) {
+            .hero-title { font-size: 2rem !important; }
+            .section-title { font-size: 1.7rem !important; }
+        }
+
+        /* ===== DARK MODE BACKGROUNDS ===== */
+        .section-light-bg {
+            background-color: #F0F7FA;
+            transition: background-color 0.3s ease;
+        }
+        .dark .section-light-bg {
+            background-color: #0A192F;
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-navy-dark text-gray-900 dark:text-gray-100 transition-colors duration-300 font-sans">
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar-wrapper" id="navbarWrapper">
+        <div class="navbar-inner">
+            <a href="index.html" class="logo-wrapper">
+                <div class="logo-icon">
+                    <i class="fas fa-car-side"></i>
+                </div>
+                <div class="logo-text-group">
+                    <span class="logo-text">Aqua<span class="highlight">Shine</span></span>
+                    <span class="logo-sub">Car Wash & Detailing</span>
+                </div>
+            </a>
+
+            <div class="desktop-nav">
+                <div class="dropdown-wrapper keep">
+                    <span class="nav-link">Home <i class="fas fa-chevron-down text-[10px] ml-1 opacity-60"></i></span>
+                    <div class="dropdown-menu">
+                        <a href="index.html" class="dropdown-item">Home 1</a>
+                        <a href="home2.html" class="dropdown-item">Home 2</a>
+                    </div>
+                </div>
+                <a href="about.html" class="nav-link active">About Us</a>
+                <a href="wash-packages.html" class="nav-link">Wash Packages</a>
+                <a href="auto-detailing.html" class="nav-link">Auto Detailing</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="pricing.html" class="nav-link">Pricing</a>
+                <a href="ceramic-protection.html" class="nav-link">Ceramic Protection</a>
+                <a href="interior-care.html" class="nav-link">Interior Care</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <button id="rtl-toggle" class="btn-icon-rounded" title="RTL">⇄</button>
+                <button id="theme-toggle" class="btn-icon-rounded" title="Theme"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+                
+                <div class="auth-toggle-wrapper" id="authToggleWrapper">
+                    <button class="auth-toggle-btn" id="authToggleBtn" title="Account">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="auth-dropdown" id="authDropdown">
+                        <a href="login.html" class="auth-dropdown-item">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span class="item-label">Log In</span>
+                        </a>
+                        <div class="auth-dropdown-divider"></div>
+                        <a href="signup.html" class="auth-dropdown-item">
+                            <i class="fas fa-user-plus"></i>
+                            <span class="item-label">Sign Up</span>
+                        </a>
+                    </div>
+                </div>
+
+                <button id="mobile-toggle" class="mobile-toggle"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="mobile-menu">
+            <div class="mobile-dropdown">
+                <button class="mobile-dropdown-btn flex justify-between items-center w-full mobile-menu-item">
+                    Home <i class="fas fa-chevron-down text-xs opacity-60"></i>
+                </button>
+                <div class="mobile-dropdown-content">
+                    <a href="index.html" class="mobile-dropdown-item">Home 1</a>
+                    <a href="home2.html" class="mobile-dropdown-item">Home 2</a>
+                </div>
+            </div>
+            <a href="about.html" class="mobile-menu-item active">About Us</a>
+            <a href="wash-packages.html" class="mobile-menu-item">Wash Packages</a>
+            <a href="auto-detailing.html" class="mobile-menu-item">Auto Detailing</a>
+            <a href="services.html" class="mobile-menu-item">Services</a>
+            <a href="pricing.html" class="mobile-menu-item">Pricing</a>
+            <a href="ceramic-protection.html" class="mobile-menu-item">Ceramic Protection</a>
+            <a href="interior-care.html" class="mobile-menu-item">Interior Care</a>
+            <a href="contact.html" class="mobile-menu-item">Contact</a>
+            <div class="mobile-actions">
+                <button id="theme-toggle-mobile" class="btn-mobile-action">
+                    <i class="fas fa-moon"></i> <span>Dark Mode</span>
+                </button>
+                <button id="rtl-toggle-mobile" class="btn-mobile-action">
+                    <i class="fas fa-align-right"></i> <span>RTL</span>
+                </button>
+                <a href="login.html" class="btn-mobile-action">
+                    <i class="fas fa-sign-in-alt"></i> <span>Log In</span>
+                </a>
+                <a href="signup.html" class="btn-mobile-action">
+                    <i class="fas fa-user-plus"></i> <span>Sign Up</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO / PAGE HEADER ===== -->
+    <section class="relative min-h-[60vh] flex items-center justify-center pt-28 pb-16 overflow-hidden w-full" style="background: linear-gradient(135deg, #0A192F 0%, #0f2644 50%, #0A192F 100%);">
+        <div class="absolute inset-0 z-0 w-full">
+            <img src="assets/ab2.avif" alt="Car wash background" class="w-full h-full object-cover opacity-15">
+            <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(10,25,47,0.75) 0%, rgba(10,25,47,0.88) 50%, #0A192F 100%);"></div>
+        </div>
+        
+        <div class="absolute inset-0 pointer-events-none opacity-10">
+            <div class="absolute top-1/3 left-10 floating text-aqua"><i class="fas fa-users fa-5x"></i></div>
+            <div class="absolute bottom-1/3 right-10 floating text-aqua" style="animation-delay: 2s;"><i class="fas fa-heart fa-4x"></i></div>
+            <div class="absolute top-1/4 right-1/4 floating text-aqua" style="animation-delay: 4s;"><i class="fas fa-star fa-4x"></i></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4 sm:px-6 max-w-5xl w-full">
+            <div class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full mb-8" style="background: rgba(0,180,216,0.15); border: 1px solid rgba(0,180,216,0.3);">
+                <span class="w-2.5 h-2.5 bg-aqua rounded-full animate-pulse"></span>
+                <span class="text-aqua text-sm uppercase tracking-widest font-bold">Our Story</span>
+            </div>
+            <h1 class="hero-title font-serif text-5xl sm:text-6xl md:text-7xl text-white leading-[1.05] mb-6 font-medium">
+                About <span class="italic text-aqua">AquaShine</span>
+            </h1>
+            <p class="text-gray-300 text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed">
+                Passionate about cars, committed to perfection. Discover the people and principles behind the shine.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== OUR STORY ===== -->
+    <section class="py-20 sm:py-24 md:py-32 px-4 sm:px-6 bg-white dark:bg-navy-dark transition-colors duration-300 w-full">
+        <div class="max-w-[1400px] mx-auto w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <span class="section-badge">Since 2013</span>
+                    <h2 class="section-title font-serif text-4xl sm:text-5xl text-navy dark:text-white font-bold mt-4 mb-8">Driven by <span class="italic text-aqua">Passion</span>, Defined by Quality</h2>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6 text-base sm:text-lg">
+                        AquaShine started in a small garage in Los Angeles with one simple belief: every car deserves to look and feel brand new. What began as a one-man operation has grown into the city's most trusted name in premium car care.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6 text-base sm:text-lg">
+                        Over a decade later, we've detailed more than 5,000 vehicles — from daily drivers to exotic supercars. Our team combines old-school craftsmanship with cutting-edge ceramic technology, always using eco-friendly products that are safe for your car and the planet.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-10 text-base sm:text-lg">
+                        We're not just washing cars. We're protecting investments, restoring pride, and delivering that unforgettable showroom feeling — every single time.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="contact.html" class="btn-primary"><i class="fas fa-calendar-check"></i> Book a Service</a>
+                        <a href="services.html" class="btn-outline"><i class="fas fa-th-large"></i> Our Services</a>
+                    </div>
+                </div>
+                <div class="relative reveal">
+                    <div class="rounded-[2.5rem] overflow-hidden shadow-2xl">
+                        <img src="assets/ab1.avif" alt="AquaShine team at work" class="w-full h-full object-cover" style="min-height: 480px;">
+                    </div>
+                    <div class="absolute -bottom-6 -left-6 bg-aqua rounded-3xl p-8 shadow-2xl hidden sm:block">
+                        <div class="text-navy font-black text-4xl">10+</div>
+                        <div class="text-navy/80 font-semibold text-sm mt-1">Years of Excellence</div>
+                    </div>
+                    <div class="absolute -top-6 -right-6 bg-navy dark:bg-navy-light rounded-3xl p-8 shadow-2xl hidden sm:block border border-navy/20 dark:border-aqua/20">
+                        <div class="text-aqua font-black text-4xl">5K+</div>
+                        <div class="text-white/70 font-semibold text-sm mt-1">Happy Customers</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section class="section-light-bg py-16 sm:py-20 px-4 sm:px-6 transition-colors duration-300 w-full">
+        <div class="max-w-[1400px] mx-auto w-full">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="stat-card reveal">
+                    <div class="stat-number">10<span>+</span></div>
+                    <div class="stat-label">Years in Business</div>
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-number">5K<span>+</span></div>
+                    <div class="stat-label">Cars Detailed</div>
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Expert Team Members</div>
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-number">100<span>%</span></div>
+                    <div class="stat-label">Satisfaction Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== OUR VALUES ===== -->
+    <section class="py-20 sm:py-24 md:py-32 px-4 sm:px-6 bg-white dark:bg-navy-dark transition-colors duration-300 w-full">
+        <div class="max-w-[1400px] mx-auto w-full">
+            <div class="text-center mb-16 sm:mb-20 reveal">
+                <span class="section-badge">What Drives Us</span>
+                <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-5">Our Core <span class="italic text-aqua">Values</span></h2>
+                <div class="section-divider mt-7"></div>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">These principles guide every wash, every detail, and every interaction with our customers.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="value-card reveal">
+                    <div class="value-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 class="value-title">Uncompromising Quality</h3>
+                    <p class="value-desc">We never cut corners. Every vehicle receives the same meticulous attention to detail, whether it's a compact car or a luxury SUV.</p>
+                </div>
+                <div class="value-card reveal">
+                    <div class="value-icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3 class="value-title">Customer First</h3>
+                    <p class="value-desc">Your satisfaction is our success. We listen, we adapt, and we guarantee our work — if you're not happy, we make it right.</p>
+                </div>
+                <div class="value-card reveal">
+                    <div class="value-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3 class="value-title">Eco Responsibility</h3>
+                    <p class="value-desc">Biodegradable products, water-saving techniques, and sustainable practices that protect your car and our planet.</p>
+                </div>
+                <div class="value-card reveal">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="value-title">Team Excellence</h3>
+                    <p class="value-desc">Certified, passionate professionals who treat every car like their own and never stop learning new techniques.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== OUR TEAM ===== -->
+    <section class="section-light-bg py-20 sm:py-24 md:py-32 px-4 sm:px-6 transition-colors duration-300 w-full">
+        <div class="max-w-[1400px] mx-auto w-full">
+            <div class="text-center mb-16 sm:mb-20 reveal">
+                <span class="section-badge">Meet the Experts</span>
+                <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-5">Our <span class="italic text-aqua">Team</span></h2>
+                <div class="section-divider mt-7"></div>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">The skilled hands and passionate hearts behind every gleaming finish. Get to know the people who make AquaShine shine.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Team Member 1 -->
+                <div class="team-card reveal">
+                    <div class="team-image-wrapper">
+                        <img src="assets/ab3.jpeg" alt="Marcus Rivera - Founder & CEO">
+                        <div class="team-social-overlay">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">Marcus Rivera</h3>
+                        <p class="team-role">Founder & CEO</p>
+                        <p class="team-bio">With 15+ years in automotive care, Marcus founded AquaShine to redefine what a car wash could be.</p>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="team-card reveal">
+                    <div class="team-image-wrapper">
+                        <img src="assets/ab4.jpeg" alt="Sophia Chen - Lead Detailer">
+                        <div class="team-social-overlay">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">Sophia Chen</h3>
+                        <p class="team-role">Lead Detailer</p>
+                        <p class="team-bio">Ceramic coating specialist and paint correction expert. Sophia's eye for detail is unmatched.</p>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="team-card reveal">
+                    <div class="team-image-wrapper">
+                        <img src="assets/ab5.jpeg" alt="David Okafor - Operations Manager">
+                        <div class="team-social-overlay">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">David Okafor</h3>
+                        <p class="team-role">Operations Manager</p>
+                        <p class="team-bio">David ensures every appointment runs on time and every customer leaves with a smile.</p>
+                    </div>
+                </div>
+
+                <!-- Team Member 4 -->
+                <div class="team-card reveal">
+                    <div class="team-image-wrapper">
+                        <img src="assets/ab6.jpeg" alt="Elena Vasquez - Interior Care Specialist">
+                        <div class="team-social-overlay">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">Elena Vasquez</h3>
+                        <p class="team-role">Interior Care Specialist</p>
+                        <p class="team-bio">Steam cleaning and leather restoration guru. Elena makes interiors look and smell brand new.</p>
+                    </div>
+                </div>
+
+                <!-- Team Member 5 -->
+                <div class="team-card reveal">
+                    <div class="team-image-wrapper">
+                        <img src="assets/ab7.jpeg" alt="James Whitfield - Ceramic Coating Technician">
+                        <div class="team-social-overlay">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">James Whitfield</h3>
+                        <p class="team-role">Ceramic Coating Technician</p>
+                        <p class="team-bio">Certified in multiple ceramic brands, James delivers durable, glass-like protection every time.</p>
+                    </div>
+                </div>
+
+                <!-- Team Member 6 -->
+                <div class="team-card reveal">
+                    <div class="team-image-wrapper">
+                        <img src="assets/ab10.jpeg" alt="Aisha Patel - Customer Experience Lead">
+                        <div class="team-social-overlay">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">Aisha Patel</h3>
+                        <p class="team-role">Customer Experience Lead</p>
+                        <p class="team-bio">Aisha is the friendly voice you hear on the phone and the reason our scheduling runs so smoothly.</p>
+                    </div>
+                </div>
+
+                <!-- Team Member 7 -->
+                <div class="team-card reveal">
+                    <div class="team-image-wrapper">
+                        <img src="assets/ab8.jpeg" alt="Carlos Mendez - Mobile Detailing Lead">
+                        <div class="team-social-overlay">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">Carlos Mendez</h3>
+                        <p class="team-role">Mobile Detailing Lead</p>
+                        <p class="team-bio">Carlos brings the AquaShine experience to your driveway with our fully equipped mobile unit.</p>
+                    </div>
+                </div>
+
+                <!-- Team Member 8 -->
+                <div class="team-card reveal">
+                    <div class="team-image-wrapper">
+                        <img src="assets/ab9.jpeg" alt="Nina Kowalski - Quality Control Manager">
+                        <div class="team-social-overlay">
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="team-content">
+                        <h3 class="team-name">Nina Kowalski</h3>
+                        <p class="team-role">Quality Control Manager</p>
+                        <p class="team-bio">Nina inspects every vehicle under professional lighting before it leaves our facility. Nothing gets past her.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA SECTION ===== -->
+    <section class="py-20 sm:py-24 md:py-32 px-4 sm:px-6 bg-white dark:bg-navy-dark transition-colors duration-300 w-full">
+        <div class="max-w-[1400px] mx-auto w-full">
+            <div class="rounded-[2.5rem] p-12 sm:p-20 text-center relative overflow-hidden reveal" style="background: linear-gradient(135deg, #0A192F 0%, #0f2644 100%);">
+                <div class="absolute top-0 left-0 w-96 h-96 bg-aqua/15 rounded-full blur-[100px] pointer-events-none"></div>
+                <div class="absolute bottom-0 right-0 w-96 h-96 bg-aqua/10 rounded-full blur-[120px] pointer-events-none"></div>
+                <div class="relative z-10">
+                    <h2 class="font-serif text-4xl sm:text-5xl md:text-6xl text-white font-bold mb-6">Experience the <span class="italic text-aqua">AquaShine</span> Difference</h2>
+                    <p class="text-gray-300 text-lg sm:text-xl max-w-2xl mx-auto mb-10">Join thousands of satisfied customers who trust us with their vehicles. Book your appointment today.</p>
+                    <div class="flex flex-wrap gap-5 justify-center">
+                        <a href="contact.html" class="btn-primary text-base sm:text-lg"><i class="fas fa-calendar-check"></i> Book Appointment</a>
+                        <a href="pricing.html" class="btn-outline border-white text-white hover:bg-white hover:text-navy text-base sm:text-lg"><i class="fas fa-tag"></i> View Pricing</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="pt-16 pb-10 w-full bg-navy dark:bg-navy-dark border-t border-navy/20 dark:border-aqua/10 transition-colors duration-300">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12">
+                <div class="text-center sm:text-start">
+                    <a href="index.html" class="logo-wrapper mb-6 justify-center sm:justify-start">
+                        <div class="logo-icon">
+                            <i class="fas fa-car-side"></i>
+                        </div>
+                        <div class="logo-text-group">
+                            <span class="logo-text">Aqua<span class="highlight">Shine</span></span>
+                            <span class="logo-sub">Car Wash & Detailing</span>
+                        </div>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Premium car wash, detailing, and ceramic protection services. Trusted by thousands since 2013.</p>
+                    <div class="flex gap-3 justify-center sm:justify-start">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="text-center sm:text-start">
+                    <h3 class="text-white text-xl font-bold mb-6 pl-3" style="border-left: 3px solid #00B4D8;">Quick Links</h3>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="about.html" class="hover:text-aqua transition block">About Us</a></li>
+                        <li><a href="services.html" class="hover:text-aqua transition block">Services</a></li>
+                        <li><a href="wash-packages.html" class="hover:text-aqua transition block">Wash Packages</a></li>
+                        <li><a href="contact.html" class="hover:text-aqua transition block">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="text-center sm:text-start">
+                    <h3 class="text-white text-xl font-bold mb-6 pl-3" style="border-left: 3px solid #00B4D8;">Services</h3>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="auto-detailing.html" class="hover:text-aqua transition block">Auto Detailing</a></li>
+                        <li><a href="ceramic-protection.html" class="hover:text-aqua transition block">Ceramic Protection</a></li>
+                        <li><a href="interior-care.html" class="hover:text-aqua transition block">Interior Care</a></li>
+                        <li><a href="pricing.html" class="hover:text-aqua transition block">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="text-center sm:text-start">
+                    <h3 class="text-white text-xl font-bold mb-6 pl-3" style="border-left: 3px solid #00B4D8;">Contact</h3>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li class="flex gap-3 justify-center sm:justify-start">
+                            <i class="fas fa-map-marker-alt text-aqua w-5 text-base"></i>
+                            <span>456 Sparkle Ave, Los Angeles, CA</span>
+                        </li>
+                        <li class="flex gap-3 justify-center sm:justify-start">
+                            <i class="fas fa-phone text-aqua w-5 text-base"></i>
+                            <span>(888) 555-0199</span>
+                        </li>
+                        <li class="flex gap-3 justify-center sm:justify-start">
+                            <i class="fas fa-envelope text-aqua w-5 text-base"></i>
+                            <span>info@aquashine.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 text-center text-gray-500 text-xs border-t border-navy/30 dark:border-aqua/10">
+                <p>© 2026 AquaShine Car Wash & Auto Detailing. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navbar = document.getElementById('navbarWrapper');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 20) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            const authToggleBtn = document.getElementById('authToggleBtn');
+            const authDropdown = document.getElementById('authDropdown');
+            const authWrapper = document.getElementById('authToggleWrapper');
+
+            if (authToggleBtn && authDropdown) {
+                authToggleBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    authDropdown.classList.toggle('active');
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!authWrapper.contains(e.target)) {
+                        authDropdown.classList.remove('active');
+                    }
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        authDropdown.classList.remove('active');
+                    }
+                });
+            }
+
+            const themeBtn = document.getElementById('theme-toggle');
+            const themeMob = document.getElementById('theme-toggle-mobile');
+            const updateThemeUI = (dark) => {
+                [themeBtn, themeMob].forEach(b => {
+                    if (b) {
+                        const moon = b.querySelector('.fa-moon');
+                        const sun = b.querySelector('.fa-sun');
+                        if (dark) { moon?.classList.add('hidden'); sun?.classList.remove('hidden'); }
+                        else { moon?.classList.remove('hidden'); sun?.classList.add('hidden'); }
+                    }
+                });
+            };
+            const toggleTheme = () => {
+                document.documentElement.classList.toggle('dark');
+                const isDark = document.documentElement.classList.contains('dark');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                updateThemeUI(isDark);
+            };
+            if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+            if (themeMob) themeMob.addEventListener('click', toggleTheme);
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+                updateThemeUI(true);
+            }
+
+            const rtlBtn = document.getElementById('rtl-toggle');
+            const rtlMob = document.getElementById('rtl-toggle-mobile');
+            const updateRtlUI = (isRtl) => {
+                document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+                [rtlBtn, rtlMob].forEach(b => b && b.classList.toggle('active', isRtl));
+            };
+            const toggleRtl = () => {
+                const isRtl = document.documentElement.dir !== 'rtl';
+                localStorage.setItem('dir', isRtl ? 'rtl' : 'ltr');
+                updateRtlUI(isRtl);
+            };
+            if (rtlBtn) rtlBtn.addEventListener('click', toggleRtl);
+            if (rtlMob) rtlMob.addEventListener('click', toggleRtl);
+            if (localStorage.getItem('dir') === 'rtl') updateRtlUI(true);
+
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const icon = mobileToggle?.querySelector('i');
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    mobileMenu.classList.toggle('open');
+                    icon?.classList.toggle('fa-bars');
+                    icon?.classList.toggle('fa-times');
+                    if (window.innerWidth <= 768) {
+                        document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+                    }
+                });
+            }
+
+            document.addEventListener('click', (e) => {
+                if (mobileMenu && mobileMenu.classList.contains('open') && !mobileMenu.contains(e.target) && !mobileToggle?.contains(e.target)) {
+                    mobileMenu.classList.remove('open');
+                    icon?.classList.add('fa-bars');
+                    icon?.classList.remove('fa-times');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 1200 && mobileMenu && mobileMenu.classList.contains('open')) {
+                    mobileMenu.classList.remove('open');
+                    icon?.classList.add('fa-bars');
+                    icon?.classList.remove('fa-times');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const content = btn.nextElementSibling;
+                    content.classList.toggle('show');
+                    const chev = btn.querySelector('.fa-chevron-down');
+                    if (chev) {
+                        chev.style.transform = content.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0)';
+                    }
+                });
+            });
+
+            // Scroll Reveal
+            const reveals = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+            }, { threshold: 0.12 });
+            reveals.forEach(el => revealObserver.observe(el));
+        });
+    </script>
+</body>
+</html>

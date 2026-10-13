@@ -1,0 +1,1959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, viewport-fit=cover">
+    <title>Auto Detailing | AquaShine Premium Car Wash & Auto Detailing</title>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='75' font-size='75' text-anchor='middle'%3E🚗%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'navy': '#0A192F',
+                        'aqua': '#00B4D8',
+                        'navy-light': '#112240',
+                        'navy-dark': '#020C1B',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .floating { animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        [dir="rtl"] .floating { animation-direction: reverse; }
+
+        /* ===== NAVBAR ===== */
+        .navbar-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            z-index: 50;
+            padding: 18px 24px;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+        .navbar-wrapper.scrolled {
+            padding: 10px 24px;
+            background: rgba(10, 25, 47, 0.97);
+            backdrop-filter: blur(20px) saturate(180%);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+        }
+        .dark .navbar-wrapper.scrolled {
+            background: rgba(2, 12, 27, 0.98);
+        }
+
+        .navbar-inner {
+            max-width: 1540px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        /* ===== LOGO ===== */
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+            text-decoration: none;
+        }
+        .logo-icon {
+            background: linear-gradient(145deg, #00B4D8 0%, #0090b0 100%);
+            width: 50px;
+            height: 50px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 24px rgba(0, 180, 216, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            flex-shrink: 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+        }
+        .logo-icon:hover::before { left: 100%; }
+        .logo-icon:hover { transform: scale(1.05) rotate(-3deg); box-shadow: 0 8px 32px rgba(0, 180, 216, 0.55); }
+        .logo-icon i {
+            color: #0A192F;
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.15);
+        }
+        .logo-text-group {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: #ffffff;
+            line-height: 1;
+            font-family: 'Inter', sans-serif;
+        }
+        .logo-text .highlight { color: #00B4D8; }
+        .logo-sub {
+            font-size: 0.5rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.45);
+            font-weight: 600;
+            display: block;
+            margin-top: 3px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Desktop Navigation */
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            flex: 1;
+            margin: 0 12px;
+        }
+        .nav-link {
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.01em;
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.25s ease;
+            cursor: pointer;
+            white-space: nowrap;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: #00B4D8;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after,
+        .nav-link.active::after { width: 60%; }
+        .nav-link:hover { color: #ffffff; }
+        .nav-link.active { color: #00B4D8; font-weight: 600; }
+
+        /* Dropdown */
+        .dropdown-wrapper { position: relative; }
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 190px;
+            background: rgba(10, 25, 47, 0.98);
+            backdrop-filter: blur(16px);
+            border-radius: 16px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-50%) translateY(10px);
+            transition: all 0.25s ease;
+            z-index: 1000;
+            border: 1px solid rgba(0, 180, 216, 0.2);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.6);
+        }
+        .dark .dropdown-menu { background: rgba(2, 12, 27, 0.98); }
+        .dropdown-wrapper:hover .dropdown-menu,
+        .dropdown-wrapper.open .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 22px;
+            gap: 10px;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.85);
+            cursor: pointer;
+            border-radius: 10px;
+            margin: 2px 10px;
+            text-decoration: none;
+        }
+        .dropdown-item:hover { background: rgba(0, 180, 216, 0.15); color: #00B4D8; }
+        .dropdown-item.active { background: rgba(0, 180, 216, 0.12); color: #00B4D8; font-weight: 600; }
+
+        /* Right Actions */
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .auth-toggle-wrapper {
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .auth-toggle-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+        .auth-toggle-btn:hover {
+            background: rgba(0, 180, 216, 0.2);
+            border-color: #00B4D8;
+            color: #00B4D8;
+            transform: scale(1.05);
+        }
+
+        .auth-dropdown {
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            min-width: 220px;
+            background: rgba(10, 25, 47, 0.98);
+            backdrop-filter: blur(16px);
+            border-radius: 16px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px) scale(0.95);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 1px solid rgba(0, 180, 216, 0.2);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.6);
+        }
+        .dark .auth-dropdown { background: rgba(2, 12, 27, 0.98); }
+        .auth-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        .auth-dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 22px;
+            gap: 14px;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.85);
+            cursor: pointer;
+            border-radius: 10px;
+            margin: 2px 10px;
+            text-decoration: none;
+        }
+        .auth-dropdown-item:hover {
+            background: rgba(0, 180, 216, 0.15);
+            color: #00B4D8;
+        }
+        .auth-dropdown-item i { width: 22px; text-align: center; color: #00B4D8; }
+        .auth-dropdown-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.08);
+            margin: 6px 20px;
+        }
+
+        .btn-icon-rounded {
+            width: 40px;
+            height: 40px;
+            border-radius: 40px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.8);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.95rem;
+        }
+        .dark .btn-icon-rounded { background: rgba(255, 255, 255, 0.04); color: rgba(255, 255, 255, 0.6); }
+        .btn-icon-rounded:hover { background: #00B4D8; color: #0A192F; border-color: #00B4D8; }
+
+        .mobile-toggle {
+            display: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .mobile-toggle:hover { background: rgba(0, 180, 216, 0.2); border-color: #00B4D8; }
+
+        .mobile-menu {
+            display: none;
+            background: rgba(10, 25, 47, 0.98);
+            backdrop-filter: blur(16px);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 180, 216, 0.15);
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+            margin: 12px 0 0 auto;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8);
+        }
+        .dark .mobile-menu { background: rgba(2, 12, 27, 0.98); }
+        .mobile-menu.open { max-height: 85vh; overflow-y: auto; }
+        .mobile-menu-item {
+            display: block;
+            padding: 14px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-weight: 500;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.85);
+            transition: all 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .mobile-menu-item:last-child { border-bottom: none; }
+        .mobile-menu-item.active { color: #00B4D8; font-weight: 600; background: rgba(0, 180, 216, 0.06); border-left: 3px solid #00B4D8; }
+        .mobile-menu-item:hover { background: rgba(255, 255, 255, 0.04); }
+        .mobile-dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: rgba(0, 0, 0, 0.15);
+        }
+        .mobile-dropdown-content.show { max-height: 300px; }
+        .mobile-dropdown-item {
+            display: block;
+            padding: 10px 24px 10px 40px;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .mobile-dropdown-item:hover { color: #00B4D8; }
+        .mobile-dropdown-item.active { color: #00B4D8; font-weight: 600; }
+
+        .mobile-actions {
+            padding: 16px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .mobile-actions .btn-mobile-action {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .mobile-actions .btn-mobile-action:hover {
+            background: rgba(0, 180, 216, 0.15);
+            border-color: #00B4D8;
+            color: #00B4D8;
+        }
+        .mobile-actions .btn-mobile-action i { width: 20px; text-align: center; color: #00B4D8; }
+
+        /* Responsive */
+        @media (min-width: 1200px) and (max-width: 1399px) {
+            .navbar-inner { gap: 8px; }
+            .desktop-nav { gap: 2px; margin: 0 4px; }
+            .nav-link { padding: 6px 9px; font-size: 0.82rem; }
+            .logo-text { font-size: 1.35rem; }
+            .logo-icon { width: 44px; height: 44px; }
+        }
+
+        @media (max-width: 1199px) {
+            .desktop-nav { display: none !important; }
+            .mobile-toggle { display: flex !important; }
+            .mobile-menu { display: block; }
+            .navbar-wrapper { padding: 14px 20px; }
+            .navbar-wrapper.scrolled { padding: 8px 20px; }
+            .logo-icon { width: 44px; height: 44px; border-radius: 14px; }
+            .logo-icon i { font-size: 1.3rem; }
+            .logo-text { font-size: 1.3rem; }
+            .logo-sub { font-size: 0.45rem; }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu {
+                max-width: 100%;
+                margin: 8px 0 0 0;
+                border-radius: 0 0 20px 20px;
+            }
+            .nav-actions .btn-icon-rounded { display: none; }
+            .nav-actions .auth-toggle-wrapper { display: none; }
+            .navbar-wrapper { padding: 10px 16px; }
+            .navbar-wrapper.scrolled { padding: 6px 16px; }
+            .logo-icon { width: 38px; height: 38px; border-radius: 12px; }
+            .logo-icon i { font-size: 1.1rem; }
+            .logo-text { font-size: 1.1rem; }
+            .logo-sub { font-size: 0.4rem; }
+            .mobile-toggle { width: 38px; height: 38px; font-size: 1.05rem; }
+            .mobile-menu-item { font-size: 0.95rem; padding: 12px 20px; }
+            .mobile-actions .btn-mobile-action { font-size: 0.8rem; padding: 8px 16px; }
+        }
+
+        @media (max-width: 480px) {
+            .navbar-wrapper { padding: 8px 12px; }
+            .navbar-wrapper.scrolled { padding: 5px 12px; }
+            .logo-icon { width: 34px; height: 34px; border-radius: 10px; }
+            .logo-icon i { font-size: 1rem; }
+            .logo-text { font-size: 1rem; }
+            .logo-sub { display: none; }
+            .mobile-toggle { width: 34px; height: 34px; font-size: 0.95rem; border-radius: 10px; }
+            .mobile-menu-item { font-size: 0.9rem; padding: 12px 18px; }
+            .mobile-actions .btn-mobile-action { font-size: 0.75rem; padding: 7px 14px; }
+        }
+
+        @media (max-width: 360px) {
+            .navbar-wrapper { padding: 6px 10px; }
+            .logo-icon { width: 28px; height: 28px; border-radius: 8px; }
+            .logo-icon i { font-size: 0.8rem; }
+            .logo-text { font-size: 0.85rem; }
+            .mobile-toggle { width: 30px; height: 30px; font-size: 0.85rem; }
+            .mobile-menu-item { font-size: 0.85rem; padding: 10px 16px; }
+            .mobile-actions .btn-mobile-action { font-size: 0.7rem; padding: 6px 12px; }
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-primary {
+            background: #00B4D8;
+            color: #0A192F;
+            padding: 0.9rem 2.2rem;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-primary:hover { background: #0096b5; transform: scale(1.03); box-shadow: 0 8px 30px rgba(0, 180, 216, 0.45); }
+        .btn-outline {
+            border: 2px solid #00B4D8;
+            background: transparent;
+            color: #00B4D8;
+            padding: 0.85rem 2.2rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .btn-outline:hover { background: #00B4D8; color: #0A192F; }
+
+        /* ===== SECTION DIVIDERS ===== */
+        .section-divider {
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #00B4D8, transparent);
+            margin: 0 auto;
+            width: 200px;
+            border-radius: 4px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            border: 1px solid #00B4D8;
+            color: #00B4D8;
+            background: rgba(0, 180, 216, 0.08);
+        }
+
+        /* ===== DETAILING SERVICE CARDS ===== */
+        .detailing-card {
+            position: relative;
+            background: #FFFFFF;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid #E8E8E8;
+            display: flex;
+            flex-direction: column;
+        }
+        .dark .detailing-card {
+            background: #112240;
+            border-color: #1A2A3A;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+        }
+        .detailing-card:hover {
+            transform: translateY(-10px);
+            border-color: #00B4D8;
+            box-shadow: 0 30px 60px -20px rgba(0, 180, 216, 0.3);
+        }
+        .detailing-icon-wrap {
+            width: 72px;
+            height: 72px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, rgba(0,180,216,0.15) 0%, rgba(0,180,216,0.05) 100%);
+            border: 1px solid rgba(0, 180, 216, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 22px;
+            transition: all 0.4s ease;
+        }
+        .detailing-card:hover .detailing-icon-wrap {
+            background: #00B4D8;
+            border-color: #00B4D8;
+            transform: rotate(-5deg) scale(1.05);
+        }
+        .detailing-icon-wrap i {
+            font-size: 1.7rem;
+            color: #00B4D8;
+            transition: color 0.4s ease;
+        }
+        .detailing-card:hover .detailing-icon-wrap i {
+            color: #0A192F;
+        }
+        .detailing-content {
+            padding: 36px 32px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .detailing-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #0A192F;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+            transition: color 0.3s ease;
+        }
+        .dark .detailing-title { color: #ffffff; }
+        .detailing-card:hover .detailing-title { color: #00B4D8; }
+        .detailing-desc {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        .dark .detailing-desc { color: #94a3b8; }
+        .detailing-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 20px;
+            border-top: 1px solid #E8E8E8;
+        }
+        .dark .detailing-meta { border-color: #1A2A3A; }
+        .detailing-time {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .dark .detailing-time { color: #94a3b8; }
+        .detailing-time i { color: #00B4D8; }
+        .detailing-cta {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #00B4D8;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: gap 0.3s ease;
+        }
+        .detailing-cta:hover { gap: 14px; }
+
+        /* ===== INTERACTIVE TABS — WHY DETAILING MATTERS ===== */
+        .wdm-wrap {
+            background: #FFFFFF;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px -20px rgba(10, 25, 47, 0.15);
+            border: 1px solid #E8E8E8;
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            min-height: 520px;
+        }
+        .dark .wdm-wrap {
+            background: #112240;
+            border-color: #1A2A3A;
+            box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.5);
+        }
+
+        .wdm-sidebar {
+            background: linear-gradient(180deg, #0A192F 0%, #0f2644 100%);
+            padding: 32px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .wdm-sidebar::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 220px;
+            height: 220px;
+            background: rgba(0, 180, 216, 0.15);
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none;
+        }
+        .wdm-sidebar-header {
+            padding: 0 12px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+        .wdm-sidebar-header h3 {
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 1.15rem;
+            margin-bottom: 4px;
+        }
+        .wdm-sidebar-header p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.8rem;
+        }
+        .wdm-tab {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 18px;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+            border: 1px solid transparent;
+            background: transparent;
+            text-align: left;
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+        }
+        .wdm-tab:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+        }
+        .wdm-tab.active {
+            background: rgba(0, 180, 216, 0.15);
+            border-color: rgba(0, 180, 216, 0.35);
+            color: #00B4D8;
+        }
+        .wdm-tab-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        .wdm-tab.active .wdm-tab-icon {
+            background: #00B4D8;
+            color: #0A192F;
+        }
+        .wdm-tab:hover .wdm-tab-icon {
+            transform: scale(1.08);
+        }
+
+        .wdm-panel-area {
+            padding: 44px 48px;
+            position: relative;
+            overflow: hidden;
+        }
+        .wdm-panel {
+            display: none;
+            animation: wdmFade 0.5s ease;
+        }
+        .wdm-panel.active {
+            display: block;
+        }
+        @keyframes wdmFade {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .wdm-panel-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 28px;
+            position: relative;
+        }
+        .wdm-panel-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .wdm-panel-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(10,25,47,0.5) 100%);
+        }
+        .wdm-panel-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: rgba(0, 180, 216, 0.9);
+            color: #0A192F;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 8px 16px;
+            border-radius: 40px;
+            z-index: 1;
+        }
+        .wdm-panel-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0A192F;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+        .dark .wdm-panel-title { color: #ffffff; }
+        .wdm-panel-desc {
+            color: #64748b;
+            font-size: 1rem;
+            line-height: 1.75;
+            margin-bottom: 24px;
+        }
+        .dark .wdm-panel-desc { color: #94a3b8; }
+        .wdm-panel-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+        .wdm-stat {
+            background: #F0F7FA;
+            border-radius: 16px;
+            padding: 18px 16px;
+            text-align: center;
+            border: 1px solid #E8E8E8;
+            transition: all 0.3s ease;
+        }
+        .dark .wdm-stat {
+            background: #0A192F;
+            border-color: #1A2A3A;
+        }
+        .wdm-stat:hover {
+            border-color: #00B4D8;
+            transform: translateY(-3px);
+        }
+        .wdm-stat-num {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #00B4D8;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            margin-bottom: 4px;
+        }
+        .wdm-stat-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #64748b;
+        }
+        .dark .wdm-stat-label { color: #94a3b8; }
+
+        .wdm-panel-check {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            color: #475569;
+            font-size: 0.95rem;
+        }
+        .dark .wdm-panel-check { color: #94a3b8; }
+        .wdm-panel-check i {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: rgba(0, 180, 216, 0.15);
+            color: #00B4D8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 900px) {
+            .wdm-wrap {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+            .wdm-sidebar {
+                padding: 20px 16px;
+                flex-direction: row;
+                overflow-x: auto;
+                gap: 10px;
+            }
+            .wdm-sidebar-header { display: none; }
+            .wdm-tab {
+                flex-shrink: 0;
+                padding: 12px 16px;
+                white-space: nowrap;
+                font-size: 0.85rem;
+            }
+            .wdm-tab-icon { width: 32px; height: 32px; font-size: 0.8rem; }
+            .wdm-panel-area { padding: 32px 24px; }
+            .wdm-panel-title { font-size: 1.4rem; }
+            .wdm-panel-stats { grid-template-columns: 1fr; }
+        }
+
+        /* ===== PROCESS TIMELINE (HORIZONTAL) ===== */
+        .hp-step {
+            position: relative;
+            padding: 0 12px;
+            text-align: center;
+        }
+        .hp-num {
+            width: 72px;
+            height: 72px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, #00B4D8 0%, #0090b0 100%);
+            color: #0A192F;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.6rem;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 30px rgba(0, 180, 216, 0.35), inset 0 1px 0 rgba(255,255,255,0.3);
+            transition: transform 0.4s ease;
+        }
+        .hp-step:hover .hp-num {
+            transform: translateY(-6px) scale(1.05);
+        }
+        .hp-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #0A192F;
+            margin-bottom: 8px;
+        }
+        .dark .hp-title { color: #ffffff; }
+        .hp-desc {
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+        .dark .hp-desc { color: #94a3b8; }
+
+        /* ===== PRICING TIERS ===== */
+        .tier-card {
+            background: #FFFFFF;
+            border-radius: 28px;
+            padding: 40px 32px;
+            border: 1px solid #E8E8E8;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            transition: all 0.4s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .dark .tier-card {
+            background: #112240;
+            border-color: #1A2A3A;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        .tier-card:hover {
+            transform: translateY(-8px);
+            border-color: #00B4D8;
+            box-shadow: 0 25px 50px -15px rgba(0, 180, 216, 0.3);
+        }
+        .tier-card.featured {
+            border: 2px solid #00B4D8;
+            box-shadow: 0 20px 50px -15px rgba(0, 180, 216, 0.25);
+        }
+        .tier-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #00B4D8;
+            color: #0A192F;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 8px 20px;
+            border-radius: 40px;
+            white-space: nowrap;
+            box-shadow: 0 6px 20px rgba(0, 180, 216, 0.4);
+        }
+        .tier-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #0A192F;
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+        .dark .tier-name { color: #ffffff; }
+        .tier-tagline {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 24px;
+        }
+        .dark .tier-tagline { color: #94a3b8; }
+        .tier-price {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            margin-bottom: 28px;
+            padding-bottom: 28px;
+            border-bottom: 1px solid #E8E8E8;
+        }
+        .dark .tier-price { border-color: #1A2A3A; }
+        .tier-price .amount {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #00B4D8;
+            line-height: 1;
+            letter-spacing: -0.04em;
+        }
+        .tier-price .from {
+            font-size: 0.8rem;
+            color: #64748b;
+            font-weight: 600;
+            align-self: flex-start;
+            margin-top: 6px;
+        }
+        .dark .tier-price .from { color: #94a3b8; }
+        .tier-features {
+            list-style: none;
+            margin-bottom: 28px;
+            flex-grow: 1;
+        }
+        .tier-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+            font-size: 0.9rem;
+            color: #475569;
+            line-height: 1.5;
+        }
+        .dark .tier-features li { color: #94a3b8; }
+        .tier-features li i {
+            color: #00B4D8;
+            font-size: 0.85rem;
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+        .tier-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 15px 24px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+        }
+        .tier-cta.primary {
+            background: #00B4D8;
+            color: #0A192F;
+        }
+        .tier-cta.primary:hover {
+            background: #0096b5;
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(0, 180, 216, 0.4);
+        }
+        .tier-cta.secondary {
+            background: transparent;
+            color: #0A192F;
+            border: 2px solid #E8E8E8;
+        }
+        .dark .tier-cta.secondary {
+            color: #ffffff;
+            border-color: #1A2A3A;
+        }
+        .tier-cta.secondary:hover {
+            border-color: #00B4D8;
+            color: #00B4D8;
+        }
+
+        /* ===== SOCIAL ICON ===== */
+        .social-icon {
+            width: 44px; height: 44px;
+            background: rgba(255,255,255,0.06);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 60px;
+            transition: all 0.3s;
+            color: #00B4D8;
+            border: 1px solid rgba(0, 180, 216, 0.2);
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+        .dark .social-icon { background: rgba(255,255,255,0.04); }
+        .social-icon:hover { background: #00B4D8 !important; color: #0A192F; transform: translateY(-3px); }
+
+        section {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-3xl {
+            width: 100%;
+            max-width: 100%;
+            padding-left: 24px;
+            padding-right: 24px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 640px) {
+            .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-3xl {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-3xl {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-3xl {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+        }
+
+        @media (max-width: 430px) {
+            .hero-title { font-size: 2.4rem !important; }
+            .section-title { font-size: 2rem !important; }
+            .btn-primary, .btn-outline { padding: 0.7rem 1.4rem; font-size: 0.85rem; }
+            .hp-num { width: 56px; height: 56px; font-size: 1.3rem; border-radius: 18px; }
+            .tier-card { padding: 32px 24px; }
+        }
+        @media (max-width: 360px) {
+            .hero-title { font-size: 2rem !important; }
+            .section-title { font-size: 1.7rem !important; }
+        }
+
+        /* ===== DARK MODE BACKGROUNDS ===== */
+        .section-light-bg {
+            background-color: #F0F7FA;
+            transition: background-color 0.3s ease;
+        }
+        .dark .section-light-bg {
+            background-color: #0A192F;
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-navy-dark text-gray-900 dark:text-gray-100 transition-colors duration-300 font-sans">
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar-wrapper" id="navbarWrapper">
+        <div class="navbar-inner">
+            <a href="index.html" class="logo-wrapper">
+                <div class="logo-icon">
+                    <i class="fas fa-car-side"></i>
+                </div>
+                <div class="logo-text-group">
+                    <span class="logo-text">Aqua<span class="highlight">Shine</span></span>
+                    <span class="logo-sub">Car Wash & Detailing</span>
+                </div>
+            </a>
+
+            <div class="desktop-nav">
+                <div class="dropdown-wrapper keep">
+                    <span class="nav-link">Home <i class="fas fa-chevron-down text-[10px] ml-1 opacity-60"></i></span>
+                    <div class="dropdown-menu">
+                        <a href="index.html" class="dropdown-item">Home 1</a>
+                        <a href="home2.html" class="dropdown-item">Home 2</a>
+                    </div>
+                </div>
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="wash-packages.html" class="nav-link">Wash Packages</a>
+                <a href="auto-detailing.html" class="nav-link active">Auto Detailing</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="pricing.html" class="nav-link">Pricing</a>
+                <a href="ceramic-protection.html" class="nav-link">Ceramic Protection</a>
+                <a href="interior-care.html" class="nav-link">Interior Care</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+
+            <div class="nav-actions">
+                <button id="rtl-toggle" class="btn-icon-rounded" title="RTL">⇄</button>
+                <button id="theme-toggle" class="btn-icon-rounded" title="Theme"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+                
+                <div class="auth-toggle-wrapper" id="authToggleWrapper">
+                    <button class="auth-toggle-btn" id="authToggleBtn" title="Account">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                    <div class="auth-dropdown" id="authDropdown">
+                        <a href="login.html" class="auth-dropdown-item">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span class="item-label">Log In</span>
+                        </a>
+                        <div class="auth-dropdown-divider"></div>
+                        <a href="signup.html" class="auth-dropdown-item">
+                            <i class="fas fa-user-plus"></i>
+                            <span class="item-label">Sign Up</span>
+                        </a>
+                    </div>
+                </div>
+
+                <button id="mobile-toggle" class="mobile-toggle"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="mobile-menu">
+            <div class="mobile-dropdown">
+                <button class="mobile-dropdown-btn flex justify-between items-center w-full mobile-menu-item">
+                    Home <i class="fas fa-chevron-down text-xs opacity-60"></i>
+                </button>
+                <div class="mobile-dropdown-content">
+                    <a href="index.html" class="mobile-dropdown-item">Home 1</a>
+                    <a href="home2.html" class="mobile-dropdown-item">Home 2</a>
+                </div>
+            </div>
+            <a href="about.html" class="mobile-menu-item">About Us</a>
+            <a href="wash-packages.html" class="mobile-menu-item">Wash Packages</a>
+            <a href="auto-detailing.html" class="mobile-menu-item active">Auto Detailing</a>
+            <a href="services.html" class="mobile-menu-item">Services</a>
+            <a href="pricing.html" class="mobile-menu-item">Pricing</a>
+            <a href="ceramic-protection.html" class="mobile-menu-item">Ceramic Protection</a>
+            <a href="interior-care.html" class="mobile-menu-item">Interior Care</a>
+            <a href="contact.html" class="mobile-menu-item">Contact</a>
+            <div class="mobile-actions">
+                <button id="theme-toggle-mobile" class="btn-mobile-action">
+                    <i class="fas fa-moon"></i> <span>Dark Mode</span>
+                </button>
+                <button id="rtl-toggle-mobile" class="btn-mobile-action">
+                    <i class="fas fa-align-right"></i> <span>RTL</span>
+                </button>
+                <a href="login.html" class="btn-mobile-action">
+                    <i class="fas fa-sign-in-alt"></i> <span>Log In</span>
+                </a>
+                <a href="signup.html" class="btn-mobile-action">
+                    <i class="fas fa-user-plus"></i> <span>Sign Up</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO / PAGE HEADER ===== -->
+    <section class="relative min-h-[70vh] flex items-center justify-center pt-28 pb-16 overflow-hidden w-full" style="background: linear-gradient(135deg, #0A192F 0%, #0f2644 50%, #0A192F 100%);">
+        <div class="absolute inset-0 z-0 w-full">
+            <img src="assets/ad1.avif" alt="Auto detailing background" class="w-full h-full object-cover opacity-20">
+            <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(10,25,47,0.75) 0%, rgba(10,25,47,0.9) 50%, #0A192F 100%);"></div>
+        </div>
+        
+        <div class="absolute inset-0 pointer-events-none opacity-10">
+            <div class="absolute top-1/4 left-10 floating text-aqua"><i class="fas fa-spray-can-sparkles fa-5x"></i></div>
+            <div class="absolute bottom-1/4 right-10 floating text-aqua" style="animation-delay: 2s;"><i class="fas fa-wand-magic-sparkles fa-4x"></i></div>
+            <div class="absolute top-1/3 right-1/4 floating text-aqua" style="animation-delay: 4s;"><i class="fas fa-gem fa-4x"></i></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-4 sm:px-6 max-w-5xl w-full">
+            <div class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full mb-8" style="background: rgba(0,180,216,0.15); border: 1px solid rgba(0,180,216,0.3);">
+                <span class="w-2.5 h-2.5 bg-aqua rounded-full animate-pulse"></span>
+                <span class="text-aqua text-sm uppercase tracking-widest font-bold">Beyond Clean. Restored.</span>
+            </div>
+            <h1 class="hero-title font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white leading-[1.05] mb-8 font-medium">
+                Auto <span class="italic text-aqua">Detailing</span>
+            </h1>
+            <p class="text-gray-300 text-lg sm:text-xl md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed">
+                This isn't just a wash. It's a full transformation. Deep cleaning, paint correction, and protection that brings your car back to life.
+            </p>
+            <div class="flex flex-wrap gap-5 justify-center">
+                <a href="contact.html" class="btn-primary shadow-lg text-base sm:text-lg"><i class="fas fa-calendar-check"></i> Book Detailing</a>
+                <a href="pricing.html" class="btn-outline border-white text-white hover:bg-white hover:text-navy text-base sm:text-lg"><i class="fas fa-tag"></i> View Pricing</a>
+            </div>
+            <div class="mt-16 flex flex-wrap justify-center gap-8 md:gap-14 text-sm sm:text-base">
+                <span class="text-white/80 flex items-center gap-2.5"><i class="fas fa-check-circle text-aqua text-lg"></i> Certified Detailers</span>
+                <span class="text-white/80 flex items-center gap-2.5"><i class="fas fa-check-circle text-aqua text-lg"></i> Premium Products</span>
+                <span class="text-white/80 flex items-center gap-2.5"><i class="fas fa-check-circle text-aqua text-lg"></i> 100% Satisfaction</span>
+                <span class="text-white/80 flex items-center gap-2.5"><i class="fas fa-check-circle text-aqua text-lg"></i> Same-Day Service</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== INTRO SPLIT ===== -->
+    <section class="py-20 sm:py-24 md:py-32 px-4 sm:px-6 bg-white dark:bg-navy-dark transition-colors duration-300 w-full">
+        <div class="max-w-[1400px] mx-auto w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <span class="section-badge">What is Detailing?</span>
+                    <h2 class="section-title font-serif text-4xl sm:text-5xl text-navy dark:text-white font-bold mt-4 mb-8">More Than a Wash — It's <span class="italic text-aqua">Restoration</span></h2>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6 text-base sm:text-lg">
+                        Auto detailing is an intricate, multi-stage process that goes far beyond a regular car wash. It involves deep cleaning, polishing, and protecting every surface of your vehicle — both inside and out — to restore it to its original showroom condition.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-6 text-base sm:text-lg">
+                        At AquaShine, our certified detailers use professional-grade products, machine polishers, and years of hands-on experience to eliminate swirl marks, remove stubborn stains, and bring out a depth of shine that simply can't be achieved with a standard wash.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-10 text-base sm:text-lg">
+                        Whether you're preparing for a car show, selling your vehicle, or simply want to fall in love with your car again — our detailing services deliver results you can see and feel.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="contact.html" class="btn-primary"><i class="fas fa-calendar-check"></i> Book a Detail</a>
+                        <a href="ceramic-protection.html" class="btn-outline"><i class="fas fa-shield-alt"></i> Add Protection</a>
+                    </div>
+                </div>
+                <div class="relative reveal">
+                    <div class="rounded-[2.5rem] overflow-hidden shadow-2xl">
+                        <img src="assets/ad2.avif" alt="Professional detailing in progress" class="w-full h-full object-cover" style="min-height: 500px;">
+                    </div>
+                    <div class="absolute -bottom-6 -left-6 bg-aqua rounded-3xl p-8 shadow-2xl hidden sm:block">
+                        <div class="text-navy font-black text-4xl">3-5h</div>
+                        <div class="text-navy/80 font-semibold text-sm mt-1">Full Detail Time</div>
+                    </div>
+                    <div class="absolute -top-6 -right-6 bg-navy dark:bg-navy-light rounded-3xl p-8 shadow-2xl hidden sm:block border border-navy/20 dark:border-aqua/20">
+                        <div class="text-aqua font-black text-4xl">100%</div>
+                        <div class="text-white/70 font-semibold text-sm mt-1">Satisfaction</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DETAILING SERVICES GRID ===== -->
+    <section class="section-light-bg py-20 sm:py-24 md:py-32 px-4 sm:px-6 transition-colors duration-300 w-full">
+        <div class="max-w-[1400px] mx-auto w-full">
+            <div class="text-center mb-16 sm:mb-20 reveal">
+                <span class="section-badge">Our Detailing Services</span>
+                <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-5">Every Service <span class="italic text-aqua">Your Car Needs</span></h2>
+                <div class="section-divider mt-7"></div>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">From deep interior restoration to paint correction and engine bay cleaning — we offer a complete menu of professional detailing services.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- 1. Interior Deep Clean -->
+                <div class="detailing-card reveal">
+                    <div class="detailing-content">
+                        <div class="detailing-icon-wrap">
+                            <i class="fas fa-couch"></i>
+                        </div>
+                        <h3 class="detailing-title">Interior Deep Clean</h3>
+                        <p class="detailing-desc">Full steam cleaning, carpet extraction, leather conditioning, and odor elimination. We treat every surface — from the dashboard to the deepest corner of your trunk.</p>
+                        <div class="detailing-meta">
+                            <span class="detailing-time"><i class="fas fa-clock"></i> 2-3 hours</span>
+                            <a href="interior-care.html" class="detailing-cta">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Exterior Hand Wash -->
+                <div class="detailing-card reveal">
+                    <div class="detailing-content">
+                        <div class="detailing-icon-wrap">
+                            <i class="fas fa-soap"></i>
+                        </div>
+                        <h3 class="detailing-title">Exterior Hand Wash</h3>
+                        <p class="detailing-desc">Meticulous two-bucket hand wash with pH-balanced soap, followed by wheel cleaning, bug removal, and a streak-free hand dry using plush microfiber towels.</p>
+                        <div class="detailing-meta">
+                            <span class="detailing-time"><i class="fas fa-clock"></i> 45-60 min</span>
+                            <a href="wash-packages.html" class="detailing-cta">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Paint Correction -->
+                <div class="detailing-card reveal">
+                    <div class="detailing-content">
+                        <div class="detailing-icon-wrap">
+                            <i class="fas fa-wand-magic-sparkles"></i>
+                        </div>
+                        <h3 class="detailing-title">Paint Correction</h3>
+                        <p class="detailing-desc">Multi-stage machine polishing that removes swirl marks, scratches, oxidation, and holograms. Restores depth, clarity, and a mirror-like finish to your paintwork.</p>
+                        <div class="detailing-meta">
+                            <span class="detailing-time"><i class="fas fa-clock"></i> 4-8 hours</span>
+                            <a href="contact.html" class="detailing-cta">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Clay Bar Treatment -->
+                <div class="detailing-card reveal">
+                    <div class="detailing-content">
+                        <div class="detailing-icon-wrap">
+                            <i class="fas fa-hand-sparkles"></i>
+                        </div>
+                        <h3 class="detailing-title">Clay Bar Treatment</h3>
+                        <p class="detailing-desc">Removes embedded contaminants like industrial fallout, tree sap, and overspray that washing alone can't touch. Leaves the paint silky smooth and ready for wax or coating.</p>
+                        <div class="detailing-meta">
+                            <span class="detailing-time"><i class="fas fa-clock"></i> 1-2 hours</span>
+                            <a href="contact.html" class="detailing-cta">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Engine Bay Cleaning -->
+                <div class="detailing-card reveal">
+                    <div class="detailing-content">
+                        <div class="detailing-icon-wrap">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <h3 class="detailing-title">Engine Bay Cleaning</h3>
+                        <p class="detailing-desc">Safe degreasing, gentle rinse, and dressing of all plastic and rubber components. A clean engine bay makes maintenance easier and boosts resale value.</p>
+                        <div class="detailing-meta">
+                            <span class="detailing-time"><i class="fas fa-clock"></i> 45-60 min</span>
+                            <a href="contact.html" class="detailing-cta">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Headlight Restoration -->
+                <div class="detailing-card reveal">
+                    <div class="detailing-content">
+                        <div class="detailing-icon-wrap">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3 class="detailing-title">Headlight Restoration</h3>
+                        <p class="detailing-desc">Wet-sanding and polishing of cloudy, yellowed headlights to restore clarity and improve nighttime visibility. Finished with a UV-protective sealant.</p>
+                        <div class="detailing-meta">
+                            <span class="detailing-time"><i class="fas fa-clock"></i> 1-2 hours</span>
+                            <a href="contact.html" class="detailing-cta">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHY DETAILING MATTERS — INTERACTIVE TABS ===== -->
+    <section class="py-20 sm:py-24 md:py-32 px-4 sm:px-6 bg-white dark:bg-navy-dark transition-colors duration-300 w-full">
+        <div class="max-w-[1400px] mx-auto w-full">
+            <div class="text-center mb-16 reveal">
+                <span class="section-badge">Why It Matters</span>
+                <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-5">The Real Value of <span class="italic text-aqua">Detailing</span></h2>
+                <div class="section-divider mt-7"></div>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">Detailing isn't just about looks — it's an investment in your vehicle's longevity, safety, and resale value. Explore what professional detailing does for you.</p>
+            </div>
+
+            <div class="wdm-wrap reveal" id="wdmWrap">
+                <!-- Sidebar Tabs -->
+                <div class="wdm-sidebar" role="tablist">
+                    <div class="wdm-sidebar-header">
+                        <h3>Pick a Benefit</h3>
+                        <p>See what detailing does for your car</p>
+                    </div>
+
+                    <button class="wdm-tab active" data-wdm-tab="protection" role="tab">
+                        <span class="wdm-tab-icon"><i class="fas fa-shield-alt"></i></span>
+                        <span>Protection</span>
+                    </button>
+                    <button class="wdm-tab" data-wdm-tab="value" role="tab">
+                        <span class="wdm-tab-icon"><i class="fas fa-chart-line"></i></span>
+                        <span>Resale Value</span>
+                    </button>
+                    <button class="wdm-tab" data-wdm-tab="health" role="tab">
+                        <span class="wdm-tab-icon"><i class="fas fa-heartbeat"></i></span>
+                        <span>Health & Hygiene</span>
+                    </button>
+                    <button class="wdm-tab" data-wdm-tab="safety" role="tab">
+                        <span class="wdm-tab-icon"><i class="fas fa-eye"></i></span>
+                        <span>Visibility & Safety</span>
+                    </button>
+                    <button class="wdm-tab" data-wdm-tab="pride" role="tab">
+                        <span class="wdm-tab-icon"><i class="fas fa-smile"></i></span>
+                        <span>Pride of Ownership</span>
+                    </button>
+                </div>
+
+                <!-- Panel Area -->
+                <div class="wdm-panel-area">
+
+                    <!-- Panel 1: Protection -->
+                    <div class="wdm-panel active" data-wdm-panel="protection">
+                        <div class="wdm-panel-image">
+                            <img src="assets/ad10.avif" alt="Paint protection">
+                            <span class="wdm-panel-badge">Shield</span>
+                        </div>
+                        <h3 class="wdm-panel-title">Protect Your Paint & Interior</h3>
+                        <p class="wdm-panel-desc">
+                            Every detail ends with a protective layer — wax, sealant, or ceramic coating — that shields your paint from UV rays, bird droppings, tree sap, and road salt. Interior surfaces are conditioned and sealed against stains, cracks, and fading.
+                        </p>
+                        <div class="wdm-panel-stats">
+                            <div class="wdm-stat">
+                                <div class="wdm-stat-num">+40%</div>
+                                <div class="wdm-stat-label">Longer Paint Life</div>
+                            </div>
+                            <div class="wdm-stat">
+                                <div class="wdm-stat-num">3x</div>
+                                <div class="wdm-stat-label">UV Resistance</div>
+                            </div>
+                            <div class="wdm-stat">
+                                <div class="wdm-stat-num">6mo</div>
+                                <div class="wdm-stat-label">Wax Duration</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 2: Resale Value -->
+                    <div class="wdm-panel" data-wdm-panel="value">
+                        <div class="wdm-panel-image">
+                            <img src="assets/ad9.avif" alt="Resale value">
+                            <span class="wdm-panel-badge">Investment</span>
+                        </div>
+                        <h3 class="wdm-panel-title">Boost Resale Value</h3>
+                        <p class="wdm-panel-desc">
+                            A well-detailed car consistently sells for more — and faster. Buyers see a well-maintained vehicle as a sign of responsible ownership. A professional detail before selling can add hundreds to your asking price and dramatically shorten time on the market.
+                        </p>
+                        <div class="wdm-panel-stats">
+                            <div class="wdm-stat">
+                                <div class="wdm-stat-num">$500+</div>
+                                <div class="wdm-stat-label">Avg. Value Added</div>
+                            </div>
+                            <div class="wdm-stat">
+                                <div class="wdm-stat-num">2x</div>
+                                <div class="wdm-stat-label">Faster Sale</div>
+                            </div>
+                            <div class="wdm-stat">
+                                <div class="wdm-stat-num">92%</div>
+                                <div class="wdm-stat-label">Buyer Preference</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 3: Health -->
+                    <div class="wdm-panel" data-wdm-panel="health">
+                        <div class="wdm-panel-image">
+                            <img src="assets/ad5.avif" alt="Interior health">
+                            <span class="wdm-panel-badge">Wellness</span>
+                        </div>
+                        <h3 class="wdm-panel-title">A Healthier Cabin for You</h3>
+                        <p class="wdm-panel-desc">
+                            Your car's interior harbors allergens, dust mites, bacteria, and mold. Steam cleaning and deep extraction remove these hidden irritants — leaving you with cleaner air, fewer allergy symptoms, and a more enjoyable ride for you and your passengers.
+                        </p>
+                        <div class="wdm-panel-stats">
+                            <div class="wdm-stat">
+                                <div class="wdm-stat-num">99%</div>
+                                <div class="wdm-stat-label">Bacteria Removed</div>
+                            </div>
+                            <div class="wdm-stat">
+                                <div class="wdm-stat-num">-80%</div>
+                                <div class="wdm-stat-label">Allergens</div>
+                            </div>
+                            <div class="wdm-stat">
+                                <div class="wdm-stat-num">100%</div>
+                                <div class="wdm-stat-label">Fresh Air</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 4: Safety -->
+                    <div class="wdm-panel" data-wdm-panel="safety">
+                        <div class="wdm-panel-image">
+                            <img src="assets/ad6.avif" alt="Visibility and safety">
+                            <span class="wdm-panel-badge">Safety</span>
+                        </div>
+                        <h3 class="wdm-panel-title">See the Road More Clearly</h3>
+                        <p class="wdm-panel-desc">
+                            Cloudy headlights, dirty windshields, and hazy mirrors reduce visibility and increase risk. Our detailing process restores clarity to headlights, deep-cleans all glass, and treats mirrors — helping you see and be seen on the road.
+                        </p>
+                        <div class="wdm-panel-stats">
+                            <div class="wdm-stat">
+                                <div class="wdm-stat-num">+60%</div>
+                                <div class="wdm-stat-label">Night Visibility</div>
+                            </div>
+                            <div class="wdm-stat">
+                                <div class="wdm-stat-num">-45%</div>
+                                <div class="wdm-stat-label">Glare at Night</div>
+                            </div>
+                            <div class="wdm-stat">
+                                <div class="wdm-stat-num">100%</div>
+                                <div class="wdm-stat-label">Safer Driving</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel 5: Pride -->
+                    <div class="wdm-panel" data-wdm-panel="pride">
+                        <div class="wdm-panel-image">
+                            <img src="assets/ad7.avif" alt="Pride of ownership">
+                            <span class="wdm-panel-badge">Emotion</span>
+                        </div>
+                        <h3 class="wdm-panel-title">Fall in Love with Your Car Again</h3>
+                        <p class="wdm-panel-desc">
+                            There's a feeling that comes with a freshly detailed car — the deep shine, the crisp interior, the new-car scent. It's pride. It's confidence. And it's the reason our customers keep coming back. Detailing isn't a luxury; it's a reward.
+                        </p>
+                        <div class="wdm-panel-stats">
+                            <div class="wdm-stat">
+                                <div class="wdm-stat-num">5★</div>
+                                <div class="wdm-stat-label">Customer Rating</div>
+                            </div>
+                            <div class="wdm-stat">
+                                <div class="wdm-stat-num">98%</div>
+                                <div class="wdm-stat-label">Return Rate</div>
+                            </div>
+                            <div class="wdm-stat">
+                                <div class="wdm-stat-num">∞</div>
+                                <div class="wdm-stat-label">Smiles Delivered</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HORIZONTAL PROCESS ===== -->
+    <section class="section-light-bg py-20 sm:py-24 md:py-32 px-4 sm:px-6 transition-colors duration-300 w-full">
+        <div class="max-w-[1400px] mx-auto w-full">
+            <div class="text-center mb-16 sm:mb-20 reveal">
+                <span class="section-badge">How It Works</span>
+                <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-5">Our Detailing <span class="italic text-aqua">Process</span></h2>
+                <div class="section-divider mt-7"></div>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">A proven 5-step process refined over a decade of detailing thousands of vehicles.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-6">
+                <div class="hp-step reveal">
+                    <div class="hp-num">1</div>
+                    <h3 class="hp-title">Inspection</h3>
+                    <p class="hp-desc">We assess paint condition, interior wear, and identify areas needing special attention.</p>
+                </div>
+                <div class="hp-step reveal">
+                    <div class="hp-num">2</div>
+                    <h3 class="hp-title">Decontamination</h3>
+                    <p class="hp-desc">Clay bar and iron remover eliminate embedded contaminants from the paint surface.</p>
+                </div>
+                <div class="hp-step reveal">
+                    <div class="hp-num">3</div>
+                    <h3 class="hp-title">Correction</h3>
+                    <p class="hp-desc">Multi-stage machine polishing removes swirls, scratches, and oxidation.</p>
+                </div>
+                <div class="hp-step reveal">
+                    <div class="hp-num">4</div>
+                    <h3 class="hp-title">Protection</h3>
+                    <p class="hp-desc">Premium wax, sealant, or ceramic coating locks in the shine and protects the paint.</p>
+                </div>
+                <div class="hp-step reveal">
+                    <div class="hp-num">5</div>
+                    <h3 class="hp-title">Final Touch</h3>
+                    <p class="hp-desc">Interior dressing, tire shine, and a quality inspection under professional lighting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRICING TIERS ===== -->
+    <section class="py-20 sm:py-24 md:py-32 px-4 sm:px-6 bg-white dark:bg-navy-dark transition-colors duration-300 w-full">
+        <div class="max-w-[1400px] mx-auto w-full">
+            <div class="text-center mb-16 sm:mb-20 reveal">
+                <span class="section-badge">Detailing Pricing</span>
+                <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-5">Choose Your <span class="italic text-aqua">Level</span></h2>
+                <div class="section-divider mt-7"></div>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">Three detailing tiers to match every need and budget. Prices vary by vehicle size and condition.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-6">
+                
+                <!-- Essential -->
+                <div class="tier-card reveal">
+                    <h3 class="tier-name">Essential Detail</h3>
+                    <p class="tier-tagline">Perfect for well-maintained vehicles</p>
+                    <div class="tier-price">
+                        <span class="amount">$149</span>
+                        <span class="from">starting from</span>
+                    </div>
+                    <ul class="tier-features">
+                        <li><i class="fas fa-check-circle"></i> Premium hand wash & dry</li>
+                        <li><i class="fas fa-check-circle"></i> Wheel & tire deep clean</li>
+                        <li><i class="fas fa-check-circle"></i> Interior vacuum & wipe-down</li>
+                        <li><i class="fas fa-check-circle"></i> Window cleaning (in/out)</li>
+                        <li><i class="fas fa-check-circle"></i> Hand wax protection</li>
+                        <li><i class="fas fa-check-circle"></i> Tire shine dressing</li>
+                    </ul>
+                    <a href="contact.html" class="tier-cta secondary">
+                        <i class="fas fa-calendar-check"></i> Book Essential
+                    </a>
+                </div>
+
+                <!-- Signature (Featured) -->
+                <div class="tier-card featured reveal">
+                    <div class="tier-badge">Most Popular</div>
+                    <h3 class="tier-name">Signature Detail</h3>
+                    <p class="tier-tagline">Our most complete detailing package</p>
+                    <div class="tier-price">
+                        <span class="amount">$279</span>
+                        <span class="from">starting from</span>
+                    </div>
+                    <ul class="tier-features">
+                        <li><i class="fas fa-check-circle"></i> Everything in Essential</li>
+                        <li><i class="fas fa-check-circle"></i> Clay bar decontamination</li>
+                        <li><i class="fas fa-check-circle"></i> 1-step machine polish</li>
+                        <li><i class="fas fa-check-circle"></i> Deep interior shampoo</li>
+                        <li><i class="fas fa-check-circle"></i> Leather conditioning</li>
+                        <li><i class="fas fa-check-circle"></i> Engine bay wipe-down</li>
+                    </ul>
+                    <a href="contact.html" class="tier-cta primary">
+                        <i class="fas fa-calendar-check"></i> Book Signature
+                    </a>
+                </div>
+
+                <!-- Concours -->
+                <div class="tier-card reveal">
+                    <h3 class="tier-name">Concours Detail</h3>
+                    <p class="tier-tagline">The ultimate show-car transformation</p>
+                    <div class="tier-price">
+                        <span class="amount">$499</span>
+                        <span class="from">starting from</span>
+                    </div>
+                    <ul class="tier-features">
+                        <li><i class="fas fa-check-circle"></i> Everything in Signature</li>
+                        <li><i class="fas fa-check-circle"></i> Multi-stage paint correction</li>
+                        <li><i class="fas fa-check-circle"></i> Ceramic coating application</li>
+                        <li><i class="fas fa-check-circle"></i> Headlight restoration</li>
+                        <li><i class="fas fa-check-circle"></i> Full interior steam clean</li>
+                        <li><i class="fas fa-check-circle"></i> Engine bay full detail</li>
+                    </ul>
+                    <a href="contact.html" class="tier-cta secondary">
+                        <i class="fas fa-calendar-check"></i> Book Concours
+                    </a>
+                </div>
+
+            </div>
+
+            <p class="text-center text-gray-500 dark:text-gray-400 text-sm mt-10 reveal">Prices vary based on vehicle size, condition, and location. Contact us for a precise quote.</p>
+        </div>
+    </section>
+
+    <!-- ===== CTA SECTION ===== -->
+    <section class="section-light-bg py-20 sm:py-24 md:py-32 px-4 sm:px-6 transition-colors duration-300 w-full">
+        <div class="max-w-[1400px] mx-auto w-full">
+            <div class="rounded-[2.5rem] p-12 sm:p-20 text-center relative overflow-hidden reveal" style="background: linear-gradient(135deg, #0A192F 0%, #0f2644 100%);">
+                <div class="absolute top-0 left-0 w-96 h-96 bg-aqua/15 rounded-full blur-[100px] pointer-events-none"></div>
+                <div class="absolute bottom-0 right-0 w-96 h-96 bg-aqua/10 rounded-full blur-[120px] pointer-events-none"></div>
+                <div class="relative z-10">
+                    <h2 class="font-serif text-4xl sm:text-5xl md:text-6xl text-white font-bold mb-6">Ready for a <span class="italic text-aqua">Transformation</span>?</h2>
+                    <p class="text-gray-300 text-lg sm:text-xl max-w-2xl mx-auto mb-10">Book your detailing appointment today and see what your car is truly capable of looking like.</p>
+                    <div class="flex flex-wrap gap-5 justify-center">
+                        <a href="contact.html" class="btn-primary text-base sm:text-lg"><i class="fas fa-calendar-check"></i> Book Appointment</a>
+                        <a href="pricing.html" class="btn-outline border-white text-white hover:bg-white hover:text-navy text-base sm:text-lg"><i class="fas fa-tag"></i> View Pricing</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="pt-16 pb-10 w-full bg-navy dark:bg-navy-dark border-t border-navy/20 dark:border-aqua/10 transition-colors duration-300">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12">
+                <div class="text-center sm:text-start">
+                    <a href="index.html" class="logo-wrapper mb-6 justify-center sm:justify-start">
+                        <div class="logo-icon">
+                            <i class="fas fa-car-side"></i>
+                        </div>
+                        <div class="logo-text-group">
+                            <span class="logo-text">Aqua<span class="highlight">Shine</span></span>
+                            <span class="logo-sub">Car Wash & Detailing</span>
+                        </div>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Premium car wash, detailing, and ceramic protection services. Trusted by thousands since 2013.</p>
+                    <div class="flex gap-3 justify-center sm:justify-start">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="text-center sm:text-start">
+                    <h3 class="text-white text-xl font-bold mb-6 pl-3" style="border-left: 3px solid #00B4D8;">Quick Links</h3>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="about.html" class="hover:text-aqua transition block">About Us</a></li>
+                        <li><a href="services.html" class="hover:text-aqua transition block">Services</a></li>
+                        <li><a href="wash-packages.html" class="hover:text-aqua transition block">Wash Packages</a></li>
+                        <li><a href="contact.html" class="hover:text-aqua transition block">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="text-center sm:text-start">
+                    <h3 class="text-white text-xl font-bold mb-6 pl-3" style="border-left: 3px solid #00B4D8;">Services</h3>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="auto-detailing.html" class="hover:text-aqua transition block">Auto Detailing</a></li>
+                        <li><a href="ceramic-protection.html" class="hover:text-aqua transition block">Ceramic Protection</a></li>
+                        <li><a href="interior-care.html" class="hover:text-aqua transition block">Interior Care</a></li>
+                        <li><a href="pricing.html" class="hover:text-aqua transition block">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="text-center sm:text-start">
+                    <h3 class="text-white text-xl font-bold mb-6 pl-3" style="border-left: 3px solid #00B4D8;">Contact</h3>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li class="flex gap-3 justify-center sm:justify-start">
+                            <i class="fas fa-map-marker-alt text-aqua w-5 text-base"></i>
+                            <span>456 Sparkle Ave, Los Angeles, CA</span>
+                        </li>
+                        <li class="flex gap-3 justify-center sm:justify-start">
+                            <i class="fas fa-phone text-aqua w-5 text-base"></i>
+                            <span>(888) 555-0199</span>
+                        </li>
+                        <li class="flex gap-3 justify-center sm:justify-start">
+                            <i class="fas fa-envelope text-aqua w-5 text-base"></i>
+                            <span>info@aquashine.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 text-center text-gray-500 text-xs border-t border-navy/30 dark:border-aqua/10">
+                <p>© 2026 AquaShine Car Wash & Auto Detailing. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navbar = document.getElementById('navbarWrapper');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 20) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            const authToggleBtn = document.getElementById('authToggleBtn');
+            const authDropdown = document.getElementById('authDropdown');
+            const authWrapper = document.getElementById('authToggleWrapper');
+
+            if (authToggleBtn && authDropdown) {
+                authToggleBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    authDropdown.classList.toggle('active');
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!authWrapper.contains(e.target)) {
+                        authDropdown.classList.remove('active');
+                    }
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        authDropdown.classList.remove('active');
+                    }
+                });
+            }
+
+            const themeBtn = document.getElementById('theme-toggle');
+            const themeMob = document.getElementById('theme-toggle-mobile');
+            const updateThemeUI = (dark) => {
+                [themeBtn, themeMob].forEach(b => {
+                    if (b) {
+                        const moon = b.querySelector('.fa-moon');
+                        const sun = b.querySelector('.fa-sun');
+                        if (dark) { moon?.classList.add('hidden'); sun?.classList.remove('hidden'); }
+                        else { moon?.classList.remove('hidden'); sun?.classList.add('hidden'); }
+                    }
+                });
+            };
+            const toggleTheme = () => {
+                document.documentElement.classList.toggle('dark');
+                const isDark = document.documentElement.classList.contains('dark');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                updateThemeUI(isDark);
+            };
+            if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+            if (themeMob) themeMob.addEventListener('click', toggleTheme);
+            if (localStorage.getItem('theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+                updateThemeUI(true);
+            }
+
+            const rtlBtn = document.getElementById('rtl-toggle');
+            const rtlMob = document.getElementById('rtl-toggle-mobile');
+            const updateRtlUI = (isRtl) => {
+                document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+                [rtlBtn, rtlMob].forEach(b => b && b.classList.toggle('active', isRtl));
+            };
+            const toggleRtl = () => {
+                const isRtl = document.documentElement.dir !== 'rtl';
+                localStorage.setItem('dir', isRtl ? 'rtl' : 'ltr');
+                updateRtlUI(isRtl);
+            };
+            if (rtlBtn) rtlBtn.addEventListener('click', toggleRtl);
+            if (rtlMob) rtlMob.addEventListener('click', toggleRtl);
+            if (localStorage.getItem('dir') === 'rtl') updateRtlUI(true);
+
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const icon = mobileToggle?.querySelector('i');
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    mobileMenu.classList.toggle('open');
+                    icon?.classList.toggle('fa-bars');
+                    icon?.classList.toggle('fa-times');
+                    if (window.innerWidth <= 768) {
+                        document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+                    }
+                });
+            }
+
+            document.addEventListener('click', (e) => {
+                if (mobileMenu && mobileMenu.classList.contains('open') && !mobileMenu.contains(e.target) && !mobileToggle?.contains(e.target)) {
+                    mobileMenu.classList.remove('open');
+                    icon?.classList.add('fa-bars');
+                    icon?.classList.remove('fa-times');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 1200 && mobileMenu && mobileMenu.classList.contains('open')) {
+                    mobileMenu.classList.remove('open');
+                    icon?.classList.add('fa-bars');
+                    icon?.classList.remove('fa-times');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            document.querySelectorAll('.mobile-dropdown-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const content = btn.nextElementSibling;
+                    content.classList.toggle('show');
+                    const chev = btn.querySelector('.fa-chevron-down');
+                    if (chev) {
+                        chev.style.transform = content.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0)';
+                    }
+                });
+            });
+
+            // ===== WHY DETAILING MATTERS — TABS =====
+            const wdmTabs = document.querySelectorAll('.wdm-tab');
+            const wdmPanels = document.querySelectorAll('.wdm-panel');
+
+            wdmTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const target = tab.getAttribute('data-wdm-tab');
+
+                    // Remove active from all tabs and panels
+                    wdmTabs.forEach(t => t.classList.remove('active'));
+                    wdmPanels.forEach(p => p.classList.remove('active'));
+
+                    // Add active to clicked tab
+                    tab.classList.add('active');
+
+                    // Show matching panel
+                    const matchingPanel = document.querySelector(`.wdm-panel[data-wdm-panel="${target}"]`);
+                    if (matchingPanel) matchingPanel.classList.add('active');
+                });
+            });
+
+            // Scroll Reveal
+            const reveals = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+            }, { threshold: 0.12 });
+            reveals.forEach(el => revealObserver.observe(el));
+        });
+    </script>
+</body>
+</html>
