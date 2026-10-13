@@ -159,12 +159,12 @@
             margin: 0 12px;
         }
         .nav-link {
-            padding: 8px 18px;
+            padding: 7px 12px;
             border-radius: 40px;
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 0.88rem;
             letter-spacing: 0.01em;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.85);
             transition: all 0.25s ease;
             cursor: pointer;
             white-space: nowrap;
@@ -242,77 +242,30 @@
             flex-shrink: 0;
         }
 
-        .auth-toggle-wrapper {
-            position: relative;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-        }
-        .auth-toggle-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: 40px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.9);
+        .mobile-actions .btn-mobile-book {
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
-            font-size: 1.2rem;
-        }
-        .auth-toggle-btn:hover {
-            background: rgba(0, 180, 216, 0.2);
-            border-color: #00B4D8;
-            color: #00B4D8;
-            transform: scale(1.05);
-        }
-
-        .auth-dropdown {
-            position: absolute;
-            top: calc(100% + 12px);
-            right: 0;
-            min-width: 220px;
-            background: rgba(10, 25, 47, 0.98);
-            backdrop-filter: blur(16px);
-            border-radius: 16px;
-            padding: 10px 0;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px) scale(0.95);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            border: 1px solid rgba(0, 180, 216, 0.2);
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.6);
-        }
-        .dark .auth-dropdown { background: rgba(2, 12, 27, 0.98); }
-        .auth-dropdown.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0) scale(1);
-        }
-        .auth-dropdown-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 22px;
-            gap: 14px;
-            transition: all 0.2s;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 40px;
+            font-weight: 700;
             font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.85);
-            cursor: pointer;
-            border-radius: 10px;
-            margin: 2px 10px;
+            transition: all 0.2s;
+            color: #0A192F;
             text-decoration: none;
+            background: linear-gradient(135deg, #00B4D8 0%, #0096b5 100%);
+            box-shadow: 0 4px 16px rgba(0, 180, 216, 0.35);
+            margin-bottom: 4px;
         }
-        .auth-dropdown-item:hover {
-            background: rgba(0, 180, 216, 0.15);
-            color: #00B4D8;
+        .mobile-actions .btn-mobile-book:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 180, 216, 0.55);
+            color: #0A192F;
         }
-        .auth-dropdown-item i { width: 22px; text-align: center; color: #00B4D8; }
-        .auth-dropdown-divider {
-            height: 1px;
-            background: rgba(255, 255, 255, 0.08);
-            margin: 6px 20px;
+        .mobile-actions .btn-mobile-book i {
+            color: #0A192F;
         }
 
         .btn-icon-rounded {
@@ -426,19 +379,12 @@
         }
         .mobile-actions .btn-mobile-action i { width: 20px; text-align: center; color: #00B4D8; }
 
-        /* Responsive */
-        @media (min-width: 1200px) and (max-width: 1399px) {
-            .navbar-inner { gap: 8px; }
-            .desktop-nav { gap: 2px; margin: 0 4px; }
-            .nav-link { padding: 6px 9px; font-size: 0.82rem; }
-            .logo-text { font-size: 1.35rem; }
-            .logo-icon { width: 44px; height: 44px; }
-        }
-
-        @media (max-width: 1199px) {
+        /* Responsive - Tab & iPad View (Hamburger appears on iPad and tablet viewports) */
+        @media (max-width: 1399px) {
             .desktop-nav { display: none !important; }
             .mobile-toggle { display: flex !important; }
             .mobile-menu { display: block; }
+            .nav-actions .btn-icon-rounded { display: none !important; }
             .navbar-wrapper { padding: 14px 20px; }
             .navbar-wrapper.scrolled { padding: 8px 20px; }
             .logo-icon { width: 44px; height: 44px; border-radius: 14px; }
@@ -454,7 +400,6 @@
                 border-radius: 0 0 20px 20px;
             }
             .nav-actions .btn-icon-rounded { display: none; }
-            .nav-actions .auth-toggle-wrapper { display: none; }
             .navbar-wrapper { padding: 10px 16px; }
             .navbar-wrapper.scrolled { padding: 6px 16px; }
             .logo-icon { width: 38px; height: 38px; border-radius: 12px; }
@@ -1103,9 +1048,14 @@
         .kit-item {
             background: #FFFFFF;
             border-radius: 18px;
-            padding: 26px 22px;
+            padding: 26px 20px;
             border: 1px solid #E8E8E8;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
             transition: all 0.35s ease;
         }
         .dark .kit-item {
@@ -1117,24 +1067,24 @@
             transform: translateY(-6px);
             box-shadow: 0 18px 40px -15px rgba(0, 180, 216, 0.3);
         }
-        .kit-item i {
-            font-size: 1.6rem;
-            color: #00B4D8;
-            margin-bottom: 12px;
-            display: block;
-        }
         .kit-item b {
             display: block;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 800;
             color: #0A192F;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
+            min-height: 1.4em;
+            line-height: 1.3;
+            text-align: center;
         }
         .dark .kit-item b { color: #ffffff; }
         .kit-item span {
-            font-size: 0.76rem;
+            font-size: 0.82rem;
             color: #64748b;
             line-height: 1.5;
+            display: block;
+            min-height: 3em;
+            text-align: center;
         }
         .dark .kit-item span { color: #94a3b8; }
         @media (max-width: 900px) {
@@ -1308,24 +1258,6 @@
             <div class="nav-actions">
                 <button id="rtl-toggle" class="btn-icon-rounded" title="RTL">⇄</button>
                 <button id="theme-toggle" class="btn-icon-rounded" title="Theme"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
-                
-                <div class="auth-toggle-wrapper" id="authToggleWrapper">
-                    <button class="auth-toggle-btn" id="authToggleBtn" title="Account">
-                        <i class="fas fa-user-circle"></i>
-                    </button>
-                    <div class="auth-dropdown" id="authDropdown">
-                        <a href="login.html" class="auth-dropdown-item">
-                            <i class="fas fa-sign-in-alt"></i>
-                            <span class="item-label">Log In</span>
-                        </a>
-                        <div class="auth-dropdown-divider"></div>
-                        <a href="signup.html" class="auth-dropdown-item">
-                            <i class="fas fa-user-plus"></i>
-                            <span class="item-label">Sign Up</span>
-                        </a>
-                    </div>
-                </div>
-
                 <button id="mobile-toggle" class="mobile-toggle"><i class="fas fa-bars"></i></button>
             </div>
         </div>
@@ -1349,18 +1281,15 @@
             <a href="interior-care.html" class="mobile-menu-item">Interior Care</a>
             <a href="contact.html" class="mobile-menu-item">Contact</a>
             <div class="mobile-actions">
+                <a href="contact.html" class="btn-mobile-book">
+                    <i class="fas fa-calendar-check"></i> <span>Book Now</span>
+                </a>
                 <button id="theme-toggle-mobile" class="btn-mobile-action">
                     <i class="fas fa-moon"></i> <span>Dark Mode</span>
                 </button>
                 <button id="rtl-toggle-mobile" class="btn-mobile-action">
                     <i class="fas fa-align-right"></i> <span>RTL</span>
                 </button>
-                <a href="login.html" class="btn-mobile-action">
-                    <i class="fas fa-sign-in-alt"></i> <span>Log In</span>
-                </a>
-                <a href="signup.html" class="btn-mobile-action">
-                    <i class="fas fa-user-plus"></i> <span>Sign Up</span>
-                </a>
             </div>
         </div>
     </nav>
@@ -1697,22 +1626,18 @@
 
             <div class="kit-strip reveal">
                 <div class="kit-item">
-                    <i class="fas fa-box-open"></i>
                     <b>Coating Kit</b>
                     <span>Full professional-grade product used on your car</span>
                 </div>
                 <div class="kit-item">
-                    <i class="fas fa-file-certificate"></i>
                     <b>Warranty Card</b>
                     <span>5-year registered warranty certificate</span>
                 </div>
                 <div class="kit-item">
-                    <i class="fas fa-spray-can"></i>
                     <b>Maintenance Spray</b>
                     <span>Ceramic boost spray for touch-ups at home</span>
                 </div>
                 <div class="kit-item">
-                    <i class="fas fa-microfiber"></i>
                     <b>Care Kit</b>
                     <span>Microfiber towel + pH-neutral wash sample</span>
                 </div>
@@ -1986,28 +1911,6 @@
                 }
             });
 
-            const authToggleBtn = document.getElementById('authToggleBtn');
-            const authDropdown = document.getElementById('authDropdown');
-            const authWrapper = document.getElementById('authToggleWrapper');
-
-            if (authToggleBtn && authDropdown) {
-                authToggleBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    authDropdown.classList.toggle('active');
-                });
-
-                document.addEventListener('click', (e) => {
-                    if (!authWrapper.contains(e.target)) {
-                        authDropdown.classList.remove('active');
-                    }
-                });
-
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape') {
-                        authDropdown.classList.remove('active');
-                    }
-                });
-            }
 
             const themeBtn = document.getElementById('theme-toggle');
             const themeMob = document.getElementById('theme-toggle-mobile');
@@ -2074,7 +1977,7 @@
             });
 
             window.addEventListener('resize', () => {
-                if (window.innerWidth >= 1200 && mobileMenu && mobileMenu.classList.contains('open')) {
+                if (window.innerWidth >= 1400 && mobileMenu && mobileMenu.classList.contains('open')) {
                     mobileMenu.classList.remove('open');
                     icon?.classList.add('fa-bars');
                     icon?.classList.remove('fa-times');

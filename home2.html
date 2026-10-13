@@ -239,77 +239,30 @@
             flex-shrink: 0;
         }
 
-        .auth-toggle-wrapper {
-            position: relative;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-        }
-        .auth-toggle-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: 40px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.9);
+        .mobile-actions .btn-mobile-book {
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
-            font-size: 1.2rem;
-        }
-        .auth-toggle-btn:hover {
-            background: rgba(0, 180, 216, 0.2);
-            border-color: #00B4D8;
-            color: #00B4D8;
-            transform: scale(1.05);
-        }
-
-        .auth-dropdown {
-            position: absolute;
-            top: calc(100% + 12px);
-            right: 0;
-            min-width: 220px;
-            background: rgba(10, 25, 47, 0.98);
-            backdrop-filter: blur(16px);
-            border-radius: 16px;
-            padding: 10px 0;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px) scale(0.95);
-            transition: all 0.3s ease;
-            z-index: 1000;
-            border: 1px solid rgba(0, 180, 216, 0.2);
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.6);
-        }
-        .dark .auth-dropdown { background: rgba(2, 12, 27, 0.98); }
-        .auth-dropdown.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0) scale(1);
-        }
-        .auth-dropdown-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 22px;
-            gap: 14px;
-            transition: all 0.2s;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 40px;
+            font-weight: 700;
             font-size: 0.95rem;
-            color: rgba(255, 255, 255, 0.85);
-            cursor: pointer;
-            border-radius: 10px;
-            margin: 2px 10px;
+            transition: all 0.2s;
+            color: #0A192F;
             text-decoration: none;
+            background: linear-gradient(135deg, #00B4D8 0%, #0096b5 100%);
+            box-shadow: 0 4px 16px rgba(0, 180, 216, 0.35);
+            margin-bottom: 4px;
         }
-        .auth-dropdown-item:hover {
-            background: rgba(0, 180, 216, 0.15);
-            color: #00B4D8;
+        .mobile-actions .btn-mobile-book:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 180, 216, 0.55);
+            color: #0A192F;
         }
-        .auth-dropdown-item i { width: 22px; text-align: center; color: #00B4D8; }
-        .auth-dropdown-divider {
-            height: 1px;
-            background: rgba(255, 255, 255, 0.08);
-            margin: 6px 20px;
+        .mobile-actions .btn-mobile-book i {
+            color: #0A192F;
         }
 
         .btn-icon-rounded {
@@ -423,20 +376,12 @@
         }
         .mobile-actions .btn-mobile-action i { width: 20px; text-align: center; color: #00B4D8; }
 
-        /* Responsive - Laptop View */
-        @media (min-width: 1200px) and (max-width: 1399px) {
-            .navbar-inner { gap: 8px; }
-            .desktop-nav { gap: 2px; margin: 0 4px; }
-            .nav-link { padding: 6px 9px; font-size: 0.82rem; }
-            .logo-text { font-size: 1.35rem; }
-            .logo-icon { width: 44px; height: 44px; }
-        }
-
-        /* Responsive - Tab View (Hamburger appears only here and below) */
-        @media (max-width: 1199px) {
+        /* Responsive - Tab & iPad View (Hamburger appears on iPad and tablet viewports) */
+        @media (max-width: 1399px) {
             .desktop-nav { display: none !important; }
             .mobile-toggle { display: flex !important; }
             .mobile-menu { display: block; }
+            .nav-actions .btn-icon-rounded { display: none !important; }
             .navbar-wrapper { padding: 14px 20px; }
             .navbar-wrapper.scrolled { padding: 8px 20px; }
             .logo-icon { width: 44px; height: 44px; border-radius: 14px; }
@@ -452,7 +397,6 @@
                 border-radius: 0 0 20px 20px;
             }
             .nav-actions .btn-icon-rounded { display: none; }
-            .nav-actions .auth-toggle-wrapper { display: none; }
             .navbar-wrapper { padding: 10px 16px; }
             .navbar-wrapper.scrolled { padding: 6px 16px; }
             .logo-icon { width: 38px; height: 38px; border-radius: 12px; }
@@ -898,7 +842,7 @@
             grid-template-columns: 1fr;
             gap: 20px;
         }
-        @media (min-width: 768px) {
+        @media (min-width: 640px) {
             .bento-grid {
                 grid-template-columns: repeat(2, 1fr);
                 grid-auto-rows: 260px;
@@ -977,19 +921,26 @@
         .bento-icon i { color: #ffffff; font-size: 1.1rem; transition: color 0.4s ease; }
         .bento-item:hover .bento-icon i { color: #0A192F; }
         .bento-title {
-            font-size: 1.4rem;
+            font-size: 1.35rem;
+            line-height: 1.25;
             font-weight: 800;
             color: #ffffff;
             letter-spacing: -0.02em;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
+            min-height: 2.5em;
+        }
+        .bento-item.tall .bento-title {
+            min-height: auto;
         }
         .bento-sub {
             font-size: 0.85rem;
+            line-height: 1.4;
             color: rgba(255,255,255,0.7);
             font-weight: 500;
+            min-height: 1.4em;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 640px) {
             .bento-item.col-span-2 { grid-column: span 2; }
             .bento-item.row-span-2 { grid-row: span 2; }
         }
@@ -1274,20 +1225,12 @@
             letter-spacing: 0.05em;
         }
 
-        /* ===== DETAILING INSIGHTS (NEW SECTION - REPLACES CLIENT STORIES) ===== */
+        /* ===== DETAILING INSIGHTS (RESPONSIVE FOR MOBILE, IPAD MINI, TABLET & DESKTOP) ===== */
         .insights-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 24px;
-        }
-        @media (min-width: 768px) {
-            .insights-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (min-width: 1024px) {
-            .insights-grid {
-                grid-template-columns: repeat(12, 1fr);
-                gap: 28px;
-            }
+            gap: 20px;
+            width: 100%;
         }
 
         .insight-card {
@@ -1296,12 +1239,14 @@
             border-radius: 28px;
             overflow: hidden;
             border: 1px solid #E8E8E8;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
             display: flex;
             flex-direction: column;
             text-decoration: none;
             box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-            padding: 36px 32px;
+            padding: 28px 24px;
+            min-width: 0;
+            will-change: transform;
         }
         .dark .insight-card {
             background: #112240;
@@ -1309,17 +1254,18 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
         .insight-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-6px);
             border-color: #00B4D8;
-            box-shadow: 0 30px 50px -15px rgba(0, 180, 216, 0.25);
+            box-shadow: 0 24px 44px -16px rgba(0, 180, 216, 0.25);
         }
 
         .insight-top-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 16px;
-            margin-bottom: 22px;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
         }
         .insight-tag {
             display: inline-flex;
@@ -1341,17 +1287,17 @@
         }
 
         .insight-icon {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             border-radius: 14px;
             background: rgba(0, 180, 216, 0.1);
             color: #00B4D8;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             flex-shrink: 0;
-            transition: all 0.3s ease;
+            transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
         }
         .insight-card:hover .insight-icon {
             background: #00B4D8;
@@ -1363,17 +1309,19 @@
             display: flex;
             flex-direction: column;
             flex-grow: 1;
+            min-width: 0;
         }
 
         .insight-meta {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
             font-size: 0.75rem;
             color: #64748b;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             font-weight: 600;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.04em;
+            flex-wrap: wrap;
         }
         .dark .insight-meta { color: #94a3b8; }
         .insight-meta span {
@@ -1387,22 +1335,25 @@
         }
 
         .insight-title {
-            font-size: 1.35rem;
+            font-size: 1.25rem;
             font-weight: 800;
             color: #0A192F;
             line-height: 1.35;
             margin-bottom: 14px;
             letter-spacing: -0.02em;
-            transition: color 0.3s ease;
+            transition: color 0.2s ease;
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
         .dark .insight-title { color: #ffffff; }
         .insight-card:hover .insight-title { color: #00B4D8; }
 
         .insight-excerpt {
-            font-size: 0.92rem;
-            line-height: 1.7;
+            font-size: 0.9rem;
+            line-height: 1.65;
             color: #64748b;
             margin-bottom: 20px;
+            overflow-wrap: break-word;
         }
         .dark .insight-excerpt { color: #94a3b8; }
 
@@ -1442,13 +1393,13 @@
             color: #0A192F;
             letter-spacing: 0.05em;
             text-transform: uppercase;
-            transition: all 0.3s ease;
+            transition: color 0.25s ease, gap 0.25s ease;
             margin-top: auto;
         }
         .dark .insight-readmore { color: #ffffff; }
         .insight-card:hover .insight-readmore {
             color: #00B4D8;
-            gap: 16px;
+            gap: 14px;
         }
         .insight-readmore i {
             width: 32px;
@@ -1460,7 +1411,7 @@
             align-items: center;
             justify-content: center;
             font-size: 0.75rem;
-            transition: all 0.3s ease;
+            transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
         }
         .insight-card:hover .insight-readmore i {
             transform: rotate(-45deg);
@@ -1472,23 +1423,16 @@
             color: #0A192F;
         }
 
-        /* Feature insight layout */
+        /* Default Feature card layout */
         .insight-card.feature {
-            grid-column: span 12;
-            padding: 40px;
+            grid-column: span 1;
+            padding: 32px 24px;
         }
         .insight-feature-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 32px;
+            gap: 28px;
             width: 100%;
-        }
-        @media (min-width: 1024px) {
-            .insight-feature-grid {
-                grid-template-columns: 1.35fr 1fr;
-                gap: 48px;
-                align-items: stretch;
-            }
         }
         .insight-sidebar-box {
             background: #F8FAFC;
@@ -1510,6 +1454,7 @@
             padding: 10px 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.06);
             font-size: 0.85rem;
+            gap: 12px;
         }
         .dark .insight-metric-item {
             border-bottom-color: rgba(255, 255, 255, 0.06);
@@ -1528,17 +1473,75 @@
         .insight-metric-val {
             font-weight: 700;
             color: #0A192F;
+            text-align: right;
         }
         .dark .insight-metric-val {
             color: #00B4D8;
         }
 
-        /* Grid spans */
+        /* Tablet Viewports: iPad Mini (744px/768px), iPad Air, Tablets (640px to 1023px) */
+        @media (min-width: 640px) {
+            .insights-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+            .insight-card {
+                padding: 32px 28px;
+            }
+            .insight-card.feature {
+                grid-column: span 2;
+                padding: 36px 32px;
+            }
+            .insight-card.col-4 {
+                grid-column: span 1;
+            }
+            .insight-card.col-6 {
+                grid-column: span 1;
+            }
+            .insight-card:last-child {
+                grid-column: span 2;
+            }
+            .insight-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Desktop Viewports (1024px and up) */
         @media (min-width: 1024px) {
-            .insight-card.col-4 { grid-column: span 4; }
-            .insight-card.col-6 { grid-column: span 6; }
-            .insight-card.col-8 { grid-column: span 8; }
-            .insight-card.col-12 { grid-column: span 12; }
+            .insights-grid {
+                grid-template-columns: repeat(12, 1fr);
+                gap: 28px;
+            }
+            .insight-card {
+                padding: 36px 32px;
+            }
+            .insight-card.feature {
+                grid-column: span 12;
+                padding: 40px;
+            }
+            .insight-feature-grid {
+                grid-template-columns: 1.35fr 1fr;
+                gap: 48px;
+                align-items: stretch;
+            }
+            .insight-card.col-4 {
+                grid-column: span 4;
+            }
+            .insight-card.col-6 {
+                grid-column: span 6;
+            }
+            .insight-card.col-8 {
+                grid-column: span 8;
+            }
+            .insight-card.col-12 {
+                grid-column: span 12;
+            }
+            .insight-card:last-child {
+                grid-column: span 6;
+            }
+            .insight-title {
+                font-size: 1.35rem;
+            }
         }
 
         /* ===== QUOTE / MANIFESTO BAND ===== */
@@ -1686,24 +1689,6 @@
             <div class="nav-actions">
                 <button id="rtl-toggle" class="btn-icon-rounded" title="RTL">⇄</button>
                 <button id="theme-toggle" class="btn-icon-rounded" title="Theme"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
-                
-                <div class="auth-toggle-wrapper" id="authToggleWrapper">
-                    <button class="auth-toggle-btn" id="authToggleBtn" title="Account">
-                        <i class="fas fa-user-circle"></i>
-                    </button>
-                    <div class="auth-dropdown" id="authDropdown">
-                        <a href="login.html" class="auth-dropdown-item">
-                            <i class="fas fa-sign-in-alt"></i>
-                            <span class="item-label">Log In</span>
-                        </a>
-                        <div class="auth-dropdown-divider"></div>
-                        <a href="signup.html" class="auth-dropdown-item">
-                            <i class="fas fa-user-plus"></i>
-                            <span class="item-label">Sign Up</span>
-                        </a>
-                    </div>
-                </div>
-
                 <button id="mobile-toggle" class="mobile-toggle"><i class="fas fa-bars"></i></button>
             </div>
         </div>
@@ -1727,18 +1712,15 @@
             <a href="interior-care.html" class="mobile-menu-item">Interior Care</a>
             <a href="contact.html" class="mobile-menu-item">Contact</a>
             <div class="mobile-actions">
+                <a href="contact.html" class="btn-mobile-book">
+                    <i class="fas fa-calendar-check"></i> <span>Book Now</span>
+                </a>
                 <button id="theme-toggle-mobile" class="btn-mobile-action">
                     <i class="fas fa-moon"></i> <span>Dark Mode</span>
                 </button>
                 <button id="rtl-toggle-mobile" class="btn-mobile-action">
                     <i class="fas fa-align-right"></i> <span>RTL</span>
                 </button>
-                <a href="login.html" class="btn-mobile-action">
-                    <i class="fas fa-sign-in-alt"></i> <span>Log In</span>
-                </a>
-                <a href="signup.html" class="btn-mobile-action">
-                    <i class="fas fa-user-plus"></i> <span>Sign Up</span>
-                </a>
             </div>
         </div>
     </nav>
@@ -2417,21 +2399,6 @@
                 }
             });
 
-            const authToggleBtn = document.getElementById('authToggleBtn');
-            const authDropdown = document.getElementById('authDropdown');
-            const authWrapper = document.getElementById('authToggleWrapper');
-            if (authToggleBtn && authDropdown) {
-                authToggleBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    authDropdown.classList.toggle('active');
-                });
-                document.addEventListener('click', (e) => {
-                    if (!authWrapper.contains(e.target)) authDropdown.classList.remove('active');
-                });
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape') authDropdown.classList.remove('active');
-                });
-            }
 
             const themeBtn = document.getElementById('theme-toggle');
             const themeMob = document.getElementById('theme-toggle-mobile');
@@ -2498,7 +2465,7 @@
             });
 
             window.addEventListener('resize', () => {
-                if (window.innerWidth >= 1200 && mobileMenu && mobileMenu.classList.contains('open')) {
+                if (window.innerWidth >= 1400 && mobileMenu && mobileMenu.classList.contains('open')) {
                     mobileMenu.classList.remove('open');
                     icon?.classList.add('fa-bars');
                     icon?.classList.remove('fa-times');
