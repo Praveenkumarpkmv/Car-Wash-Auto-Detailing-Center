@@ -242,6 +242,32 @@
             flex-shrink: 0;
         }
 
+        .btn-nav-book {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            border-radius: 40px;
+            background: linear-gradient(135deg, #00B4D8 0%, #0096b5 100%);
+            color: #0A192F;
+            font-weight: 700;
+            font-size: 0.88rem;
+            letter-spacing: 0.02em;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0, 180, 216, 0.35);
+        }
+        .btn-nav-book:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 180, 216, 0.55);
+            color: #0A192F;
+        }
+        .btn-nav-book i {
+            font-size: 0.85rem;
+            color: #0A192F;
+        }
+
         .mobile-actions .btn-mobile-book {
             display: flex;
             align-items: center;
@@ -385,6 +411,7 @@
             .mobile-toggle { display: flex !important; }
             .mobile-menu { display: block; }
             .nav-actions .btn-icon-rounded { display: none !important; }
+            .btn-nav-book { display: none !important; }
             .navbar-wrapper { padding: 14px 20px; }
             .navbar-wrapper.scrolled { padding: 8px 20px; }
             .logo-icon { width: 44px; height: 44px; border-radius: 14px; }
@@ -1132,6 +1159,10 @@
             <div class="nav-actions">
                 <button id="rtl-toggle" class="btn-icon-rounded" title="RTL">⇄</button>
                 <button id="theme-toggle" class="btn-icon-rounded" title="Theme"><i class="fas fa-moon"></i><i class="fas fa-sun hidden"></i></button>
+                <a href="contact.html" class="btn-nav-book">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Book Now</span>
+                </a>
                 <button id="mobile-toggle" class="mobile-toggle"><i class="fas fa-bars"></i></button>
             </div>
         </div>
