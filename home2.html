@@ -21,7 +21,7 @@
                     },
                     colors: {
                         'navy': '#0A192F',
-                        'aqua': '#00B4D8',
+                        'aqua': 'var(--color-aqua, #0077B6)',
                         'navy-light': '#112240',
                         'navy-dark': '#020C1B',
                     }
@@ -30,6 +30,35 @@
         }
     </script>
     <style>
+        :root {
+            --color-aqua: #0077B6;
+            --color-aqua-rgb: 0, 119, 182;
+            --color-aqua-hover: #005F92;
+            --color-aqua-badge-bg: rgba(0, 119, 182, 0.08);
+            --color-aqua-badge-border: rgba(0, 119, 182, 0.35);
+        }
+        .dark {
+            --color-aqua: #00B4D8;
+            --color-aqua-rgb: 0, 180, 216;
+            --color-aqua-hover: #0096B5;
+            --color-aqua-badge-bg: rgba(0, 180, 216, 0.12);
+            --color-aqua-badge-border: rgba(0, 180, 216, 0.35);
+        }
+
+        .text-aqua {
+            color: var(--color-aqua) !important;
+        }
+        /* Preserve glowing vibrant aqua on inherently dark sections */
+        .dark .text-aqua,
+        .bg-navy .text-aqua,
+        .bg-navy-dark .text-aqua,
+        footer .text-aqua,
+        .hero3-container .text-aqua,
+        section[style*="#0A192F"] .text-aqua,
+        div[style*="#0A192F"] .text-aqua {
+            color: #00B4D8 !important;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -459,8 +488,8 @@
 
         /* ===== BUTTONS ===== */
         .btn-primary {
-            background: #00B4D8;
-            color: #0A192F;
+            background: var(--color-aqua);
+            color: #FFFFFF;
             padding: 0.9rem 2.2rem;
             border-radius: 60px;
             font-weight: 700;
@@ -473,12 +502,35 @@
             border: none;
             cursor: pointer;
             text-decoration: none;
+            box-shadow: 0 4px 16px rgba(var(--color-aqua-rgb), 0.25);
         }
-        .btn-primary:hover { background: #0096b5; transform: scale(1.03); box-shadow: 0 8px 30px rgba(0, 180, 216, 0.45); }
+        .btn-primary:hover { 
+            background: var(--color-aqua-hover); 
+            color: #FFFFFF;
+            transform: scale(1.03); 
+            box-shadow: 0 8px 30px rgba(var(--color-aqua-rgb), 0.45); 
+        }
+        .dark .btn-primary,
+        section[style*="#0A192F"] .btn-primary,
+        div[style*="#0A192F"] .btn-primary,
+        .hero3-container .btn-primary {
+            background: #00B4D8;
+            color: #0A192F;
+            box-shadow: 0 4px 16px rgba(0, 180, 216, 0.35);
+        }
+        .dark .btn-primary:hover,
+        section[style*="#0A192F"] .btn-primary:hover,
+        div[style*="#0A192F"] .btn-primary:hover,
+        .hero3-container .btn-primary:hover {
+            background: #0096b5;
+            color: #0A192F;
+            box-shadow: 0 8px 30px rgba(0, 180, 216, 0.55);
+        }
+
         .btn-outline {
-            border: 2px solid #00B4D8;
+            border: 2px solid var(--color-aqua);
             background: transparent;
-            color: #00B4D8;
+            color: var(--color-aqua);
             padding: 0.85rem 2.2rem;
             border-radius: 60px;
             font-weight: 600;
@@ -491,11 +543,22 @@
             text-decoration: none;
             cursor: pointer;
         }
-        .btn-outline:hover { background: #00B4D8; color: #0A192F; }
+        .btn-outline:hover { 
+            background: var(--color-aqua); 
+            color: #FFFFFF; 
+        }
+        .dark .btn-outline {
+            border-color: #00B4D8;
+            color: #00B4D8;
+        }
+        .dark .btn-outline:hover { 
+            background: #00B4D8; 
+            color: #0A192F; 
+        }
 
         .section-divider {
             height: 4px;
-            background: linear-gradient(90deg, transparent, #00B4D8, transparent);
+            background: linear-gradient(90deg, transparent, var(--color-aqua), transparent);
             margin: 0 auto;
             width: 200px;
             border-radius: 4px;
@@ -509,9 +572,15 @@
             font-weight: 700;
             letter-spacing: 0.18em;
             text-transform: uppercase;
-            border: 1px solid #00B4D8;
+            border: 1.5px solid var(--color-aqua);
+            color: var(--color-aqua);
+            background: var(--color-aqua-badge-bg);
+            transition: all 0.3s ease;
+        }
+        .dark .section-badge {
+            border-color: #00B4D8;
             color: #00B4D8;
-            background: rgba(0, 180, 216, 0.08);
+            background: rgba(0, 180, 216, 0.12);
         }
 
         .social-icon {
@@ -976,25 +1045,25 @@
             .bento-item.wide { grid-column: span 2; }
         }
 
-        /* ===== HORIZONTAL SCROLL PROCESS ===== */
+        /* ===== WORKFLOW CAROUSEL & ARROW NAVIGATION ===== */
         .h-scroll-wrapper {
             overflow-x: auto;
             overflow-y: hidden;
-            padding-bottom: 24px;
-            scrollbar-width: thin;
-            scrollbar-color: #00B4D8 rgba(0,0,0,0.1);
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            padding: 12px 6px 20px;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE 10+ */
         }
-        .h-scroll-wrapper::-webkit-scrollbar { height: 6px; }
-        .h-scroll-wrapper::-webkit-scrollbar-track {
-            background: rgba(0,0,0,0.05);
-            border-radius: 10px;
+        .h-scroll-wrapper::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+            width: 0;
+            height: 0;
         }
-        .dark .h-scroll-wrapper::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
-        .h-scroll-wrapper::-webkit-scrollbar-thumb { background: #00B4D8; border-radius: 10px; }
         .h-scroll-track {
             display: flex;
             gap: 24px;
-            padding: 8px 4px;
+            padding: 4px;
             min-width: max-content;
         }
         .h-step {
@@ -1009,7 +1078,7 @@
             position: relative;
         }
         @media (min-width: 768px) {
-            .h-step { width: 380px; padding: 40px; }
+            .h-step { width: 380px; padding: 38px; }
         }
         .dark .h-step {
             background: #112240;
@@ -1041,9 +1110,104 @@
         .h-step-text {
             font-size: 0.95rem;
             line-height: 1.75;
-            color: #64748b;
+            color: #475569;
         }
-        .dark .h-step-text { color: #94a3b8; }
+        .dark .h-step-text { color: #cbd5e1; }
+
+        /* Header Navigation Arrows */
+        .workflow-arrow-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #FFFFFF;
+            border: 1px solid #E8E8E8;
+            color: #0A192F;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+        .dark .workflow-arrow-btn {
+            background: #112240;
+            border-color: #1A2A3A;
+            color: #FFFFFF;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+        }
+        .workflow-arrow-btn:hover:not(:disabled) {
+            background: #00B4D8;
+            border-color: #00B4D8;
+            color: #0A192F;
+            transform: scale(1.08);
+            box-shadow: 0 8px 24px rgba(0, 180, 216, 0.4);
+        }
+        .workflow-arrow-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Floating Side Arrows */
+        .workflow-float-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 180, 216, 0.35);
+            color: #0A192F;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        @media (min-width: 1024px) {
+            .workflow-float-arrow { display: flex; }
+        }
+        .dark .workflow-float-arrow {
+            background: rgba(17, 34, 64, 0.96);
+            border-color: rgba(0, 180, 216, 0.35);
+            color: #FFFFFF;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+        .workflow-float-arrow:hover:not(:disabled) {
+            background: #00B4D8;
+            color: #0A192F;
+            border-color: #00B4D8;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 10px 28px rgba(0, 180, 216, 0.45);
+        }
+        .workflow-float-arrow:disabled {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .workflow-float-prev { left: -16px; }
+        .workflow-float-next { right: -16px; }
+
+        /* Progress Dots */
+        .workflow-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 10px;
+            background: #cbd5e1;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            padding: 0;
+        }
+        .dark .workflow-dot { background: #334155; }
+        .workflow-dot.active {
+            width: 28px;
+            background: #00B4D8;
+        }
 
         /* ===== BEFORE / AFTER COMPARISON ===== */
         .ba-container {
@@ -1232,10 +1396,10 @@
         .arsenal-desc {
             font-size: 0.95rem;
             line-height: 1.75;
-            color: #64748b;
+            color: #475569;
             margin-bottom: 24px;
         }
-        .dark .arsenal-desc { color: #94a3b8; }
+        .dark .arsenal-desc { color: #cbd5e1; }
         .arsenal-tags {
             display: flex;
             flex-wrap: wrap;
@@ -1344,13 +1508,13 @@
             align-items: center;
             gap: 12px;
             font-size: 0.75rem;
-            color: #64748b;
+            color: #475569;
             margin-bottom: 12px;
             font-weight: 600;
             letter-spacing: 0.04em;
             flex-wrap: wrap;
         }
-        .dark .insight-meta { color: #94a3b8; }
+        .dark .insight-meta { color: #cbd5e1; }
         .insight-meta span {
             display: inline-flex;
             align-items: center;
@@ -1378,11 +1542,11 @@
         .insight-excerpt {
             font-size: 0.9rem;
             line-height: 1.65;
-            color: #64748b;
+            color: #475569;
             margin-bottom: 20px;
             overflow-wrap: break-word;
         }
-        .dark .insight-excerpt { color: #94a3b8; }
+        .dark .insight-excerpt { color: #cbd5e1; }
 
         .insight-keypoints {
             list-style: none;
@@ -1491,11 +1655,11 @@
             padding-bottom: 0;
         }
         .insight-metric-label {
-            color: #64748b;
+            color: #475569;
             font-weight: 500;
         }
         .dark .insight-metric-label {
-            color: #94a3b8;
+            color: #cbd5e1;
         }
         .insight-metric-val {
             font-weight: 700;
@@ -1853,7 +2017,7 @@
                     </h2>
                     <div class="section-divider mt-6 ml-0" style="margin-left: 0;"></div>
                 </div>
-                <p class="text-gray-600 dark:text-gray-400 max-w-md text-base leading-relaxed sm:text-right">
+                <p class="text-gray-600 dark:text-gray-300 max-w-md text-base leading-relaxed sm:text-right">
                     A complete suite of specialist services, each executed with obsessive attention to detail.
                 </p>
             </div>
@@ -1924,58 +2088,93 @@
         </div>
     </section>
 
-    <!-- ===== HORIZONTAL PROCESS SCROLL ===== -->
-    <section class="py-24 sm:py-32 px-4 sm:px-6 bg-[#F0F7FA] dark:bg-navy-light transition-colors duration-300 w-full">
+    <!-- ===== PROCESS WORKFLOW CAROUSEL ===== -->
+    <section class="py-24 sm:py-32 px-4 sm:px-6 bg-[#F0F7FA] dark:bg-navy-light transition-colors duration-300 w-full relative overflow-hidden">
         <div class="max-w-[1400px] mx-auto w-full">
             
-            <div class="text-center mb-16 reveal">
-                <span class="section-badge">Our Workflow</span>
-                <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-4">
-                    The <span class="italic text-aqua">Detail</span> Journey
-                </h2>
-                <div class="section-divider mt-6"></div>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-6 text-base">Scroll horizontally to walk through our step-by-step detailing process.</p>
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 reveal gap-6">
+                <div>
+                    <span class="section-badge">Our Workflow</span>
+                    <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-4">
+                        The <span class="italic text-aqua">Detail</span> Journey
+                    </h2>
+                    <div class="section-divider mt-6 mb-0"></div>
+                    <p class="text-gray-600 dark:text-gray-300 max-w-2xl mt-6 text-base sm:text-lg">Step-by-step master craftsmanship from initial inspection to final handover.</p>
+                </div>
+
+                <!-- Navigation Arrow Controls -->
+                <div class="flex items-center gap-3 self-start md:self-end">
+                    <button id="workflowPrevBtn" class="workflow-arrow-btn" aria-label="Previous step" title="Previous step">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button id="workflowNextBtn" class="workflow-arrow-btn" aria-label="Next step" title="Next step">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
             </div>
 
-            <div class="h-scroll-wrapper reveal">
-                <div class="h-scroll-track">
-                    
-                    <div class="h-step">
-                        <div class="h-step-num">01</div>
-                        <h3 class="h-step-title">Initial Inspection</h3>
-                        <p class="h-step-text">We photograph and document every panel. Paint depth readings identify thin spots, and we discuss your specific goals.</p>
-                    </div>
+            <!-- Carousel Area with Floating Side Arrows -->
+            <div class="relative group/workflow reveal">
+                <button id="workflowFloatPrev" class="workflow-float-arrow workflow-float-prev" aria-label="Previous step" title="Previous step">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="workflowFloatNext" class="workflow-float-arrow workflow-float-next" aria-label="Next step" title="Next step">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
 
-                    <div class="h-step">
-                        <div class="h-step-num">02</div>
-                        <h3 class="h-step-title">Decontamination Wash</h3>
-                        <p class="h-step-text">Two-bucket hand wash, iron fallout removal, tar treatment, and clay bar to strip all bonded contaminants.</p>
-                    </div>
+                <div class="h-scroll-wrapper" id="workflowScrollWrapper">
+                    <div class="h-scroll-track" id="workflowScrollTrack">
+                        
+                        <div class="h-step">
+                            <div class="h-step-num">01</div>
+                            <h3 class="h-step-title">Initial Inspection</h3>
+                            <p class="h-step-text">We photograph and document every panel. Paint depth readings identify thin spots, and we discuss your specific goals.</p>
+                        </div>
 
-                    <div class="h-step">
-                        <div class="h-step-num">03</div>
-                        <h3 class="h-step-title">Paint Correction</h3>
-                        <p class="h-step-text">Multi-stage machine polishing removes swirls, scratches, and oxidation. We restore depth, gloss, and clarity.</p>
-                    </div>
+                        <div class="h-step">
+                            <div class="h-step-num">02</div>
+                            <h3 class="h-step-title">Decontamination Wash</h3>
+                            <p class="h-step-text">Two-bucket hand wash, iron fallout removal, tar treatment, and clay bar to strip all bonded contaminants.</p>
+                        </div>
 
-                    <div class="h-step">
-                        <div class="h-step-num">04</div>
-                        <h3 class="h-step-title">Interior Restoration</h3>
-                        <p class="h-step-text">Steam extraction, leather conditioning, and UV protection. Every crevice detailed, every odor neutralized.</p>
-                    </div>
+                        <div class="h-step">
+                            <div class="h-step-num">03</div>
+                            <h3 class="h-step-title">Paint Correction</h3>
+                            <p class="h-step-text">Multi-stage machine polishing removes swirls, scratches, and oxidation. We restore depth, gloss, and clarity.</p>
+                        </div>
 
-                    <div class="h-step">
-                        <div class="h-step-num">05</div>
-                        <h3 class="h-step-title">Ceramic Application</h3>
-                        <p class="h-step-text">Professional-grade ceramic coating applied in a controlled environment for maximum durability and shine.</p>
-                    </div>
+                        <div class="h-step">
+                            <div class="h-step-num">04</div>
+                            <h3 class="h-step-title">Interior Restoration</h3>
+                            <p class="h-step-text">Steam extraction, leather conditioning, and UV protection. Every crevice detailed, every odor neutralized.</p>
+                        </div>
 
-                    <div class="h-step">
-                        <div class="h-step-num">06</div>
-                        <h3 class="h-step-title">Final Inspection</h3>
-                        <p class="h-step-text">Under specialized LED lighting, we inspect every inch. Only when we're 100% satisfied do you get your keys back.</p>
-                    </div>
+                        <div class="h-step">
+                            <div class="h-step-num">05</div>
+                            <h3 class="h-step-title">Ceramic Application</h3>
+                            <p class="h-step-text">Professional-grade ceramic coating applied in a controlled environment for maximum durability and shine.</p>
+                        </div>
 
+                        <div class="h-step">
+                            <div class="h-step-num">06</div>
+                            <h3 class="h-step-title">Final Inspection</h3>
+                            <p class="h-step-text">Under specialized LED lighting, we inspect every inch. Only when we're 100% satisfied do you get your keys back.</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Bottom Indicators -->
+                <div class="flex items-center justify-between mt-8 pt-2 px-1">
+                    <div class="flex items-center gap-2.5" id="workflowDots">
+                        <button class="workflow-dot active" data-index="0" aria-label="Step 1"></button>
+                        <button class="workflow-dot" data-index="1" aria-label="Step 2"></button>
+                        <button class="workflow-dot" data-index="2" aria-label="Step 3"></button>
+                        <button class="workflow-dot" data-index="3" aria-label="Step 4"></button>
+                        <button class="workflow-dot" data-index="4" aria-label="Step 5"></button>
+                        <button class="workflow-dot" data-index="5" aria-label="Step 6"></button>
+                    </div>
+                    <span class="text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-600 dark:text-gray-300" id="workflowStepCounter">Step 1 of 6</span>
                 </div>
             </div>
         </div>
@@ -1991,7 +2190,7 @@
                     See The <span class="italic text-aqua">Transformation</span>
                 </h2>
                 <div class="section-divider mt-6"></div>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-6 text-base">Drag the slider to reveal the dramatic difference our detailing makes.</p>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-6 text-base">Drag the slider to reveal the dramatic difference our detailing makes.</p>
             </div>
 
             <div class="reveal">
@@ -2018,7 +2217,7 @@
                     Professional <span class="italic text-aqua">Grade</span> Only
                 </h2>
                 <div class="section-divider mt-6"></div>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-6 text-base sm:text-lg">
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-6 text-base sm:text-lg">
                     We don't cut corners. Every product on our shelves is chosen for performance, safety, and results — the same brands trusted by concours-winning detailers worldwide.
                 </p>
             </div>
@@ -2123,7 +2322,7 @@
                     From The <span class="italic text-aqua">Workshop</span>
                 </h2>
                 <div class="section-divider mt-6"></div>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-6 text-base sm:text-lg">
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-6 text-base sm:text-lg">
                     Expert tips, deep dives, and insider knowledge from our team of certified detailers. Learn how to protect your investment.
                 </p>
             </div>
@@ -2314,7 +2513,8 @@
         <div class="max-w-6xl mx-auto w-full">
             <div class="manifesto-band p-12 sm:p-20 relative reveal">
                 <div class="relative z-10 text-center">
-                    <i class="fas fa-quote-left text-aqua text-4xl mb-8 opacity-50"></i>
+                    <span class="inline-block py-1.5 px-4 rounded-full bg-aqua/20 text-aqua font-bold tracking-widest text-xs uppercase mb-6 border border-aqua/30">Our Philosophy</span>
+                    <i class="fas fa-quote-left text-aqua text-4xl mb-6 opacity-60 block"></i>
                     <p class="manifesto-quote">
                         "We don't just clean cars. We <em>preserve</em> them — protecting the investment, the memories, and the pride that comes with owning something worth caring for."
                     </p>
@@ -2339,6 +2539,12 @@
                             Get <span class="italic text-aqua">10% Off</span> Your First Detail
                         </h2>
                         <p class="text-gray-300 text-lg max-w-md">Subscribe to receive exclusive offers, car care tips, and early access to seasonal promotions.</p>
+                        <div class="flex items-center gap-3 mt-6">
+                            <span class="text-sm text-gray-400">Prefer to book immediately?</span>
+                            <a href="contact.html" class="inline-flex items-center gap-1.5 text-aqua text-sm font-bold hover:underline">
+                                <span>Schedule Online</span> <i class="fas fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
                     </div>
                     <div>
                         <form onsubmit="event.preventDefault(); alert('Thanks for subscribing! Check your email for the 10% off code.');" class="flex flex-col gap-4">
@@ -2346,7 +2552,7 @@
                             <button type="submit" class="btn-primary w-full justify-center text-base" style="padding: 18px 32px;">
                                 <i class="fas fa-paper-plane"></i> Subscribe & Save 10%
                             </button>
-                            <p class="text-gray-400 text-xs mt-2">No spam. Unsubscribe anytime.</p>
+                            <p class="text-gray-500 dark:text-gray-400 text-xs mt-2">No spam. Unsubscribe anytime.</p>
                         </form>
                     </div>
                 </div>
@@ -2368,7 +2574,7 @@
                             <span class="logo-sub">Car Wash & Detailing</span>
                         </div>
                     </a>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Premium car wash, detailing, and ceramic protection services. Trusted by thousands since 2013.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">Premium car wash, detailing, and ceramic protection services. Trusted by thousands since 2013.</p>
                     <div class="flex gap-3 justify-center sm:justify-start">
                         <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
@@ -2378,7 +2584,7 @@
                 </div>
                 <div class="text-center sm:text-start">
                     <h3 class="text-white text-xl font-bold mb-6 pl-3" style="border-left: 3px solid #00B4D8;">Quick Links</h3>
-                    <ul class="space-y-3 text-gray-400 text-sm">
+                    <ul class="space-y-3 text-gray-300 text-sm">
                         <li><a href="about.html" class="hover:text-aqua transition block">About Us</a></li>
                         <li><a href="services.html" class="hover:text-aqua transition block">Services</a></li>
                         <li><a href="wash-packages.html" class="hover:text-aqua transition block">Wash Packages</a></li>
@@ -2387,7 +2593,7 @@
                 </div>
                 <div class="text-center sm:text-start">
                     <h3 class="text-white text-xl font-bold mb-6 pl-3" style="border-left: 3px solid #00B4D8;">Services</h3>
-                    <ul class="space-y-3 text-gray-400 text-sm">
+                    <ul class="space-y-3 text-gray-300 text-sm">
                         <li><a href="auto-detailing.html" class="hover:text-aqua transition block">Auto Detailing</a></li>
                         <li><a href="ceramic-protection.html" class="hover:text-aqua transition block">Ceramic Protection</a></li>
                         <li><a href="interior-care.html" class="hover:text-aqua transition block">Interior Care</a></li>
@@ -2396,7 +2602,7 @@
                 </div>
                 <div class="text-center sm:text-start">
                     <h3 class="text-white text-xl font-bold mb-6 pl-3" style="border-left: 3px solid #00B4D8;">Contact</h3>
-                    <ul class="space-y-4 text-gray-400 text-sm">
+                    <ul class="space-y-4 text-gray-300 text-sm">
                         <li class="flex gap-3 justify-center sm:justify-start">
                             <i class="fas fa-map-marker-alt text-aqua w-5 text-base"></i>
                             <span>456 Sparkle Ave, Los Angeles, CA</span>
@@ -2412,7 +2618,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="mt-12 pt-8 text-center text-gray-500 text-xs border-t border-navy/30 dark:border-aqua/10">
+            <div class="mt-12 pt-8 text-center text-gray-400 text-xs border-t border-navy/30 dark:border-aqua/10">
                 <p>© 2026 AquaShine Car Wash & Auto Detailing. All rights reserved.</p>
             </div>
         </div>
@@ -2556,6 +2762,70 @@
                 };
                 initBA();
                 window.addEventListener('resize', initBA);
+            }
+
+            // ===== WORKFLOW CAROUSEL NAVIGATION =====
+            const workflowWrapper = document.getElementById('workflowScrollWrapper');
+            const prevBtns = [document.getElementById('workflowPrevBtn'), document.getElementById('workflowFloatPrev')].filter(Boolean);
+            const nextBtns = [document.getElementById('workflowNextBtn'), document.getElementById('workflowFloatNext')].filter(Boolean);
+            const workflowDots = document.querySelectorAll('.workflow-dot');
+            const workflowCounter = document.getElementById('workflowStepCounter');
+
+            if (workflowWrapper) {
+                const getStepWidth = () => {
+                    const firstStep = workflowWrapper.querySelector('.h-step');
+                    return firstStep ? firstStep.offsetWidth + 24 : 380;
+                };
+
+                const updateWorkflowState = () => {
+                    const scrollLeft = workflowWrapper.scrollLeft;
+                    const maxScroll = workflowWrapper.scrollWidth - workflowWrapper.clientWidth;
+                    const stepWidth = getStepWidth();
+                    const activeIndex = Math.min(
+                        workflowDots.length - 1,
+                        Math.max(0, Math.round(scrollLeft / stepWidth))
+                    );
+
+                    // Update buttons disabled state
+                    prevBtns.forEach(btn => btn.disabled = scrollLeft <= 10);
+                    nextBtns.forEach(btn => btn.disabled = scrollLeft >= maxScroll - 10);
+
+                    // Update dots
+                    workflowDots.forEach((dot, idx) => {
+                        dot.classList.toggle('active', idx === activeIndex);
+                    });
+
+                    // Update counter
+                    if (workflowCounter) {
+                        workflowCounter.textContent = `Step ${activeIndex + 1} of ${workflowDots.length || 6}`;
+                    }
+                };
+
+                const scrollWorkflow = (direction) => {
+                    const stepWidth = getStepWidth();
+                    workflowWrapper.scrollBy({
+                        left: direction * stepWidth,
+                        behavior: 'smooth'
+                    });
+                };
+
+                prevBtns.forEach(btn => btn.addEventListener('click', () => scrollWorkflow(-1)));
+                nextBtns.forEach(btn => btn.addEventListener('click', () => scrollWorkflow(1)));
+
+                workflowDots.forEach((dot) => {
+                    dot.addEventListener('click', () => {
+                        const index = parseInt(dot.getAttribute('data-index') || '0', 10);
+                        const stepWidth = getStepWidth();
+                        workflowWrapper.scrollTo({
+                            left: index * stepWidth,
+                            behavior: 'smooth'
+                        });
+                    });
+                });
+
+                workflowWrapper.addEventListener('scroll', updateWorkflowState, { passive: true });
+                window.addEventListener('resize', updateWorkflowState);
+                updateWorkflowState();
             }
 
             // ===== SCROLL REVEAL =====

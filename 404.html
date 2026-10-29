@@ -21,7 +21,7 @@
                     },
                     colors: {
                         'navy': '#0A192F',
-                        'aqua': '#00B4D8',
+                        'aqua': 'var(--color-aqua, #0077B6)',
                         'navy-light': '#112240',
                         'navy-dark': '#020C1B',
                     }
@@ -30,6 +30,32 @@
         }
     </script>
     <style>
+        :root {
+            --color-aqua: #0077B6;
+            --color-aqua-rgb: 0, 119, 182;
+            --color-aqua-hover: #005F92;
+            --color-aqua-badge-bg: rgba(0, 119, 182, 0.08);
+            --color-aqua-badge-border: rgba(0, 119, 182, 0.35);
+        }
+        .dark {
+            --color-aqua: #00B4D8;
+            --color-aqua-rgb: 0, 180, 216;
+            --color-aqua-hover: #0096B5;
+            --color-aqua-badge-bg: rgba(0, 180, 216, 0.12);
+            --color-aqua-badge-border: rgba(0, 180, 216, 0.35);
+        }
+
+        .text-aqua {
+            color: var(--color-aqua) !important;
+        }
+        .dark .text-aqua,
+        .bg-navy .text-aqua,
+        .bg-navy-dark .text-aqua,
+        footer .text-aqua,
+        .err-shell .text-aqua {
+            color: #00B4D8 !important;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -274,10 +300,10 @@
         .err-title .italic { font-style: italic; color: #00B4D8; }
 
         .err-desc {
-            font-size: 1.02rem;
-            color: rgba(255, 255, 255, 0.68);
+            font-size: 1.05rem;
+            color: #cbd5e1;
             line-height: 1.75;
-            max-width: 540px;
+            max-width: 560px;
             margin: 0 auto 38px;
         }
 
@@ -453,15 +479,6 @@
 
         <!-- Ambient decoration layers -->
         <div class="err-grid-bg"></div>
-
-        <div class="err-float-icons">
-            <div class="floating" style="top: 14%; left: 8%;"><i class="fas fa-car-side fa-4x"></i></div>
-            <div class="floating-slow" style="top: 22%; right: 10%;"><i class="fas fa-soap fa-3x"></i></div>
-            <div class="floating-rev" style="bottom: 20%; left: 12%;"><i class="fas fa-water fa-3x"></i></div>
-            <div class="floating" style="bottom: 14%; right: 14%;"><i class="fas fa-spray-can-sparkles fa-4x"></i></div>
-            <div class="floating-slow" style="top: 48%; left: 4%;"><i class="fas fa-gem fa-3x"></i></div>
-            <div class="floating-rev" style="top: 62%; right: 5%;"><i class="fas fa-shield-alt fa-3x"></i></div>
-        </div>
 
         <!-- Logo -->
         <a href="index.html" class="err-logo" aria-label="AquaShine home">

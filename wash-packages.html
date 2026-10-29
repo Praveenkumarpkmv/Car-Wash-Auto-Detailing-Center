@@ -21,7 +21,7 @@
                     },
                     colors: {
                         'navy': '#0A192F',
-                        'aqua': '#00B4D8',
+                        'aqua': 'var(--color-aqua, #0077B6)',
                         'navy-light': '#112240',
                         'navy-dark': '#020C1B',
                     }
@@ -30,6 +30,35 @@
         }
     </script>
     <style>
+        :root {
+            --color-aqua: #0077B6;
+            --color-aqua-rgb: 0, 119, 182;
+            --color-aqua-hover: #005F92;
+            --color-aqua-badge-bg: rgba(0, 119, 182, 0.08);
+            --color-aqua-badge-border: rgba(0, 119, 182, 0.35);
+        }
+        .dark {
+            --color-aqua: #00B4D8;
+            --color-aqua-rgb: 0, 180, 216;
+            --color-aqua-hover: #0096B5;
+            --color-aqua-badge-bg: rgba(0, 180, 216, 0.12);
+            --color-aqua-badge-border: rgba(0, 180, 216, 0.35);
+        }
+
+        .text-aqua {
+            color: var(--color-aqua) !important;
+        }
+        /* Preserve glowing vibrant aqua on inherently dark sections */
+        .dark .text-aqua,
+        .bg-navy .text-aqua,
+        .bg-navy-dark .text-aqua,
+        footer .text-aqua,
+        .hero-visual-stage .text-aqua,
+        section[style*="#0A192F"] .text-aqua,
+        div[style*="#0A192F"] .text-aqua {
+            color: #00B4D8 !important;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -462,8 +491,8 @@
 
         /* ===== BUTTONS ===== */
         .btn-primary {
-            background: #00B4D8;
-            color: #0A192F;
+            background: var(--color-aqua);
+            color: #FFFFFF;
             padding: 0.9rem 2.2rem;
             border-radius: 60px;
             font-weight: 700;
@@ -476,12 +505,33 @@
             border: none;
             cursor: pointer;
             text-decoration: none;
+            box-shadow: 0 4px 16px rgba(var(--color-aqua-rgb), 0.25);
         }
-        .btn-primary:hover { background: #0096b5; transform: scale(1.03); box-shadow: 0 8px 30px rgba(0, 180, 216, 0.45); }
+        .btn-primary:hover { 
+            background: var(--color-aqua-hover); 
+            color: #FFFFFF;
+            transform: scale(1.03); 
+            box-shadow: 0 8px 30px rgba(var(--color-aqua-rgb), 0.45); 
+        }
+        .dark .btn-primary,
+        section[style*="#0A192F"] .btn-primary,
+        div[style*="#0A192F"] .btn-primary {
+            background: #00B4D8;
+            color: #0A192F;
+            box-shadow: 0 4px 16px rgba(0, 180, 216, 0.35);
+        }
+        .dark .btn-primary:hover,
+        section[style*="#0A192F"] .btn-primary:hover,
+        div[style*="#0A192F"] .btn-primary:hover {
+            background: #0096b5;
+            color: #0A192F;
+            box-shadow: 0 8px 30px rgba(0, 180, 216, 0.55);
+        }
+
         .btn-outline {
-            border: 2px solid #00B4D8;
+            border: 2px solid var(--color-aqua);
             background: transparent;
-            color: #00B4D8;
+            color: var(--color-aqua);
             padding: 0.85rem 2.2rem;
             border-radius: 60px;
             font-weight: 600;
@@ -494,12 +544,23 @@
             text-decoration: none;
             cursor: pointer;
         }
-        .btn-outline:hover { background: #00B4D8; color: #0A192F; }
+        .btn-outline:hover { 
+            background: var(--color-aqua); 
+            color: #FFFFFF; 
+        }
+        .dark .btn-outline {
+            border-color: #00B4D8;
+            color: #00B4D8;
+        }
+        .dark .btn-outline:hover { 
+            background: #00B4D8; 
+            color: #0A192F; 
+        }
 
         /* ===== SECTION DIVIDERS ===== */
         .section-divider {
             height: 4px;
-            background: linear-gradient(90deg, transparent, #00B4D8, transparent);
+            background: linear-gradient(90deg, transparent, var(--color-aqua), transparent);
             margin: 0 auto;
             width: 200px;
             border-radius: 4px;
@@ -513,9 +574,15 @@
             font-weight: 700;
             letter-spacing: 0.18em;
             text-transform: uppercase;
-            border: 1px solid #00B4D8;
+            border: 1.5px solid var(--color-aqua);
+            color: var(--color-aqua);
+            background: var(--color-aqua-badge-bg);
+            transition: all 0.3s ease;
+        }
+        .dark .section-badge {
+            border-color: #00B4D8;
             color: #00B4D8;
-            background: rgba(0, 180, 216, 0.08);
+            background: rgba(0, 180, 216, 0.12);
         }
 
         /* ===== PACKAGE CARDS ===== */
@@ -614,17 +681,17 @@
         }
         .package-price .period {
             font-size: 0.95rem;
-            color: #64748b;
+            color: #475569;
             font-weight: 500;
         }
-        .dark .package-price .period { color: #94a3b8; }
+        .dark .package-price .period { color: #cbd5e1; }
         .package-desc {
-            color: #64748b;
+            color: #475569;
             font-size: 0.95rem;
             line-height: 1.7;
             margin-bottom: 24px;
         }
-        .dark .package-desc { color: #94a3b8; }
+        .dark .package-desc { color: #cbd5e1; }
         .package-features {
             list-style: none;
             margin-bottom: 28px;
@@ -639,7 +706,7 @@
             color: #475569;
             line-height: 1.5;
         }
-        .dark .package-features li { color: #94a3b8; }
+        .dark .package-features li { color: #cbd5e1; }
         .package-features li i {
             color: #00B4D8;
             font-size: 0.85rem;
@@ -650,7 +717,7 @@
             opacity: 0.4;
         }
         .package-features li.disabled i {
-            color: #94a3b8;
+            color: #cbd5e1;
         }
         .package-cta {
             display: inline-flex;
@@ -900,9 +967,9 @@
         .dark .addon-name { color: #ffffff; }
         .addon-desc {
             font-size: 0.85rem;
-            color: #64748b;
+            color: #475569;
         }
-        .dark .addon-desc { color: #94a3b8; }
+        .dark .addon-desc { color: #cbd5e1; }
         .addon-price {
             font-weight: 800;
             color: #00B4D8;
@@ -1085,11 +1152,7 @@
             <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(10,25,47,0.75) 0%, rgba(10,25,47,0.88) 50%, #0A192F 100%);"></div>
         </div>
         
-        <div class="absolute inset-0 pointer-events-none opacity-10">
-            <div class="absolute top-1/3 left-10 floating text-aqua"><i class="fas fa-soap fa-5x"></i></div>
-            <div class="absolute bottom-1/3 right-10 floating text-aqua" style="animation-delay: 2s;"><i class="fas fa-water fa-4x"></i></div>
-            <div class="absolute top-1/4 right-1/4 floating text-aqua" style="animation-delay: 4s;"><i class="fas fa-sparkles fa-4x"></i></div>
-        </div>
+        
         
         <div class="relative z-10 text-center px-4 sm:px-6 max-w-5xl w-full">
             <div class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full mb-8" style="background: rgba(0,180,216,0.15); border: 1px solid rgba(0,180,216,0.3);">
@@ -1112,7 +1175,7 @@
                 <span class="section-badge">Our Packages</span>
                 <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-5">Pick Your <span class="italic text-aqua">Perfect Wash</span></h2>
                 <div class="section-divider mt-7"></div>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">Every package includes our signature hand wash, premium products, and a satisfaction guarantee. No hidden fees, ever.</p>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">Every package includes our signature hand wash, premium products, and a satisfaction guarantee. No hidden fees, ever.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -1212,7 +1275,7 @@
                 <span class="section-badge">Compare</span>
                 <h2 class="section-title font-serif text-4xl sm:text-5xl text-navy dark:text-white font-bold mt-5">Package <span class="italic text-aqua">Comparison</span></h2>
                 <div class="section-divider mt-7"></div>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">Not sure which package is right for you? Here's a detailed breakdown of what's included in each.</p>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">Not sure which package is right for you? Here's a detailed breakdown of what's included in each.</p>
             </div>
 
             <div class="overflow-x-auto reveal pb-4">
@@ -1314,7 +1377,7 @@
                 <div class="reveal">
                     <span class="section-badge">Customize</span>
                     <h2 class="section-title font-serif text-4xl sm:text-5xl text-navy dark:text-white font-bold mt-4 mb-6">Popular <span class="italic text-aqua">Add-Ons</span></h2>
-                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-10 text-base sm:text-lg">
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-10 text-base sm:text-lg">
                         Make any package your own with these premium upgrades. Add them to any wash for extra protection and shine.
                     </p>
                     
@@ -1464,7 +1527,7 @@
                             <span class="logo-sub">Car Wash & Detailing</span>
                         </div>
                     </a>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Premium car wash, detailing, and ceramic protection services. Trusted by thousands since 2013.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">Premium car wash, detailing, and ceramic protection services. Trusted by thousands since 2013.</p>
                     <div class="flex gap-3 justify-center sm:justify-start">
                         <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
@@ -1474,7 +1537,7 @@
                 </div>
                 <div class="text-center sm:text-start">
                     <h3 class="text-white text-xl font-bold mb-6 pl-3" style="border-left: 3px solid #00B4D8;">Quick Links</h3>
-                    <ul class="space-y-3 text-gray-400 text-sm">
+                    <ul class="space-y-3 text-gray-300 text-sm">
                         <li><a href="about.html" class="hover:text-aqua transition block">About Us</a></li>
                         <li><a href="services.html" class="hover:text-aqua transition block">Services</a></li>
                         <li><a href="wash-packages.html" class="hover:text-aqua transition block">Wash Packages</a></li>
@@ -1483,7 +1546,7 @@
                 </div>
                 <div class="text-center sm:text-start">
                     <h3 class="text-white text-xl font-bold mb-6 pl-3" style="border-left: 3px solid #00B4D8;">Services</h3>
-                    <ul class="space-y-3 text-gray-400 text-sm">
+                    <ul class="space-y-3 text-gray-300 text-sm">
                         <li><a href="auto-detailing.html" class="hover:text-aqua transition block">Auto Detailing</a></li>
                         <li><a href="ceramic-protection.html" class="hover:text-aqua transition block">Ceramic Protection</a></li>
                         <li><a href="interior-care.html" class="hover:text-aqua transition block">Interior Care</a></li>
@@ -1492,7 +1555,7 @@
                 </div>
                 <div class="text-center sm:text-start">
                     <h3 class="text-white text-xl font-bold mb-6 pl-3" style="border-left: 3px solid #00B4D8;">Contact</h3>
-                    <ul class="space-y-4 text-gray-400 text-sm">
+                    <ul class="space-y-4 text-gray-300 text-sm">
                         <li class="flex gap-3 justify-center sm:justify-start">
                             <i class="fas fa-map-marker-alt text-aqua w-5 text-base"></i>
                             <span>456 Sparkle Ave, Los Angeles, CA</span>
@@ -1508,7 +1571,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="mt-12 pt-8 text-center text-gray-500 text-xs border-t border-navy/30 dark:border-aqua/10">
+            <div class="mt-12 pt-8 text-center text-gray-400 text-xs border-t border-navy/30 dark:border-aqua/10">
                 <p>© 2026 AquaShine Car Wash & Auto Detailing. All rights reserved.</p>
             </div>
         </div>

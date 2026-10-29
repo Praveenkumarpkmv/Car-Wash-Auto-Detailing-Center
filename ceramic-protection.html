@@ -21,7 +21,7 @@
                     },
                     colors: {
                         'navy': '#0A192F',
-                        'aqua': '#00B4D8',
+                        'aqua': 'var(--color-aqua, #0077B6)',
                         'navy-light': '#112240',
                         'navy-dark': '#020C1B',
                     }
@@ -30,6 +30,35 @@
         }
     </script>
     <style>
+        :root {
+            --color-aqua: #0077B6;
+            --color-aqua-rgb: 0, 119, 182;
+            --color-aqua-hover: #005F92;
+            --color-aqua-badge-bg: rgba(0, 119, 182, 0.08);
+            --color-aqua-badge-border: rgba(0, 119, 182, 0.35);
+        }
+        .dark {
+            --color-aqua: #00B4D8;
+            --color-aqua-rgb: 0, 180, 216;
+            --color-aqua-hover: #0096B5;
+            --color-aqua-badge-bg: rgba(0, 180, 216, 0.12);
+            --color-aqua-badge-border: rgba(0, 180, 216, 0.35);
+        }
+
+        .text-aqua {
+            color: var(--color-aqua) !important;
+        }
+        /* Preserve glowing vibrant aqua on inherently dark sections */
+        .dark .text-aqua,
+        .bg-navy .text-aqua,
+        .bg-navy-dark .text-aqua,
+        footer .text-aqua,
+        .hero-visual-stage .text-aqua,
+        section[style*="#0A192F"] .text-aqua,
+        div[style*="#0A192F"] .text-aqua {
+            color: #00B4D8 !important;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -462,8 +491,8 @@
 
         /* ===== BUTTONS ===== */
         .btn-primary {
-            background: #00B4D8;
-            color: #0A192F;
+            background: var(--color-aqua);
+            color: #FFFFFF;
             padding: 0.9rem 2.2rem;
             border-radius: 60px;
             font-weight: 700;
@@ -476,12 +505,33 @@
             border: none;
             cursor: pointer;
             text-decoration: none;
+            box-shadow: 0 4px 16px rgba(var(--color-aqua-rgb), 0.25);
         }
-        .btn-primary:hover { background: #0096b5; transform: scale(1.03); box-shadow: 0 8px 30px rgba(0, 180, 216, 0.45); }
+        .btn-primary:hover { 
+            background: var(--color-aqua-hover); 
+            color: #FFFFFF;
+            transform: scale(1.03); 
+            box-shadow: 0 8px 30px rgba(var(--color-aqua-rgb), 0.45); 
+        }
+        .dark .btn-primary,
+        section[style*="#0A192F"] .btn-primary,
+        div[style*="#0A192F"] .btn-primary {
+            background: #00B4D8;
+            color: #0A192F;
+            box-shadow: 0 4px 16px rgba(0, 180, 216, 0.35);
+        }
+        .dark .btn-primary:hover,
+        section[style*="#0A192F"] .btn-primary:hover,
+        div[style*="#0A192F"] .btn-primary:hover {
+            background: #0096b5;
+            color: #0A192F;
+            box-shadow: 0 8px 30px rgba(0, 180, 216, 0.55);
+        }
+
         .btn-outline {
-            border: 2px solid #00B4D8;
+            border: 2px solid var(--color-aqua);
             background: transparent;
-            color: #00B4D8;
+            color: var(--color-aqua);
             padding: 0.85rem 2.2rem;
             border-radius: 60px;
             font-weight: 600;
@@ -494,12 +544,23 @@
             text-decoration: none;
             cursor: pointer;
         }
-        .btn-outline:hover { background: #00B4D8; color: #0A192F; }
+        .btn-outline:hover { 
+            background: var(--color-aqua); 
+            color: #FFFFFF; 
+        }
+        .dark .btn-outline {
+            border-color: #00B4D8;
+            color: #00B4D8;
+        }
+        .dark .btn-outline:hover { 
+            background: #00B4D8; 
+            color: #0A192F; 
+        }
 
         /* ===== SECTION DIVIDERS ===== */
         .section-divider {
             height: 4px;
-            background: linear-gradient(90deg, transparent, #00B4D8, transparent);
+            background: linear-gradient(90deg, transparent, var(--color-aqua), transparent);
             margin: 0 auto;
             width: 200px;
             border-radius: 4px;
@@ -513,9 +574,15 @@
             font-weight: 700;
             letter-spacing: 0.18em;
             text-transform: uppercase;
-            border: 1px solid #00B4D8;
+            border: 1.5px solid var(--color-aqua);
+            color: var(--color-aqua);
+            background: var(--color-aqua-badge-bg);
+            transition: all 0.3s ease;
+        }
+        .dark .section-badge {
+            border-color: #00B4D8;
             color: #00B4D8;
-            background: rgba(0, 180, 216, 0.08);
+            background: rgba(0, 180, 216, 0.12);
         }
 
         /* ===== TECHNICAL SPEC SHEET ===== */
@@ -624,9 +691,9 @@
             font-weight: 700;
             letter-spacing: 0.05em;
             text-transform: uppercase;
-            color: #64748b;
+            color: #475569;
         }
-        .dark .spec-label { color: #94a3b8; }
+        .dark .spec-label { color: #cbd5e1; }
         .spec-value {
             font-size: 0.95rem;
             font-weight: 800;
@@ -707,10 +774,10 @@
         .layer-item:hover .layer-name { color: #00B4D8; }
         .layer-desc {
             font-size: 0.85rem;
-            color: #64748b;
+            color: #475569;
             line-height: 1.55;
         }
-        .dark .layer-desc { color: #94a3b8; }
+        .dark .layer-desc { color: #cbd5e1; }
         .layer-tag {
             font-size: 0.68rem;
             font-weight: 800;
@@ -719,12 +786,12 @@
             padding: 6px 12px;
             border-radius: 20px;
             background: #F0F7FA;
-            color: #64748b;
+            color: #475569;
             flex-shrink: 0;
         }
         .dark .layer-tag {
             background: #0A192F;
-            color: #94a3b8;
+            color: #cbd5e1;
         }
         .layer-item:hover .layer-tag {
             background: rgba(0, 180, 216, 0.15);
@@ -858,9 +925,9 @@
             text-align: center;
             font-size: 0.88rem;
             font-weight: 700;
-            color: #64748b;
+            color: #475569;
         }
-        .dark .ledger-cell { color: #94a3b8; }
+        .dark .ledger-cell { color: #cbd5e1; }
         .ledger-cell.aqua {
             color: #00B4D8;
         }
@@ -904,7 +971,7 @@
                 font-weight: 800;
                 letter-spacing: 0.08em;
                 text-transform: uppercase;
-                color: #94a3b8;
+                color: #cbd5e1;
             }
         }
 
@@ -964,10 +1031,10 @@
         .dark .care-title { color: #ffffff; }
         .care-text {
             font-size: 0.86rem;
-            color: #64748b;
+            color: #475569;
             line-height: 1.65;
         }
-        .dark .care-text { color: #94a3b8; }
+        .dark .care-text { color: #cbd5e1; }
 
         @media (max-width: 700px) {
             .care-grid { grid-template-columns: 1fr; }
@@ -1050,13 +1117,13 @@
         }
         .ceramic-faq-a p {
             font-size: 0.92rem;
-            color: #64748b;
+            color: #475569;
             line-height: 1.75;
             padding-top: 16px;
             border-top: 1px solid #E8E8E8;
         }
         .dark .ceramic-faq-a p {
-            color: #94a3b8;
+            color: #cbd5e1;
             border-color: #1A2A3A;
         }
         @media (max-width: 640px) {
@@ -1107,13 +1174,13 @@
         .dark .kit-item b { color: #ffffff; }
         .kit-item span {
             font-size: 0.82rem;
-            color: #64748b;
+            color: #475569;
             line-height: 1.5;
             display: block;
             min-height: 3em;
             text-align: center;
         }
-        .dark .kit-item span { color: #94a3b8; }
+        .dark .kit-item span { color: #cbd5e1; }
         @media (max-width: 900px) {
             .kit-strip { grid-template-columns: repeat(2, 1fr); }
         }
@@ -1332,11 +1399,7 @@
             <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(10,25,47,0.78) 0%, rgba(10,25,47,0.9) 50%, #0A192F 100%);"></div>
         </div>
 
-        <div class="absolute inset-0 pointer-events-none opacity-10">
-            <div class="absolute top-1/4 left-10 floating text-aqua"><i class="fas fa-shield-alt fa-5x"></i></div>
-            <div class="absolute bottom-1/4 right-10 floating text-aqua" style="animation-delay: 2s;"><i class="fas fa-gem fa-4x"></i></div>
-            <div class="absolute top-1/3 right-1/4 floating text-aqua" style="animation-delay: 4s;"><i class="fas fa-atom fa-4x"></i></div>
-        </div>
+        
 
         <div class="relative z-10 text-center px-4 sm:px-6 max-w-5xl w-full">
             <div class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full mb-8" style="background: rgba(0,180,216,0.15); border: 1px solid rgba(0,180,216,0.3);">
@@ -1369,13 +1432,13 @@
                 <span class="section-badge">The Science</span>
                 <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-5 mb-8">What is a <span class="italic text-aqua">Ceramic Coating</span>?</h2>
                 <div class="section-divider mb-10"></div>
-                <p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-6">
+                <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-6">
                     A ceramic coating is a liquid polymer — typically silicon dioxide (SiO₂) or silicon carbide (SiC) based — that chemically bonds with your vehicle's clear coat. Unlike traditional wax or sealant that simply sits on top of the paint, ceramic coating forms a semi-permanent layer that becomes part of the surface itself.
                 </p>
-                <p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed mb-6">
+                <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-6">
                     Once cured, the coating creates a highly cross-linked, glass-like shell that is incredibly hard, chemically resistant, and extremely hydrophobic. Water beads and rolls off, dirt and contaminants struggle to bond, and UV rays are deflected before they can fade or oxidize your paint.
                 </p>
-                <p class="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
+                <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
                     The result isn't just a glossier car — it's a car that stays cleaner, looks newer, resists damage, and requires less work to maintain. That's the AquaShine ceramic promise.
                 </p>
             </div>
@@ -1389,7 +1452,7 @@
                 <span class="section-badge">Technical Data</span>
                 <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-5">Product <span class="italic text-aqua">Specifications</span></h2>
                 <div class="section-divider mt-7"></div>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">Real numbers, real performance. Here's exactly what our professional-grade ceramic coating delivers.</p>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">Real numbers, real performance. Here's exactly what our professional-grade ceramic coating delivers.</p>
             </div>
 
             <div class="spec-sheet reveal">
@@ -1454,7 +1517,7 @@
                 <span class="section-badge">Coating Stack</span>
                 <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-5">How the <span class="italic text-aqua">Layers Work</span></h2>
                 <div class="section-divider mt-7"></div>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">From bare metal to finished glass-like shine — every layer in a professional ceramic application serves a specific purpose.</p>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">From bare metal to finished glass-like shine — every layer in a professional ceramic application serves a specific purpose.</p>
             </div>
 
             <div class="layer-stack reveal">
@@ -1513,7 +1576,7 @@
                 <span class="section-badge">Longevity</span>
                 <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-5">Durability Over <span class="italic text-aqua">Time</span></h2>
                 <div class="section-divider mt-7"></div>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">See how our ceramic coating performs year after year with proper maintenance.</p>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">See how our ceramic coating performs year after year with proper maintenance.</p>
             </div>
 
             <div class="max-w-4xl mx-auto durability-track reveal">
@@ -1547,15 +1610,15 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 reveal">
                 <div class="bg-white dark:bg-navy-light rounded-2xl p-8 text-center border border-gray-100 dark:border-navy/40">
                     <div class="text-4xl font-black text-aqua mb-2">5</div>
-                    <div class="text-sm font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">Years Protection</div>
+                    <div class="text-sm font-bold uppercase tracking-widest text-gray-600 dark:text-gray-300">Years Protection</div>
                 </div>
                 <div class="bg-white dark:bg-navy-light rounded-2xl p-8 text-center border border-gray-100 dark:border-navy/40">
                     <div class="text-4xl font-black text-aqua mb-2">50+</div>
-                    <div class="text-sm font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">Washes Saved</div>
+                    <div class="text-sm font-bold uppercase tracking-widest text-gray-600 dark:text-gray-300">Washes Saved</div>
                 </div>
                 <div class="bg-white dark:bg-navy-light rounded-2xl p-8 text-center border border-gray-100 dark:border-navy/40">
                     <div class="text-4xl font-black text-aqua mb-2">70%</div>
-                    <div class="text-sm font-bold uppercase tracking-widest text-gray-500 dark:text-gray-400">Less Cleaning Time</div>
+                    <div class="text-sm font-bold uppercase tracking-widest text-gray-600 dark:text-gray-300">Less Cleaning Time</div>
                 </div>
             </div>
         </div>
@@ -1568,7 +1631,7 @@
                 <span class="section-badge">Comparison</span>
                 <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-5">Ceramic vs. <span class="italic text-aqua">Alternatives</span></h2>
                 <div class="section-divider mt-7"></div>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">How professional ceramic coating outperforms every other protection option on the market.</p>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">How professional ceramic coating outperforms every other protection option on the market.</p>
             </div>
 
             <div class="ledger reveal">
@@ -1652,7 +1715,7 @@
                 <span class="section-badge">What's Included</span>
                 <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-5">Your Ceramic <span class="italic text-aqua">Package</span></h2>
                 <div class="section-divider mt-7"></div>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">Every ceramic coating service includes these essentials at no extra cost.</p>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">Every ceramic coating service includes these essentials at no extra cost.</p>
             </div>
 
             <div class="kit-strip reveal">
@@ -1683,7 +1746,7 @@
                 <span class="section-badge">Aftercare</span>
                 <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-5">Caring for Your <span class="italic text-aqua">Coating</span></h2>
                 <div class="section-divider mt-7"></div>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">A few simple habits will keep your ceramic coating performing at its best for years.</p>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">A few simple habits will keep your ceramic coating performing at its best for years.</p>
             </div>
 
             <div class="care-grid reveal">
@@ -1753,7 +1816,7 @@
                 <span class="section-badge">FAQ</span>
                 <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-5">Ceramic Coating <span class="italic text-aqua">Questions</span></h2>
                 <div class="section-divider mt-7"></div>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">Everything you need to know about professional ceramic coating, answered by our certified installers.</p>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">Everything you need to know about professional ceramic coating, answered by our certified installers.</p>
             </div>
 
             <div class="max-w-4xl mx-auto reveal">
@@ -1880,7 +1943,7 @@
                             <span class="logo-sub">Car Wash & Detailing</span>
                         </div>
                     </a>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Premium car wash, detailing, and ceramic protection services. Trusted by thousands since 2013.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">Premium car wash, detailing, and ceramic protection services. Trusted by thousands since 2013.</p>
                     <div class="flex gap-3 justify-center sm:justify-start">
                         <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
@@ -1890,7 +1953,7 @@
                 </div>
                 <div class="text-center sm:text-start">
                     <h3 class="text-white text-xl font-bold mb-6 pl-3" style="border-left: 3px solid #00B4D8;">Quick Links</h3>
-                    <ul class="space-y-3 text-gray-400 text-sm">
+                    <ul class="space-y-3 text-gray-300 text-sm">
                         <li><a href="about.html" class="hover:text-aqua transition block">About Us</a></li>
                         <li><a href="services.html" class="hover:text-aqua transition block">Services</a></li>
                         <li><a href="wash-packages.html" class="hover:text-aqua transition block">Wash Packages</a></li>
@@ -1899,7 +1962,7 @@
                 </div>
                 <div class="text-center sm:text-start">
                     <h3 class="text-white text-xl font-bold mb-6 pl-3" style="border-left: 3px solid #00B4D8;">Services</h3>
-                    <ul class="space-y-3 text-gray-400 text-sm">
+                    <ul class="space-y-3 text-gray-300 text-sm">
                         <li><a href="auto-detailing.html" class="hover:text-aqua transition block">Auto Detailing</a></li>
                         <li><a href="ceramic-protection.html" class="hover:text-aqua transition block">Ceramic Protection</a></li>
                         <li><a href="interior-care.html" class="hover:text-aqua transition block">Interior Care</a></li>
@@ -1908,7 +1971,7 @@
                 </div>
                 <div class="text-center sm:text-start">
                     <h3 class="text-white text-xl font-bold mb-6 pl-3" style="border-left: 3px solid #00B4D8;">Contact</h3>
-                    <ul class="space-y-4 text-gray-400 text-sm">
+                    <ul class="space-y-4 text-gray-300 text-sm">
                         <li class="flex gap-3 justify-center sm:justify-start">
                             <i class="fas fa-map-marker-alt text-aqua w-5 text-base"></i>
                             <span>456 Sparkle Ave, Los Angeles, CA</span>
@@ -1924,7 +1987,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="mt-12 pt-8 text-center text-gray-500 text-xs border-t border-navy/30 dark:border-aqua/10">
+            <div class="mt-12 pt-8 text-center text-gray-400 text-xs border-t border-navy/30 dark:border-aqua/10">
                 <p>© 2026 AquaShine Car Wash & Auto Detailing. All rights reserved.</p>
             </div>
         </div>

@@ -21,7 +21,7 @@
                     },
                     colors: {
                         'navy': '#0A192F',
-                        'aqua': '#00B4D8',
+                        'aqua': 'var(--color-aqua, #0077B6)',
                         'navy-light': '#112240',
                         'navy-dark': '#020C1B',
                     }
@@ -30,6 +30,35 @@
         }
     </script>
     <style>
+        :root {
+            --color-aqua: #0077B6;
+            --color-aqua-rgb: 0, 119, 182;
+            --color-aqua-hover: #005F92;
+            --color-aqua-badge-bg: rgba(0, 119, 182, 0.08);
+            --color-aqua-badge-border: rgba(0, 119, 182, 0.35);
+        }
+        .dark {
+            --color-aqua: #00B4D8;
+            --color-aqua-rgb: 0, 180, 216;
+            --color-aqua-hover: #0096B5;
+            --color-aqua-badge-bg: rgba(0, 180, 216, 0.12);
+            --color-aqua-badge-border: rgba(0, 180, 216, 0.35);
+        }
+
+        .text-aqua {
+            color: var(--color-aqua) !important;
+        }
+        /* Preserve glowing vibrant aqua on inherently dark sections */
+        .dark .text-aqua,
+        .bg-navy .text-aqua,
+        .bg-navy-dark .text-aqua,
+        footer .text-aqua,
+        .hero-visual-stage .text-aqua,
+        section[style*="#0A192F"] .text-aqua,
+        div[style*="#0A192F"] .text-aqua {
+            color: #00B4D8 !important;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -462,8 +491,8 @@
 
         /* ===== BUTTONS ===== */
         .btn-primary {
-            background: #00B4D8;
-            color: #0A192F;
+            background: var(--color-aqua);
+            color: #FFFFFF;
             padding: 0.9rem 2.2rem;
             border-radius: 60px;
             font-weight: 700;
@@ -476,12 +505,33 @@
             border: none;
             cursor: pointer;
             text-decoration: none;
+            box-shadow: 0 4px 16px rgba(var(--color-aqua-rgb), 0.25);
         }
-        .btn-primary:hover { background: #0096b5; transform: scale(1.03); box-shadow: 0 8px 30px rgba(0, 180, 216, 0.45); }
+        .btn-primary:hover { 
+            background: var(--color-aqua-hover); 
+            color: #FFFFFF;
+            transform: scale(1.03); 
+            box-shadow: 0 8px 30px rgba(var(--color-aqua-rgb), 0.45); 
+        }
+        .dark .btn-primary,
+        section[style*="#0A192F"] .btn-primary,
+        div[style*="#0A192F"] .btn-primary {
+            background: #00B4D8;
+            color: #0A192F;
+            box-shadow: 0 4px 16px rgba(0, 180, 216, 0.35);
+        }
+        .dark .btn-primary:hover,
+        section[style*="#0A192F"] .btn-primary:hover,
+        div[style*="#0A192F"] .btn-primary:hover {
+            background: #0096b5;
+            color: #0A192F;
+            box-shadow: 0 8px 30px rgba(0, 180, 216, 0.55);
+        }
+
         .btn-outline {
-            border: 2px solid #00B4D8;
+            border: 2px solid var(--color-aqua);
             background: transparent;
-            color: #00B4D8;
+            color: var(--color-aqua);
             padding: 0.85rem 2.2rem;
             border-radius: 60px;
             font-weight: 600;
@@ -494,12 +544,23 @@
             text-decoration: none;
             cursor: pointer;
         }
-        .btn-outline:hover { background: #00B4D8; color: #0A192F; }
+        .btn-outline:hover { 
+            background: var(--color-aqua); 
+            color: #FFFFFF; 
+        }
+        .dark .btn-outline {
+            border-color: #00B4D8;
+            color: #00B4D8;
+        }
+        .dark .btn-outline:hover { 
+            background: #00B4D8; 
+            color: #0A192F; 
+        }
 
         /* ===== SECTION DIVIDERS ===== */
         .section-divider {
             height: 4px;
-            background: linear-gradient(90deg, transparent, #00B4D8, transparent);
+            background: linear-gradient(90deg, transparent, var(--color-aqua), transparent);
             margin: 0 auto;
             width: 200px;
             border-radius: 4px;
@@ -513,9 +574,15 @@
             font-weight: 700;
             letter-spacing: 0.18em;
             text-transform: uppercase;
-            border: 1px solid #00B4D8;
+            border: 1.5px solid var(--color-aqua);
+            color: var(--color-aqua);
+            background: var(--color-aqua-badge-bg);
+            transition: all 0.3s ease;
+        }
+        .dark .section-badge {
+            border-color: #00B4D8;
             color: #00B4D8;
-            background: rgba(0, 180, 216, 0.08);
+            background: rgba(0, 180, 216, 0.12);
         }
 
         /* ===== SIGNATURE SERVICES ===== */
@@ -543,7 +610,7 @@
         }
         .signature-image-wrapper {
             position: relative;
-            height: 320px;
+            height: 270px;
             overflow: hidden;
             flex-shrink: 0;
         }
@@ -568,91 +635,105 @@
         }
         .signature-number {
             position: absolute;
-            top: 24px;
-            left: 24px;
-            width: 48px;
-            height: 48px;
+            top: 20px;
+            left: 20px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            background: #00B4D8;
-            color: #0A192F;
+            background: var(--color-aqua);
+            color: #FFFFFF;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
-            font-size: 1.1rem;
-            box-shadow: 0 6px 20px rgba(0,180,216,0.4);
+            font-size: 1.05rem;
+            box-shadow: 0 6px 20px rgba(var(--color-aqua-rgb), 0.35);
             z-index: 2;
         }
+        .dark .signature-number {
+            background: #00B4D8;
+            color: #0A192F;
+            box-shadow: 0 6px 20px rgba(0, 180, 216, 0.4);
+        }
         .signature-content {
-            padding: 32px 28px;
+            padding: 24px 26px 22px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
         .signature-title {
-            font-size: 1.5rem;
+            font-size: 1.45rem;
             font-weight: 800;
             color: #0A192F;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
             letter-spacing: -0.02em;
             transition: color 0.3s ease;
-            line-height: 1.25;
-            min-height: 3.75rem;
+            line-height: 1.3;
+            min-height: 2.1rem;
             display: flex;
-            align-items: flex-start;
+            align-items: center;
         }
         .dark .signature-title { color: #ffffff; }
-        .signature-card:hover .signature-title { color: #00B4D8; }
+        .signature-card:hover .signature-title { color: var(--color-aqua); }
+        .dark .signature-card:hover .signature-title { color: #00B4D8; }
         .signature-desc {
-            color: #64748b;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 24px;
+            color: #475569;
+            font-size: 0.93rem;
+            line-height: 1.55;
+            margin-bottom: 16px;
             flex-grow: 1;
-            min-height: 9.2rem;
+            min-height: 4.8rem;
             display: flex;
             flex-direction: column;
         }
-        .dark .signature-desc { color: #94a3b8; }
+        .dark .signature-desc { color: #cbd5e1; }
         .signature-link {
             display: inline-flex;
             align-items: center;
             gap: 10px;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
             color: #0A192F;
             text-decoration: none;
             transition: all 0.3s ease;
-            padding-top: 20px;
+            padding-top: 16px;
             border-top: 1px solid #E8E8E8;
             margin-top: auto;
         }
         @media (max-width: 767px) {
-            .signature-title { min-height: auto; }
-            .signature-desc { min-height: auto; }
+            .signature-image-wrapper { height: 230px; }
+            .signature-content { padding: 20px 20px 18px; }
+            .signature-title { min-height: auto; font-size: 1.3rem; margin-bottom: 8px; }
+            .signature-desc { min-height: auto; margin-bottom: 14px; }
         }
         .dark .signature-link { color: #ffffff; border-color: #1A2A3A; }
-        .signature-link:hover { color: #00B4D8; gap: 16px; }
+        .signature-link:hover { color: var(--color-aqua); gap: 16px; }
+        .dark .signature-link:hover { color: #00B4D8; gap: 16px; }
         .signature-link i {
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background: #00B4D8;
-            color: #0A192F;
+            background: var(--color-aqua);
+            color: #FFFFFF;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.85rem;
             transition: all 0.3s ease;
         }
+        .dark .signature-link i {
+            background: #00B4D8;
+            color: #0A192F;
+        }
         .signature-link:hover i {
             background: #0A192F;
-            color: #00B4D8;
+            color: #FFFFFF;
             transform: rotate(-45deg);
         }
         .dark .signature-link:hover i {
             background: #00B4D8;
             color: #0A192F;
+            transform: rotate(-45deg);
         }
 
         /* ===== PROCESS TIMELINE ===== */
@@ -669,7 +750,7 @@
             top: 60px;
             bottom: 0;
             width: 2px;
-            background: linear-gradient(180deg, #00B4D8, transparent);
+            background: linear-gradient(180deg, var(--color-aqua), transparent);
         }
         .process-step:last-child::before { display: none; }
         .process-number {
@@ -679,15 +760,21 @@
             width: 56px;
             height: 56px;
             border-radius: 50%;
-            background: #00B4D8;
-            color: #0A192F;
+            background: var(--color-aqua);
+            color: #FFFFFF;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 800;
             font-size: 1.3rem;
-            box-shadow: 0 6px 20px rgba(0, 180, 216, 0.35);
+            box-shadow: 0 6px 20px rgba(var(--color-aqua-rgb), 0.35);
             z-index: 1;
+            transition: all 0.3s ease;
+        }
+        .dark .process-number {
+            background: #00B4D8;
+            color: #0A192F;
+            box-shadow: 0 6px 20px rgba(0, 180, 216, 0.35);
         }
 
         /* ===== FAQ CARD DESIGN ===== */
@@ -705,10 +792,18 @@
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
         }
         .faq-card:hover {
+            border-color: var(--color-aqua);
+            box-shadow: 0 8px 30px -10px rgba(var(--color-aqua-rgb), 0.2);
+        }
+        .faq-card.active {
+            border-color: var(--color-aqua);
+            box-shadow: 0 12px 40px -12px rgba(var(--color-aqua-rgb), 0.3);
+        }
+        .dark .faq-card:hover {
             border-color: #00B4D8;
             box-shadow: 0 8px 30px -10px rgba(0, 180, 216, 0.2);
         }
-        .faq-card.active {
+        .dark .faq-card.active {
             border-color: #00B4D8;
             box-shadow: 0 12px 40px -12px rgba(0, 180, 216, 0.3);
         }
@@ -734,7 +829,7 @@
             width: 44px;
             height: 44px;
             border-radius: 12px;
-            background: rgba(0, 180, 216, 0.1);
+            background: var(--color-aqua-badge-bg);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -742,13 +837,22 @@
             transition: all 0.3s ease;
         }
         .faq-icon i {
-            color: #00B4D8;
+            color: var(--color-aqua);
             font-size: 1.1rem;
         }
         .faq-card.active .faq-icon {
-            background: #00B4D8;
+            background: var(--color-aqua);
         }
         .faq-card.active .faq-icon i {
+            color: #FFFFFF;
+        }
+        .dark .faq-icon i {
+            color: #00B4D8;
+        }
+        .dark .faq-card.active .faq-icon {
+            background: #00B4D8;
+        }
+        .dark .faq-card.active .faq-icon i {
             color: #0A192F;
         }
 
@@ -764,14 +868,20 @@
             color: #ffffff;
         }
         .faq-card.active .faq-text {
+            color: var(--color-aqua);
+        }
+        .dark .faq-card.active .faq-text {
             color: #00B4D8;
         }
 
         .faq-arrow {
-            color: #00B4D8;
-            font-size: 0.9rem;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            color: var(--color-aqua);
+            font-size: 0.95rem;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
             flex-shrink: 0;
+        }
+        .dark .faq-arrow {
+            color: #00B4D8;
         }
         .faq-card.active .faq-arrow {
             transform: rotate(180deg);
@@ -780,23 +890,35 @@
         .faq-card-answer {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease;
-            padding: 0 28px 0 88px;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.45s ease, padding 0.3s ease;
+            padding: 0 28px;
         }
         .faq-card.active .faq-card-answer {
-            max-height: 400px;
+            max-height: 500px;
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
             padding: 0 28px 28px 88px;
         }
         .faq-card-answer p {
-            color: #64748b;
+            color: #475569;
             line-height: 1.75;
-            font-size: 0.95rem;
+            font-size: 0.98rem;
             border-top: 1px solid #E8E8E8;
             padding-top: 20px;
         }
         .dark .faq-card-answer p {
-            color: #94a3b8;
+            color: #cbd5e1;
             border-color: #1A2A3A;
+        }
+        [dir="rtl"] .faq-card-question {
+            text-align: right;
+        }
+        [dir="rtl"] .faq-card.active .faq-card-answer {
+            padding: 0 88px 28px 28px;
         }
 
         /* ===== CARDS ===== */
@@ -871,13 +993,16 @@
                 font-size: 0.95rem;
             }
             .faq-card-answer {
-                padding: 0 20px 0 70px;
+                padding: 0 20px;
             }
             .faq-card.active .faq-card-answer {
-                padding: 0 20px 24px 70px;
+                padding: 0 20px 22px 20px;
+            }
+            [dir="rtl"] .faq-card.active .faq-card-answer {
+                padding: 0 20px 22px 20px;
             }
             .faq-card-answer p {
-                font-size: 0.9rem;
+                font-size: 0.92rem;
             }
         }
 
@@ -917,6 +1042,313 @@
         }
         .dark .section-light-bg {
             background-color: #0A192F;
+        }
+
+        /* ===== HERO VISUAL SHOWCASE STYLES ===== */
+        .hero-visual-stage {
+            position: relative;
+            width: 100%;
+            max-width: 580px;
+            margin: 0 auto;
+        }
+        .hero-visual-card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(17, 34, 64, 0.55);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 40px rgba(0, 180, 216, 0.15);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .hero-visual-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.8), 0 0 50px rgba(0, 180, 216, 0.25);
+        }
+        .hero-badge-float-1 {
+            animation: heroFloat1 6s ease-in-out infinite;
+        }
+        .hero-badge-float-2 {
+            animation: heroFloat2 6s ease-in-out infinite 1.5s;
+        }
+        @keyframes heroFloat1 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        @keyframes heroFloat2 {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+        .hero-thumb-btn {
+            padding: 6px 14px;
+            border-radius: 9999px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            color: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: all 0.25s ease;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .hero-thumb-btn:hover {
+            background: rgba(0, 180, 216, 0.15);
+            color: #00B4D8;
+            border-color: rgba(0, 180, 216, 0.35);
+        }
+        .hero-thumb-btn.active {
+            background: rgba(0, 180, 216, 0.25);
+            color: #ffffff;
+            border-color: #00B4D8;
+            box-shadow: 0 0 15px rgba(0, 180, 216, 0.35);
+        }
+        @media (max-width: 640px) {
+            .hero-badge-float-1 {
+                top: -12px !important;
+                left: 6px !important;
+                padding: 8px 12px !important;
+            }
+            .hero-badge-float-2 {
+                bottom: -12px !important;
+                right: 6px !important;
+                padding: 8px 12px !important;
+            }
+        }
+        [dir="rtl"] .hero-badge-float-1 {
+            left: auto !important;
+            right: -16px;
+        }
+        [dir="rtl"] .hero-badge-float-2 {
+            right: auto !important;
+            left: -16px;
+        }
+        @media (max-width: 640px) {
+            [dir="rtl"] .hero-badge-float-1 {
+                right: 6px !important;
+                left: auto !important;
+            }
+            [dir="rtl"] .hero-badge-float-2 {
+                left: 6px !important;
+                right: auto !important;
+            }
+        }
+
+        /* ===== POPULAR PACKAGES SHOWCASE STYLES ===== */
+        .pkg-card {
+            background: #FFFFFF;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid #E8E8E8;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .dark .pkg-card {
+            background: #112240;
+            border-color: #1A2A3A;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+        }
+        .pkg-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-aqua);
+            box-shadow: 0 24px 50px -15px rgba(var(--color-aqua-rgb), 0.22);
+        }
+        .dark .pkg-card:hover {
+            border-color: #00B4D8;
+            box-shadow: 0 24px 50px -15px rgba(0, 180, 216, 0.3);
+        }
+        .pkg-card.featured {
+            border: 2px solid var(--color-aqua);
+            box-shadow: 0 16px 40px -12px rgba(var(--color-aqua-rgb), 0.25);
+        }
+        .dark .pkg-card.featured {
+            border-color: #00B4D8;
+            box-shadow: 0 16px 40px -12px rgba(0, 180, 216, 0.35);
+        }
+        .pkg-img-wrap {
+            position: relative;
+            height: 210px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background: #0A192F;
+        }
+        .pkg-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .pkg-card:hover .pkg-img-wrap img {
+            transform: scale(1.08);
+        }
+        .pkg-img-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(10,25,47,0.1) 0%, rgba(10,25,47,0.65) 65%, rgba(10,25,47,0.92) 100%);
+        }
+        .pkg-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 2;
+        }
+        [dir="rtl"] .pkg-badge {
+            left: auto;
+            right: 16px;
+        }
+        .pkg-badge.featured {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #0A192F;
+            border: none;
+            box-shadow: 0 4px 14px rgba(255, 215, 0, 0.45);
+        }
+        .pkg-time-pill {
+            position: absolute;
+            bottom: 14px;
+            right: 16px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: rgba(10, 25, 47, 0.75);
+            backdrop-filter: blur(6px);
+            color: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        [dir="rtl"] .pkg-time-pill {
+            right: auto;
+            left: 16px;
+        }
+        .pkg-body {
+            padding: 26px 26px 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .pkg-title {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #0A192F;
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+            line-height: 1.3;
+        }
+        .dark .pkg-title {
+            color: #ffffff;
+        }
+        .pkg-subtitle {
+            font-size: 0.88rem;
+            color: #475569;
+            line-height: 1.5;
+            margin-bottom: 18px;
+            min-height: 2.6rem;
+        }
+        .dark .pkg-subtitle {
+            color: #cbd5e1;
+        }
+        .pkg-price-box {
+            padding: 16px 18px;
+            border-radius: 18px;
+            background: #F8FAFC;
+            border: 1px solid #EDF2F7;
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .dark .pkg-price-box {
+            background: rgba(10, 25, 47, 0.5);
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+        .pkg-price-amount {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--color-aqua);
+            line-height: 1;
+            letter-spacing: -0.03em;
+        }
+        .dark .pkg-price-amount {
+            color: #00B4D8;
+        }
+        .pkg-save-tag {
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: #ECFDF5;
+            color: #059669;
+            border: 1px solid #A7F3D0;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .dark .pkg-save-tag {
+            background: rgba(5, 150, 105, 0.15);
+            color: #34D399;
+            border-color: rgba(52, 211, 153, 0.25);
+        }
+        .pkg-features-title {
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #cbd5e1;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .pkg-feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 24px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex-grow: 1;
+        }
+        .pkg-feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.88rem;
+            color: #334155;
+            line-height: 1.45;
+        }
+        .dark .pkg-feature-list li {
+            color: #cbd5e1;
+        }
+        .pkg-feature-list li i {
+            color: var(--color-aqua);
+            font-size: 0.95rem;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        .dark .pkg-feature-list li i {
+            color: #00B4D8;
+        }
+        .pkg-cta-wrapper {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
     </style>
 </head>
@@ -997,38 +1429,130 @@
     </nav>
 
     <!-- ===== HERO SECTION ===== -->
-    <section class="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden w-full" style="background: linear-gradient(135deg, #0A192F 0%, #0f2644 50%, #0A192F 100%);">
-        <div class="absolute inset-0 z-0 w-full">
-            <img src="assets/index1.avif" alt="Car wash background" class="w-full h-full object-cover opacity-15">
-            <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(10,25,47,0.75) 0%, rgba(10,25,47,0.88) 50%, #0A192F 100%);"></div>
+    <section class="relative min-h-screen flex items-center justify-center pt-24 pb-16 lg:py-28 overflow-hidden w-full" style="background: linear-gradient(135deg, #0A192F 0%, #0f2644 50%, #0A192F 100%);">
+        <!-- Ambient Background Image -->
+        <div class="absolute inset-0 z-0 w-full pointer-events-none">
+            <img src="assets/index1.avif" alt="Car wash background" class="w-full h-full object-cover opacity-25">
+            <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(10,25,47,0.70) 0%, rgba(10,25,47,0.85) 60%, #0A192F 100%);"></div>
         </div>
         
-        <div class="absolute inset-0 pointer-events-none opacity-10">
-            <div class="absolute top-1/4 left-10 floating text-aqua"><i class="fas fa-soap fa-5x"></i></div>
-            <div class="absolute bottom-1/4 right-10 floating text-aqua" style="animation-delay: 2s;"><i class="fas fa-spray-can fa-4x"></i></div>
-            <div class="absolute top-1/3 right-1/4 floating text-aqua" style="animation-delay: 4s;"><i class="fas fa-shield-alt fa-4x"></i></div>
-        </div>
         
-        <div class="relative z-10 text-center px-4 sm:px-6 max-w-5xl w-full">
-            <div class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full mb-8" style="background: rgba(0,180,216,0.15); border: 1px solid rgba(0,180,216,0.3);">
-                <span class="w-2.5 h-2.5 bg-aqua rounded-full animate-pulse"></span>
-                <span class="text-aqua text-sm uppercase tracking-widest font-bold">Premium Car Care Since 2013</span>
-            </div>
-            <h1 class="hero-title font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white leading-[1.05] mb-8 font-medium">
-                Your Car <span class="italic text-aqua">Deserves</span> <br>The Best Shine
-            </h1>
-            <p class="text-gray-300 text-lg sm:text-xl md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed">
-                Experience the ultimate car wash and detailing service. From express washes to full ceramic protection — we bring the showroom shine back.
-            </p>
-            <div class="flex flex-wrap gap-5 justify-center">
-                <a href="wash-packages.html" class="btn-primary shadow-lg text-base sm:text-lg"><i class="fas fa-calendar-check"></i> Book Now</a>
-                <a href="pricing.html" class="btn-outline border-white text-white hover:bg-white hover:text-navy text-base sm:text-lg"><i class="fas fa-tag"></i> View Pricing</a>
-            </div>
-            <div class="mt-16 flex flex-wrap justify-center gap-8 md:gap-14 text-sm sm:text-base">
-                <span class="text-white/80 flex items-center gap-2.5"><i class="fas fa-check-circle text-aqua text-lg"></i> 10+ Years Experience</span>
-                <span class="text-white/80 flex items-center gap-2.5"><i class="fas fa-check-circle text-aqua text-lg"></i> 5000+ Cars Detailed</span>
-                <span class="text-white/80 flex items-center gap-2.5"><i class="fas fa-check-circle text-aqua text-lg"></i> Eco-Friendly Products</span>
-                <span class="text-white/80 flex items-center gap-2.5"><i class="fas fa-check-circle text-aqua text-lg"></i> 100% Satisfaction</span>
+        
+        <!-- Main 2-Column Hero Container -->
+        <div class="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 xl:gap-12 items-center">
+                
+                <!-- Left Column: Typography, CTAs & Trust Metrics -->
+                <div class="lg:col-span-7 xl:col-span-6 text-center lg:text-left rtl:lg:text-right">
+                    <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full mb-6" style="background: rgba(0,180,216,0.15); border: 1px solid rgba(0,180,216,0.3);">
+                        <span class="w-2.5 h-2.5 bg-aqua rounded-full animate-pulse"></span>
+                        <span class="text-aqua text-xs sm:text-sm uppercase tracking-widest font-bold">Premium Car Care Since 2013</span>
+                    </div>
+
+                    <h1 class="hero-title font-serif text-4xl sm:text-5xl md:text-6xl xl:text-7xl text-white leading-[1.08] mb-6 font-medium">
+                        Your Car <span class="italic text-aqua">Deserves</span> <br class="hidden sm:inline">The Best Shine
+                    </h1>
+
+                    <p class="text-gray-300 text-base sm:text-lg md:text-xl mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                        Experience the ultimate car wash and detailing service. From express snow-foam washes to full 9H ceramic paint protection — we bring the showroom shine back.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 justify-center lg:justify-start rtl:lg:justify-end mb-10">
+                        <a href="wash-packages.html" class="btn-primary shadow-lg text-base sm:text-lg">
+                            <i class="fas fa-calendar-check"></i> <span>Book Now</span>
+                        </a>
+                        <a href="pricing.html" class="btn-outline border-white text-white hover:bg-white hover:text-navy text-base sm:text-lg">
+                            <i class="fas fa-tag"></i> <span>View Pricing</span>
+                        </a>
+                    </div>
+
+                    <!-- Trust Checkmarks -->
+                    <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-4 sm:gap-6 justify-center lg:justify-start rtl:lg:justify-end text-xs sm:text-sm pt-4 border-t border-white/10">
+                        <span class="text-white/85 flex items-center gap-2"><i class="fas fa-check-circle text-aqua text-base flex-shrink-0"></i> 10+ Yrs Experience</span>
+                        <span class="text-white/85 flex items-center gap-2"><i class="fas fa-check-circle text-aqua text-base flex-shrink-0"></i> 5,000+ Cars Detailed</span>
+                        <span class="text-white/85 flex items-center gap-2"><i class="fas fa-check-circle text-aqua text-base flex-shrink-0"></i> Eco-Friendly Wash</span>
+                        <span class="text-white/85 flex items-center gap-2"><i class="fas fa-check-circle text-aqua text-base flex-shrink-0"></i> 100% Satisfaction</span>
+                    </div>
+                </div>
+
+                <!-- Right Column: Premium Detailing & Wash Showcase -->
+                <div class="lg:col-span-5 xl:col-span-6 flex justify-center items-center">
+                    <div class="hero-visual-stage">
+                        
+                        <!-- Ambient Backdrop Glow -->
+                        <div class="absolute -inset-4 bg-gradient-to-tr from-aqua/25 via-blue-600/20 to-cyan-400/20 rounded-3xl blur-2xl opacity-70 pointer-events-none"></div>
+
+                        <!-- Main Visual Showcase Card -->
+                        <div class="hero-visual-card group">
+                            
+                            <!-- Card Image Area -->
+                            <div class="relative w-full h-[300px] sm:h-[380px] lg:h-[410px] overflow-hidden bg-navy">
+                                <img id="heroShowcaseImg" src="assets/wp5.avif" alt="Showroom Ferrari 812 in Ultra-Gloss Ceramic Finish" class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105">
+                                <div class="absolute inset-0 bg-gradient-to-t from-[#0A192F] via-[#0A192F]/20 to-transparent"></div>
+                                
+                                <!-- Top-Right Live Studio Badge -->
+                                <div class="absolute top-4 right-4 rtl:right-auto rtl:left-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0A192F]/85 backdrop-blur-md border border-white/15 text-white text-xs font-semibold shadow-lg">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                    <span>Studio Active</span>
+                                </div>
+                            </div>
+
+                            <!-- Interactive Detailing Switcher Strip -->
+                            <div class="p-5 sm:p-6 bg-gradient-to-b from-[#0A192F]/90 to-[#0A192F] border-t border-white/10">
+                                
+                                <!-- Header Info & Rating -->
+                                <div class="flex items-center justify-between gap-4 flex-wrap mb-4">
+                                    <div>
+                                        <span id="heroShowcaseCategory" class="text-aqua text-xs font-bold tracking-wider uppercase block">Showroom Finish</span>
+                                        <h3 id="heroShowcaseTitle" class="text-white font-semibold text-lg sm:text-xl">Ultra-Gloss Paint Correction</h3>
+                                    </div>
+                                    <div class="flex items-center gap-1.5 bg-white/5 border border-white/10 px-3 py-1.5 rounded-xl">
+                                        <div class="flex text-amber-400 text-xs">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <span class="text-white text-xs font-bold ml-1">5.0</span>
+                                    </div>
+                                </div>
+
+                                <!-- Interactive Gallery Pills -->
+                                <div class="flex items-center gap-2 overflow-x-auto pb-1 mb-4 no-scrollbar">
+                                    <button class="hero-thumb-btn active" data-index="0">
+                                        <i class="fas fa-gem text-aqua mr-1"></i> Showroom Shine
+                                    </button>
+                                    <button class="hero-thumb-btn" data-index="1">
+                                        <i class="fas fa-warehouse text-aqua mr-1"></i> Detailing Bay
+                                    </button>
+                                    <button class="hero-thumb-btn" data-index="2">
+                                        <i class="fas fa-spray-can text-aqua mr-1"></i> Master Polish
+                                    </button>
+                                </div>
+
+                                <!-- Detailing Service Highlights -->
+                                <div class="pt-3 border-t border-white/10 flex items-center justify-between gap-2 overflow-x-auto text-[11px] sm:text-xs">
+                                    <span class="inline-flex items-center gap-1.5 text-gray-300 whitespace-nowrap">
+                                        <i class="fas fa-shield-alt text-aqua"></i> 9H Ceramic Coat
+                                    </span>
+                                    <span class="text-white/20">·</span>
+                                    <span class="inline-flex items-center gap-1.5 text-gray-300 whitespace-nowrap">
+                                        <i class="fas fa-soap text-aqua"></i> Snow Foam Wash
+                                    </span>
+                                    <span class="text-white/20">·</span>
+                                    <span class="inline-flex items-center gap-1.5 text-gray-300 whitespace-nowrap">
+                                        <i class="fas fa-magic text-amber-400"></i> Swirl-Free
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -1040,7 +1564,7 @@
                 <span class="section-badge">Our Expertise</span>
                 <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-5">Signature <span class="italic text-aqua">Services</span></h2>
                 <div class="section-divider mt-7"></div>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">Every vehicle is unique. That's why we offer a range of specialized services designed to bring out the best in your car, inside and out.</p>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">Every vehicle is unique. That's why we offer a range of specialized services designed to bring out the best in your car, inside and out.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 items-stretch">
@@ -1146,7 +1670,7 @@
                 <span class="section-badge">Why Choose Us</span>
                 <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-4">The <span class="italic text-aqua">AquaShine</span> Difference</h2>
                 <div class="section-divider mt-6"></div>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-6 text-base sm:text-lg">We combine cutting-edge equipment with eco-friendly products and a team that treats every car like their own.</p>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-6 text-base sm:text-lg">We combine cutting-edge equipment with eco-friendly products and a team that treats every car like their own.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
@@ -1154,32 +1678,32 @@
                     <div class="w-16 h-16 rounded-2xl bg-aqua/10 flex items-center justify-center mx-auto mb-6 flex-shrink-0">
                         <i class="fas fa-leaf text-aqua text-2xl"></i>
                     </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-navy dark:text-white mb-3 min-h-[3.25rem] flex items-center justify-center text-center">Eco-Friendly</h3>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed flex-grow">Biodegradable soaps and water-saving technology that protects your car and the planet.</p>
+                    <h3 class="text-lg sm:text-xl font-bold text-navy dark:text-white mb-3 min-h-[2rem] sm:min-h-[2.25rem] flex items-center justify-center text-center">Eco-Friendly</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed flex-grow">Biodegradable soaps and water-saving technology that protects your car and the planet.</p>
                 </div>
 
                 <div class="bg-white dark:bg-navy-light rounded-3xl px-6 py-8 text-center shadow-lg border border-gray-100 dark:border-navy/40 hover:shadow-2xl hover:shadow-aqua/15 hover:-translate-y-2 transition-all duration-400 reveal h-full flex flex-col items-center">
                     <div class="w-16 h-16 rounded-2xl bg-aqua/10 flex items-center justify-center mx-auto mb-6 flex-shrink-0">
                         <i class="fas fa-user-tie text-aqua text-2xl"></i>
                     </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-navy dark:text-white mb-3 min-h-[3.25rem] flex items-center justify-center text-center">Expert Team</h3>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed flex-grow">Certified detailers with years of experience in paint correction and ceramic coating.</p>
+                    <h3 class="text-lg sm:text-xl font-bold text-navy dark:text-white mb-3 min-h-[2rem] sm:min-h-[2.25rem] flex items-center justify-center text-center">Expert Team</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed flex-grow">Certified detailers with years of experience in paint correction and ceramic coating.</p>
                 </div>
 
                 <div class="bg-white dark:bg-navy-light rounded-3xl px-6 py-8 text-center shadow-lg border border-gray-100 dark:border-navy/40 hover:shadow-2xl hover:shadow-aqua/15 hover:-translate-y-2 transition-all duration-400 reveal h-full flex flex-col items-center">
                     <div class="w-16 h-16 rounded-2xl bg-aqua/10 flex items-center justify-center mx-auto mb-6 flex-shrink-0">
                         <i class="fas fa-clock text-aqua text-2xl"></i>
                     </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-navy dark:text-white mb-3 min-h-[3.25rem] flex items-center justify-center text-center">Fast Turnaround</h3>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed flex-grow">Express services in under 30 minutes. Full details completed same day, every time.</p>
+                    <h3 class="text-lg sm:text-xl font-bold text-navy dark:text-white mb-3 min-h-[2rem] sm:min-h-[2.25rem] flex items-center justify-center text-center">Fast Turnaround</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed flex-grow">Express services in under 30 minutes. Full details completed same day, every time.</p>
                 </div>
 
                 <div class="bg-white dark:bg-navy-light rounded-3xl px-6 py-8 text-center shadow-lg border border-gray-100 dark:border-navy/40 hover:shadow-2xl hover:shadow-aqua/15 hover:-translate-y-2 transition-all duration-400 reveal h-full flex flex-col items-center">
                     <div class="w-16 h-16 rounded-2xl bg-aqua/10 flex items-center justify-center mx-auto mb-6 flex-shrink-0">
                         <i class="fas fa-shield-alt text-aqua text-2xl"></i>
                     </div>
-                    <h3 class="text-lg sm:text-xl font-bold text-navy dark:text-white mb-3 min-h-[3.25rem] flex items-center justify-center text-center">Guaranteed Work</h3>
-                    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed flex-grow">100% satisfaction guarantee. If you're not happy, we'll re-do it free of charge.</p>
+                    <h3 class="text-lg sm:text-xl font-bold text-navy dark:text-white mb-3 min-h-[2rem] sm:min-h-[2.25rem] flex items-center justify-center text-center">Guaranteed Work</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed flex-grow">100% satisfaction guarantee. If you're not happy, we'll re-do it free of charge.</p>
                 </div>
             </div>
         </div>
@@ -1191,27 +1715,29 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div class="reveal">
                     <span class="section-badge">How It Works</span>
-                    <h2 class="section-title font-serif text-4xl sm:text-5xl text-navy dark:text-white font-bold mt-4 mb-8">Our Simple <span class="italic text-aqua">4-Step</span> Process</h2>
+                    <h2 class="section-title font-serif text-4xl sm:text-5xl text-navy dark:text-white font-bold mt-4">Our Simple <span class="italic text-aqua">4-Step</span> Process</h2>
+                    <div class="section-divider mt-4 mb-6 ml-0" style="margin-left: 0;"></div>
+                    <p class="text-gray-600 dark:text-gray-300 max-w-lg mb-8 text-base leading-relaxed">From initial booking to final showroom inspection, every vehicle follows our proven detailing journey.</p>
                     <div class="space-y-0">
                         <div class="process-step">
                             <div class="process-number">1</div>
                             <h3 class="text-xl font-bold text-navy dark:text-white mb-2">Book Your Appointment</h3>
-                            <p class="text-gray-500 dark:text-gray-400 leading-relaxed">Choose your package online or give us a call. Pick a time that works for you — we're open 7 days a week.</p>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">Choose your package online or give us a call. Pick a time that works for you — we're open 7 days a week.</p>
                         </div>
                         <div class="process-step">
                             <div class="process-number">2</div>
                             <h3 class="text-xl font-bold text-navy dark:text-white mb-2">Pre-Wash Inspection</h3>
-                            <p class="text-gray-500 dark:text-gray-400 leading-relaxed">Our team inspects your vehicle for any existing damage and customizes the wash approach for your car's needs.</p>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">Our team inspects your vehicle for any existing damage and customizes the wash approach for your car's needs.</p>
                         </div>
                         <div class="process-step">
                             <div class="process-number">3</div>
                             <h3 class="text-xl font-bold text-navy dark:text-white mb-2">Deep Clean & Detail</h3>
-                            <p class="text-gray-500 dark:text-gray-400 leading-relaxed">Using premium products and techniques, we carefully wash, polish, and protect every surface inside and out.</p>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">Using premium products and techniques, we carefully wash, polish, and protect every surface inside and out.</p>
                         </div>
                         <div class="process-step">
                             <div class="process-number">4</div>
                             <h3 class="text-xl font-bold text-navy dark:text-white mb-2">Final Quality Check</h3>
-                            <p class="text-gray-500 dark:text-gray-400 leading-relaxed">We do a final inspection under professional lighting to ensure a flawless finish before handing back your keys.</p>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">We do a final inspection under professional lighting to ensure a flawless finish before handing back your keys.</p>
                         </div>
                     </div>
                 </div>
@@ -1232,66 +1758,185 @@
                 <span class="section-badge">Top Rated</span>
                 <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-4">Popular <span class="italic text-aqua">Packages</span></h2>
                 <div class="section-divider mt-6"></div>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-6 text-base sm:text-lg">Our most loved packages, chosen by thousands of happy customers across Los Angeles.</p>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-6 text-base sm:text-lg">Our most loved packages, chosen by thousands of happy customers across Los Angeles. Complete care, clear pricing, zero hidden fees.</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10 items-stretch">
                 
-                <!-- Package 1 -->
-                <div class="bg-white dark:bg-navy-light rounded-3xl p-5 sm:p-6 lg:p-6 xl:p-7 flex items-center gap-4 sm:gap-5 shadow-xl border border-gray-100 dark:border-navy/40 hover:shadow-2xl hover:shadow-aqua/20 transition-all duration-300 group reveal h-full">
-                    <div class="w-24 h-24 sm:w-28 sm:h-28 lg:w-24 lg:h-24 xl:w-28 xl:h-28 rounded-2xl overflow-hidden bg-gray-50 dark:bg-navy/50 flex-shrink-0 aspect-square">
-                        <img src="assets/index9.jpeg" alt="Premium Wash" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <!-- Package 1: Premium Wash & Wax -->
+                <div class="pkg-card reveal h-full">
+                    <div class="pkg-img-wrap">
+                        <img src="assets/index9.jpeg" alt="Premium Wash & Wax Package" class="w-full h-full object-cover">
+                        <div class="pkg-img-overlay"></div>
+                        <span class="pkg-badge">#1 Express Wash</span>
+                        <span class="pkg-time-pill"><i class="fas fa-clock text-aqua"></i> 45–60 min</span>
                     </div>
-                    <div class="flex-grow flex flex-col justify-between self-stretch py-0.5 min-w-0">
-                        <div>
-                            <div class="text-xs sm:text-sm font-bold text-aqua mb-1.5 whitespace-nowrap">#1 Best Seller</div>
-                            <h4 class="text-base sm:text-lg xl:text-xl font-bold text-navy dark:text-white leading-snug min-h-[3rem] sm:min-h-[3.25rem] flex items-center">Premium Wash & Wax</h4>
+                    <div class="pkg-body">
+                        <h3 class="pkg-title">Premium Wash & Wax</h3>
+                        <p class="pkg-subtitle">Essential exterior hand wash & protective Brazilian carnauba gloss sealant for routine care.</p>
+                        
+                        <div class="pkg-price-box">
+                            <div>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="pkg-price-amount">$59</span>
+                                    <span class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 font-medium">/ wash</span>
+                                </div>
+                                <span class="text-xs text-gray-600 dark:text-gray-400 block mt-0.5">Sedan / Coupe</span>
+                            </div>
+                            <div class="text-right rtl:text-left">
+                                <s class="text-xs text-gray-500 dark:text-gray-400 block">$75</s>
+                                <span class="pkg-save-tag">Save $16</span>
+                            </div>
                         </div>
-                        <div class="pt-2 sm:pt-3">
-                            <a href="contact.html" class="inline-block text-center text-sm font-bold bg-navy dark:bg-white text-white dark:text-navy px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl hover:bg-aqua dark:hover:bg-aqua hover:text-navy dark:hover:text-navy transition-colors w-full sm:w-auto">
-                                Book Now
+
+                        <div class="pkg-features-title">
+                            <i class="fas fa-check-circle text-aqua"></i> Services Included:
+                        </div>
+
+                        <ul class="pkg-feature-list">
+                            <li><i class="fas fa-check-circle"></i> <span>Foam cannon pre-soak & scratch-free hand wash</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Wheels, rim barrels & tire scrub with satin dressing</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Hand-applied Brazilian carnauba protective wax</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Interior vacuum (seats, carpets, floor mats & trunk)</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Dashboard, console & door panel wipe down</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Streak-free window cleaning (inside & outside)</span></li>
+                        </ul>
+
+                        <div class="pkg-cta-wrapper">
+                            <a href="contact.html" class="btn-outline w-full justify-center text-sm sm:text-base py-3 sm:py-3.5">
+                                <i class="fas fa-calendar-check"></i> <span>Book Premium Wash</span>
                             </a>
+                            <span class="text-[11px] text-gray-600 dark:text-gray-400 text-center flex items-center justify-center gap-1 mt-1">
+                                <i class="fas fa-shield-alt text-emerald-500"></i> 100% Scratch-Free Guarantee
+                            </span>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Package 2 -->
-                <div class="bg-white dark:bg-navy-light rounded-3xl p-5 sm:p-6 lg:p-6 xl:p-7 flex items-center gap-4 sm:gap-5 shadow-xl border border-gray-100 dark:border-navy/40 hover:shadow-2xl hover:shadow-aqua/20 transition-all duration-300 group reveal h-full">
-                    <div class="w-24 h-24 sm:w-28 sm:h-28 lg:w-24 lg:h-24 xl:w-28 xl:h-28 rounded-2xl overflow-hidden bg-gray-50 dark:bg-navy/50 flex-shrink-0 aspect-square">
-                        <img src="assets/index10.jpeg" alt="Interior + Exterior" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <!-- Package 2: Interior + Exterior Detail (Featured / Most Popular) -->
+                <div class="pkg-card featured reveal h-full">
+                    <div class="pkg-img-wrap">
+                        <img src="assets/index10.jpeg" alt="Interior + Exterior Detailing Package" class="w-full h-full object-cover">
+                        <div class="pkg-img-overlay"></div>
+                        <span class="pkg-badge featured"><i class="fas fa-crown text-xs mr-1"></i> Most Popular</span>
+                        <span class="pkg-time-pill"><i class="fas fa-clock text-aqua"></i> 2.5–3.5 hrs</span>
                     </div>
-                    <div class="flex-grow flex flex-col justify-between self-stretch py-0.5 min-w-0">
-                        <div>
-                            <div class="text-xs sm:text-sm font-bold text-aqua mb-1.5 whitespace-nowrap">#2 Best Seller</div>
-                            <h4 class="text-base sm:text-lg xl:text-xl font-bold text-navy dark:text-white leading-snug min-h-[3rem] sm:min-h-[3.25rem] flex items-center">Interior + Exterior Detail</h4>
+                    <div class="pkg-body">
+                        <h3 class="pkg-title">Interior + Exterior Detail</h3>
+                        <p class="pkg-subtitle">Comprehensive cabin deep-cleansing & machine-polished exterior shine for complete renewal.</p>
+                        
+                        <div class="pkg-price-box" style="background: rgba(0, 180, 216, 0.06); border-color: rgba(0, 180, 216, 0.25);">
+                            <div>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="pkg-price-amount">$149</span>
+                                    <span class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 font-medium">/ service</span>
+                                </div>
+                                <span class="text-xs text-gray-600 dark:text-gray-400 block mt-0.5">Sedan / Coupe</span>
+                            </div>
+                            <div class="text-right rtl:text-left">
+                                <s class="text-xs text-gray-500 dark:text-gray-400 block">$189</s>
+                                <span class="pkg-save-tag">Save $40</span>
+                            </div>
                         </div>
-                        <div class="pt-2 sm:pt-3">
-                            <a href="contact.html" class="inline-block text-center text-sm font-bold bg-navy dark:bg-white text-white dark:text-navy px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl hover:bg-aqua dark:hover:bg-aqua hover:text-navy dark:hover:text-navy transition-colors w-full sm:w-auto">
-                                Book Now
+
+                        <div class="pkg-features-title text-aqua">
+                            <i class="fas fa-star text-amber-400"></i> Everything in Wash & Wax, Plus:
+                        </div>
+
+                        <ul class="pkg-feature-list">
+                            <li><i class="fas fa-check-circle"></i> <span>Full clay bar decontamination & iron fallout removal</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Single-stage machine polish (removes light swirls & marks)</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Hot-water extraction shampoo on seats & carpets</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Leather deep cleaning & UV conditioner treatment</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Steam sanitization of AC vents & interior crevices</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Antibacterial cabin odor elimination treatment</span></li>
+                        </ul>
+
+                        <div class="pkg-cta-wrapper">
+                            <a href="contact.html" class="btn-primary w-full justify-center text-sm sm:text-base py-3 sm:py-3.5 shadow-xl">
+                                <i class="fas fa-calendar-check"></i> <span>Book Most Popular</span>
                             </a>
+                            <span class="text-[11px] text-gray-600 dark:text-gray-400 text-center flex items-center justify-center gap-1 mt-1">
+                                <i class="fas fa-gem text-aqua"></i> Showroom Finish Guaranteed
+                            </span>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Package 3 -->
-                <div class="bg-white dark:bg-navy-light rounded-3xl p-5 sm:p-6 lg:p-6 xl:p-7 flex items-center gap-4 sm:gap-5 shadow-xl border border-gray-100 dark:border-navy/40 hover:shadow-2xl hover:shadow-aqua/20 transition-all duration-300 group reveal h-full">
-                    <div class="w-24 h-24 sm:w-28 sm:h-28 lg:w-24 lg:h-24 xl:w-28 xl:h-28 rounded-2xl overflow-hidden bg-gray-50 dark:bg-navy/50 flex-shrink-0 aspect-square">
-                        <img src="assets/index11.avif" alt="Ceramic Boost" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <!-- Package 3: Ceramic Boost & Seal -->
+                <div class="pkg-card reveal h-full">
+                    <div class="pkg-img-wrap">
+                        <img src="assets/index11.avif" alt="Ceramic Boost & Seal Package" class="w-full h-full object-cover">
+                        <div class="pkg-img-overlay"></div>
+                        <span class="pkg-badge">Ultimate Protection</span>
+                        <span class="pkg-time-pill"><i class="fas fa-clock text-aqua"></i> 4–5 hrs</span>
                     </div>
-                    <div class="flex-grow flex flex-col justify-between self-stretch py-0.5 min-w-0">
-                        <div>
-                            <div class="text-xs sm:text-sm font-bold text-aqua mb-1.5 whitespace-nowrap">#3 Best Seller</div>
-                            <h4 class="text-base sm:text-lg xl:text-xl font-bold text-navy dark:text-white leading-snug min-h-[3rem] sm:min-h-[3.25rem] flex items-center">Ceramic Boost & Seal</h4>
+                    <div class="pkg-body">
+                        <h3 class="pkg-title">Ceramic Boost & Seal</h3>
+                        <p class="pkg-subtitle">Multi-stage swirl correction with a 12-month 9H ceramic nano-sealant for hydrophobic gloss.</p>
+                        
+                        <div class="pkg-price-box">
+                            <div>
+                                <div class="flex items-baseline gap-1">
+                                    <span class="pkg-price-amount">$249</span>
+                                    <span class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 font-medium">/ service</span>
+                                </div>
+                                <span class="text-xs text-gray-600 dark:text-gray-400 block mt-0.5">Sedan / Coupe</span>
+                            </div>
+                            <div class="text-right rtl:text-left">
+                                <s class="text-xs text-gray-500 dark:text-gray-400 block">$299</s>
+                                <span class="pkg-save-tag">Save $50</span>
+                            </div>
                         </div>
-                        <div class="pt-2 sm:pt-3">
-                            <a href="contact.html" class="inline-block text-center text-sm font-bold bg-navy dark:bg-white text-white dark:text-navy px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl hover:bg-aqua dark:hover:bg-aqua hover:text-navy dark:hover:text-navy transition-colors w-full sm:w-auto">
-                                Book Now
+
+                        <div class="pkg-features-title">
+                            <i class="fas fa-check-circle text-aqua"></i> Services Included:
+                        </div>
+
+                        <ul class="pkg-feature-list">
+                            <li><i class="fas fa-check-circle"></i> <span>Complete Interior & Exterior Detail included</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>2-stage chemical & mechanical paint decontamination</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Machine swirl correction polish (up to 80% swirl reduction)</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>12-Month SiO2 9H Ceramic Nano-Sealant applied</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Hydrophobic rain-repellent windshield & glass coat</span></li>
+                            <li><i class="fas fa-check-circle"></i> <span>Exterior trim UV restoration & engine bay degrease</span></li>
+                        </ul>
+
+                        <div class="pkg-cta-wrapper">
+                            <a href="contact.html" class="btn-outline w-full justify-center text-sm sm:text-base py-3 sm:py-3.5">
+                                <i class="fas fa-shield-alt"></i> <span>Book Ceramic Seal</span>
                             </a>
+                            <span class="text-[11px] text-gray-600 dark:text-gray-400 text-center flex items-center justify-center gap-1 mt-1">
+                                <i class="fas fa-award text-amber-500"></i> Certified 9H Coating Technicians
+                            </span>
                         </div>
                     </div>
                 </div>
 
             </div>
+
+            <!-- Bottom Custom Services Banner -->
+            <div class="mt-14 sm:mt-16 p-6 sm:p-8 rounded-3xl bg-white dark:bg-navy-light border border-gray-100 dark:border-white/10 shadow-lg flex flex-col md:flex-row items-center justify-between gap-6 reveal">
+                <div class="flex items-center gap-4 text-center sm:text-left rtl:sm:text-right">
+                    <div class="w-12 h-12 rounded-2xl bg-aqua/10 flex items-center justify-center text-aqua text-xl flex-shrink-0 hidden sm:flex">
+                        <i class="fas fa-sliders-h"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-base sm:text-lg font-bold text-navy dark:text-white">Need a Custom Detail or Want to Compare All Plans?</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-300 mt-0.5">Explore our full line-up of 6 detailing tiers or view the comprehensive vehicle-size pricing matrix.</p>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-4 items-center justify-center flex-shrink-0">
+                    <a href="wash-packages.html" class="inline-flex items-center gap-2 text-sm font-bold text-aqua hover:underline whitespace-nowrap">
+                        <span>All Wash Packages</span> <i class="fas fa-arrow-right text-xs"></i>
+                    </a>
+                    <span class="text-gray-300 dark:text-gray-600 hidden sm:inline">|</span>
+                    <a href="pricing.html" class="inline-flex items-center gap-2 text-sm font-bold text-navy dark:text-white hover:text-aqua transition whitespace-nowrap">
+                        <span>Full Pricing Matrix</span> <i class="fas fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -1305,15 +1950,15 @@
                     Frequently Asked <span class="italic text-aqua">Questions</span>
                 </h2>
                 <div class="section-divider mt-6"></div>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-6 text-base sm:text-lg">
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-6 text-base sm:text-lg">
                     Everything you need to know about our services. Can't find an answer? <a href="contact.html" class="text-aqua font-semibold hover:underline">Contact our team</a>.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto">
+            <div class="flex flex-col gap-4 sm:gap-5 max-w-4xl mx-auto w-full">
                 
                 <div class="faq-card reveal">
-                    <button class="faq-card-question">
+                    <button class="faq-card-question" type="button" aria-expanded="false">
                         <span class="faq-icon">
                             <i class="fas fa-clock"></i>
                         </span>
@@ -1326,7 +1971,7 @@
                 </div>
 
                 <div class="faq-card reveal">
-                    <button class="faq-card-question">
+                    <button class="faq-card-question" type="button" aria-expanded="false">
                         <span class="faq-icon">
                             <i class="fas fa-shield-alt"></i>
                         </span>
@@ -1339,7 +1984,7 @@
                 </div>
 
                 <div class="faq-card reveal">
-                    <button class="faq-card-question">
+                    <button class="faq-card-question" type="button" aria-expanded="false">
                         <span class="faq-icon">
                             <i class="fas fa-truck"></i>
                         </span>
@@ -1352,7 +1997,7 @@
                 </div>
 
                 <div class="faq-card reveal">
-                    <button class="faq-card-question">
+                    <button class="faq-card-question" type="button" aria-expanded="false">
                         <span class="faq-icon">
                             <i class="fas fa-flask"></i>
                         </span>
@@ -1365,7 +2010,7 @@
                 </div>
 
                 <div class="faq-card reveal">
-                    <button class="faq-card-question">
+                    <button class="faq-card-question" type="button" aria-expanded="false">
                         <span class="faq-icon">
                             <i class="fas fa-credit-card"></i>
                         </span>
@@ -1378,7 +2023,7 @@
                 </div>
 
                 <div class="faq-card reveal">
-                    <button class="faq-card-question">
+                    <button class="faq-card-question" type="button" aria-expanded="false">
                         <span class="faq-icon">
                             <i class="fas fa-calendar-check"></i>
                         </span>
@@ -1404,6 +2049,7 @@
                 <span class="section-badge">Limited Time Offers</span>
                 <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-4">Exclusive <span class="italic text-aqua">Deals</span></h2>
                 <div class="section-divider mt-6"></div>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-6 text-base sm:text-lg">Take advantage of seasonal savings on our most requested ceramic protection and bundled detailing packages.</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
@@ -1451,11 +2097,12 @@
                 <div class="absolute top-0 left-0 w-96 h-96 bg-aqua/15 rounded-full blur-[100px] pointer-events-none"></div>
                 <div class="absolute bottom-0 right-0 w-96 h-96 bg-aqua/10 rounded-full blur-[120px] pointer-events-none"></div>
                 <div class="relative z-10">
-                    <h2 class="font-serif text-4xl sm:text-5xl md:text-6xl text-white font-bold mb-6">Ready to Give Your Car <span class="italic text-aqua">The Shine</span>?</h2>
-                    <p class="text-gray-300 text-lg sm:text-xl max-w-2xl mx-auto mb-10">Book your appointment today and experience the AquaShine difference. Same-day service available.</p>
+                    <span class="inline-block py-2 px-5 rounded-full bg-aqua/20 text-aqua font-bold tracking-widest text-xs uppercase mb-6 border border-aqua/30">Get Started Today</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl md:text-6xl text-white font-bold mb-6">Ready to Experience <span class="italic text-aqua">The Difference</span>?</h2>
+                    <p class="text-gray-300 text-lg sm:text-xl max-w-2xl mx-auto mb-10">Book your appointment today and experience the AquaShine standard. Same-day detailing and express washes available 7 days a week.</p>
                     <div class="flex flex-wrap gap-5 justify-center">
                         <a href="contact.html" class="btn-primary text-base sm:text-lg"><i class="fas fa-calendar-check"></i> Book Appointment</a>
-                        <a href="pricing.html" class="btn-outline border-white text-white hover:bg-white hover:text-navy text-base sm:text-lg"><i class="fas fa-phone"></i> Call Us Now</a>
+                        <a href="tel:8885550199" class="btn-outline border-white text-white hover:bg-white hover:text-navy text-base sm:text-lg"><i class="fas fa-phone-alt"></i> Call (888) 555-0199</a>
                     </div>
                 </div>
             </div>
@@ -1476,7 +2123,7 @@
                             <span class="logo-sub">Car Wash & Detailing</span>
                         </div>
                     </a>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Premium car wash, detailing, and ceramic protection services. Trusted by thousands since 2013.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">Premium car wash, detailing, and ceramic protection services. Trusted by thousands since 2013.</p>
                     <div class="flex gap-3 justify-center sm:justify-start">
                         <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
@@ -1486,7 +2133,7 @@
                 </div>
                 <div class="text-center sm:text-start">
                     <h3 class="text-white text-xl font-bold mb-6 pl-3" style="border-left: 3px solid #00B4D8;">Quick Links</h3>
-                    <ul class="space-y-3 text-gray-400 text-sm">
+                    <ul class="space-y-3 text-gray-300 text-sm">
                         <li><a href="about.html" class="hover:text-aqua transition block">About Us</a></li>
                         <li><a href="services.html" class="hover:text-aqua transition block">Services</a></li>
                         <li><a href="wash-packages.html" class="hover:text-aqua transition block">Wash Packages</a></li>
@@ -1495,7 +2142,7 @@
                 </div>
                 <div class="text-center sm:text-start">
                     <h3 class="text-white text-xl font-bold mb-6 pl-3" style="border-left: 3px solid #00B4D8;">Services</h3>
-                    <ul class="space-y-3 text-gray-400 text-sm">
+                    <ul class="space-y-3 text-gray-300 text-sm">
                         <li><a href="auto-detailing.html" class="hover:text-aqua transition block">Auto Detailing</a></li>
                         <li><a href="ceramic-protection.html" class="hover:text-aqua transition block">Ceramic Protection</a></li>
                         <li><a href="interior-care.html" class="hover:text-aqua transition block">Interior Care</a></li>
@@ -1504,7 +2151,7 @@
                 </div>
                 <div class="text-center sm:text-start">
                     <h3 class="text-white text-xl font-bold mb-6 pl-3" style="border-left: 3px solid #00B4D8;">Contact</h3>
-                    <ul class="space-y-4 text-gray-400 text-sm">
+                    <ul class="space-y-4 text-gray-300 text-sm">
                         <li class="flex gap-3 justify-center sm:justify-start">
                             <i class="fas fa-map-marker-alt text-aqua w-5 text-base"></i>
                             <span>456 Sparkle Ave, Los Angeles, CA</span>
@@ -1520,7 +2167,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="mt-12 pt-8 text-center text-gray-500 text-xs border-t border-navy/30 dark:border-aqua/10">
+            <div class="mt-12 pt-8 text-center text-gray-400 text-xs border-t border-navy/30 dark:border-aqua/10">
                 <p>© 2026 AquaShine Car Wash & Auto Detailing. All rights reserved.</p>
             </div>
         </div>
@@ -1624,18 +2271,102 @@
             });
 
             // FAQ Accordion
-            document.querySelectorAll('.faq-card-question').forEach(button => {
+            const faqCards = document.querySelectorAll('.faq-card');
+            faqCards.forEach(card => {
+                const button = card.querySelector('.faq-card-question');
+                if (!button) return;
+                
                 button.addEventListener('click', () => {
-                    const card = button.parentElement;
                     const isActive = card.classList.contains('active');
                     
-                    document.querySelectorAll('.faq-card').forEach(c => c.classList.remove('active'));
+                    // Collapse all
+                    faqCards.forEach(c => {
+                        c.classList.remove('active');
+                        const btn = c.querySelector('.faq-card-question');
+                        if (btn) btn.setAttribute('aria-expanded', 'false');
+                    });
                     
+                    // Toggle current card
                     if (!isActive) {
                         card.classList.add('active');
+                        button.setAttribute('aria-expanded', 'true');
                     }
                 });
             });
+
+            // Hero Visual Showcase Switcher
+            const heroData = [
+                {
+                    src: 'assets/wp5.avif',
+                    alt: 'Showroom Ferrari 812 in Ultra-Gloss Ceramic Finish',
+                    category: 'Showroom Finish',
+                    title: 'Ultra-Gloss Paint Correction'
+                },
+                {
+                    src: 'assets/wp4.avif',
+                    alt: 'Detailing Bay - BMW M2 in Clean-Room Detailing Facility',
+                    category: 'Detailing Studio',
+                    title: 'Clean-Room Wash & Prep Bay'
+                },
+                {
+                    src: 'assets/index8.avif',
+                    alt: 'Master Craftsmanship - Two Auto Detailers Machine Polishing BMW',
+                    category: 'Master Craftsmanship',
+                    title: 'Multi-Stage Swirl Removal'
+                }
+            ];
+
+            const heroImg = document.getElementById('heroShowcaseImg');
+            const heroCat = document.getElementById('heroShowcaseCategory');
+            const heroTitle = document.getElementById('heroShowcaseTitle');
+            const heroBtns = document.querySelectorAll('.hero-thumb-btn');
+
+            let currentHeroIdx = 0;
+            let heroTimer = null;
+
+            function setHeroShowcase(idx) {
+                if (!heroImg || !heroData[idx]) return;
+                currentHeroIdx = idx;
+                
+                heroBtns.forEach((btn, i) => {
+                    btn.classList.toggle('active', i === idx);
+                });
+
+                heroImg.style.opacity = '0.3';
+                heroImg.style.transform = 'scale(0.97)';
+                
+                setTimeout(() => {
+                    heroImg.src = heroData[idx].src;
+                    heroImg.alt = heroData[idx].alt;
+                    if (heroCat) heroCat.textContent = heroData[idx].category;
+                    if (heroTitle) heroTitle.textContent = heroData[idx].title;
+                    
+                    heroImg.style.opacity = '1';
+                    heroImg.style.transform = 'scale(1)';
+                }, 200);
+            }
+
+            heroBtns.forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    clearInterval(heroTimer);
+                    const idx = parseInt(btn.getAttribute('data-index'), 10);
+                    if (!isNaN(idx)) {
+                        setHeroShowcase(idx);
+                        startHeroAutoplay();
+                    }
+                });
+            });
+
+            function startHeroAutoplay() {
+                heroTimer = setInterval(() => {
+                    const next = (currentHeroIdx + 1) % heroData.length;
+                    setHeroShowcase(next);
+                }, 5000);
+            }
+
+            if (heroBtns.length > 0) {
+                startHeroAutoplay();
+            }
 
             // Scroll Reveal
             const reveals = document.querySelectorAll('.reveal');

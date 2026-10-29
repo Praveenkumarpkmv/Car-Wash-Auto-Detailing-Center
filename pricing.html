@@ -21,7 +21,7 @@
                     },
                     colors: {
                         'navy': '#0A192F',
-                        'aqua': '#00B4D8',
+                        'aqua': 'var(--color-aqua, #0077B6)',
                         'navy-light': '#112240',
                         'navy-dark': '#020C1B',
                     }
@@ -30,6 +30,35 @@
         }
     </script>
     <style>
+        :root {
+            --color-aqua: #0077B6;
+            --color-aqua-rgb: 0, 119, 182;
+            --color-aqua-hover: #005F92;
+            --color-aqua-badge-bg: rgba(0, 119, 182, 0.08);
+            --color-aqua-badge-border: rgba(0, 119, 182, 0.35);
+        }
+        .dark {
+            --color-aqua: #00B4D8;
+            --color-aqua-rgb: 0, 180, 216;
+            --color-aqua-hover: #0096B5;
+            --color-aqua-badge-bg: rgba(0, 180, 216, 0.12);
+            --color-aqua-badge-border: rgba(0, 180, 216, 0.35);
+        }
+
+        .text-aqua {
+            color: var(--color-aqua) !important;
+        }
+        /* Preserve glowing vibrant aqua on inherently dark sections */
+        .dark .text-aqua,
+        .bg-navy .text-aqua,
+        .bg-navy-dark .text-aqua,
+        footer .text-aqua,
+        .hero-visual-stage .text-aqua,
+        section[style*="#0A192F"] .text-aqua,
+        div[style*="#0A192F"] .text-aqua {
+            color: #00B4D8 !important;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -462,8 +491,8 @@
 
         /* ===== BUTTONS ===== */
         .btn-primary {
-            background: #00B4D8;
-            color: #0A192F;
+            background: var(--color-aqua);
+            color: #FFFFFF;
             padding: 0.9rem 2.2rem;
             border-radius: 60px;
             font-weight: 700;
@@ -476,12 +505,33 @@
             border: none;
             cursor: pointer;
             text-decoration: none;
+            box-shadow: 0 4px 16px rgba(var(--color-aqua-rgb), 0.25);
         }
-        .btn-primary:hover { background: #0096b5; transform: scale(1.03); box-shadow: 0 8px 30px rgba(0, 180, 216, 0.45); }
+        .btn-primary:hover { 
+            background: var(--color-aqua-hover); 
+            color: #FFFFFF;
+            transform: scale(1.03); 
+            box-shadow: 0 8px 30px rgba(var(--color-aqua-rgb), 0.45); 
+        }
+        .dark .btn-primary,
+        section[style*="#0A192F"] .btn-primary,
+        div[style*="#0A192F"] .btn-primary {
+            background: #00B4D8;
+            color: #0A192F;
+            box-shadow: 0 4px 16px rgba(0, 180, 216, 0.35);
+        }
+        .dark .btn-primary:hover,
+        section[style*="#0A192F"] .btn-primary:hover,
+        div[style*="#0A192F"] .btn-primary:hover {
+            background: #0096b5;
+            color: #0A192F;
+            box-shadow: 0 8px 30px rgba(0, 180, 216, 0.55);
+        }
+
         .btn-outline {
-            border: 2px solid #00B4D8;
+            border: 2px solid var(--color-aqua);
             background: transparent;
-            color: #00B4D8;
+            color: var(--color-aqua);
             padding: 0.85rem 2.2rem;
             border-radius: 60px;
             font-weight: 600;
@@ -494,12 +544,23 @@
             text-decoration: none;
             cursor: pointer;
         }
-        .btn-outline:hover { background: #00B4D8; color: #0A192F; }
+        .btn-outline:hover { 
+            background: var(--color-aqua); 
+            color: #FFFFFF; 
+        }
+        .dark .btn-outline {
+            border-color: #00B4D8;
+            color: #00B4D8;
+        }
+        .dark .btn-outline:hover { 
+            background: #00B4D8; 
+            color: #0A192F; 
+        }
 
         /* ===== SECTION DIVIDERS ===== */
         .section-divider {
             height: 4px;
-            background: linear-gradient(90deg, transparent, #00B4D8, transparent);
+            background: linear-gradient(90deg, transparent, var(--color-aqua), transparent);
             margin: 0 auto;
             width: 200px;
             border-radius: 4px;
@@ -513,9 +574,15 @@
             font-weight: 700;
             letter-spacing: 0.18em;
             text-transform: uppercase;
-            border: 1px solid #00B4D8;
+            border: 1.5px solid var(--color-aqua);
+            color: var(--color-aqua);
+            background: var(--color-aqua-badge-bg);
+            transition: all 0.3s ease;
+        }
+        .dark .section-badge {
+            border-color: #00B4D8;
             color: #00B4D8;
-            background: rgba(0, 180, 216, 0.08);
+            background: rgba(0, 180, 216, 0.12);
         }
 
         /* ===== VEHICLE SIZE TOGGLE ===== */
@@ -541,14 +608,14 @@
             transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
             border: none;
             background: transparent;
-            color: #64748b;
+            color: #475569;
             font-family: 'Inter', sans-serif;
             display: inline-flex;
             align-items: center;
             gap: 8px;
             white-space: nowrap;
         }
-        .dark .toggle-btn { color: #94a3b8; }
+        .dark .toggle-btn { color: #cbd5e1; }
         .toggle-btn:hover { color: #00B4D8; }
         .toggle-btn.active {
             background: #00B4D8;
@@ -642,11 +709,11 @@
         }
         .dark .matrix-name { color: #ffffff; }
         .matrix-sub {
-            color: #64748b;
+            color: #475569;
             font-size: 0.9rem;
             margin-bottom: 26px;
         }
-        .dark .matrix-sub { color: #94a3b8; }
+        .dark .matrix-sub { color: #cbd5e1; }
 
         .matrix-price {
             display: flex;
@@ -673,15 +740,15 @@
         .matrix-card.featured .matrix-price .amount { color: #00B4D8; }
         .matrix-price .unit {
             font-size: 0.85rem;
-            color: #64748b;
+            color: #475569;
             font-weight: 600;
             margin-bottom: 6px;
         }
-        .dark .matrix-price .unit { color: #94a3b8; }
+        .dark .matrix-price .unit { color: #cbd5e1; }
 
         .matrix-original {
             font-size: 0.85rem;
-            color: #94a3b8;
+            color: #cbd5e1;
             margin-bottom: 22px;
             display: flex;
             align-items: center;
@@ -719,7 +786,7 @@
             color: #475569;
             line-height: 1.5;
         }
-        .dark .matrix-features li { color: #94a3b8; }
+        .dark .matrix-features li { color: #cbd5e1; }
         .matrix-features li i {
             color: #00B4D8;
             font-size: 0.85rem;
@@ -729,7 +796,7 @@
         .matrix-features li.dim {
             opacity: 0.4;
         }
-        .matrix-features li.dim i { color: #94a3b8; }
+        .matrix-features li.dim i { color: #cbd5e1; }
 
         .matrix-cta {
             display: inline-flex;
@@ -845,13 +912,13 @@
         .price-list-cell .small {
             display: block;
             font-size: 0.7rem;
-            color: #94a3b8;
+            color: #cbd5e1;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             margin-top: 2px;
         }
-        .price-list-cell.neg { color: #94a3b8; }
+        .price-list-cell.neg { color: #cbd5e1; }
         .price-list-cell.neg .small { color: #cbd5e1; }
 
         @media (max-width: 700px) {
@@ -879,7 +946,7 @@
                 font-weight: 700;
                 letter-spacing: 0.08em;
                 text-transform: uppercase;
-                color: #94a3b8;
+                color: #cbd5e1;
             }
         }
 
@@ -1156,7 +1223,7 @@
             width: 100%;
             text-align: center;
         }
-        .dark .loyalty-perks li { color: #94a3b8; }
+        .dark .loyalty-perks li { color: #cbd5e1; }
         .loyalty-perks li i {
             color: #00B4D8;
             font-size: 0.78rem;
@@ -1229,10 +1296,10 @@
         .dark .guarantee-text b { color: #ffffff; }
         .guarantee-text span {
             font-size: 0.78rem;
-            color: #64748b;
+            color: #475569;
             line-height: 1.3;
         }
-        .dark .guarantee-text span { color: #94a3b8; }
+        .dark .guarantee-text span { color: #cbd5e1; }
         .guarantee-divider {
             width: 1px;
             height: 40px;
@@ -1414,11 +1481,7 @@
             <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(10,25,47,0.78) 0%, rgba(10,25,47,0.9) 50%, #0A192F 100%);"></div>
         </div>
         
-        <div class="absolute inset-0 pointer-events-none opacity-10">
-            <div class="absolute top-1/4 left-10 floating text-aqua"><i class="fas fa-tags fa-5x"></i></div>
-            <div class="absolute bottom-1/4 right-10 floating text-aqua" style="animation-delay: 2s;"><i class="fas fa-coins fa-4x"></i></div>
-            <div class="absolute top-1/3 right-1/4 floating text-aqua" style="animation-delay: 4s;"><i class="fas fa-calculator fa-4x"></i></div>
-        </div>
+        
         
         <div class="relative z-10 text-center px-4 sm:px-6 max-w-5xl w-full">
             <div class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full mb-8" style="background: rgba(0,180,216,0.15); border: 1px solid rgba(0,180,216,0.3);">
@@ -1447,7 +1510,7 @@
     <!-- ===== VEHICLE SIZE TOGGLE ===== -->
     <section class="py-14 sm:py-16 px-4 sm:px-6 bg-white dark:bg-navy-dark transition-colors duration-300 w-full">
         <div class="max-w-[1400px] mx-auto w-full text-center">
-            <p class="text-sm font-bold tracking-widest uppercase text-gray-500 dark:text-gray-400 mb-5 reveal">Select Your Vehicle Size</p>
+            <p class="text-sm font-bold tracking-widest uppercase text-gray-600 dark:text-gray-300 mb-5 reveal">Select Your Vehicle Size</p>
             <div class="toggle-shell reveal" id="sizeToggle">
                 <button class="toggle-btn active" data-size="sedan">
                     <i class="fas fa-car-side"></i> Sedan / Coupe
@@ -1456,7 +1519,7 @@
                     <i class="fas fa-truck-pickup"></i> SUV / Truck
                 </button>
             </div>
-            <p class="text-xs text-gray-500 dark:text-gray-400 mt-5 reveal">Prices shown below update based on your selection.</p>
+            <p class="text-xs text-gray-600 dark:text-gray-300 mt-5 reveal">Prices shown below update based on your selection.</p>
         </div>
     </section>
 
@@ -1467,7 +1530,7 @@
                 <span class="section-badge">Pricing Plans</span>
                 <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-5">Choose Your <span class="italic text-aqua">Level of Care</span></h2>
                 <div class="section-divider mt-7"></div>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">Three core packages with everything you need, from routine maintenance to full restoration.</p>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">Three core packages with everything you need, from routine maintenance to full restoration.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-6">
@@ -1574,7 +1637,7 @@
 
             </div>
 
-            <p class="text-center text-gray-500 dark:text-gray-400 text-sm mt-10 reveal">
+            <p class="text-center text-gray-600 dark:text-gray-300 text-sm mt-10 reveal">
                 <i class="fas fa-info-circle text-aqua mr-2"></i>
                 Prices shown for <b>Sedan / Coupe</b>. Toggle above to see SUV / Truck pricing.
             </p>
@@ -1588,7 +1651,7 @@
                 <span class="section-badge">Detailed Price List</span>
                 <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-5">Every Service, <span class="italic text-aqua">Every Price</span></h2>
                 <div class="section-divider mt-7"></div>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">Full transparency on every service we offer. Add any of these to your package or book individually.</p>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">Full transparency on every service we offer. Add any of these to your package or book individually.</p>
             </div>
 
             <div class="price-list reveal">
@@ -1768,7 +1831,7 @@
                 <span class="section-badge">Loyalty Rewards</span>
                 <h2 class="section-title font-serif text-4xl sm:text-5xl md:text-6xl text-navy dark:text-white font-bold mt-5">Perks That <span class="italic text-aqua">Grow With You</span></h2>
                 <div class="section-divider mt-7"></div>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">The more you visit, the more you save. Climb the tiers and unlock bigger rewards at each level.</p>
+                <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mt-7 text-base sm:text-lg leading-relaxed">The more you visit, the more you save. Climb the tiers and unlock bigger rewards at each level.</p>
             </div>
 
             <div class="loyalty-track reveal">
@@ -1894,7 +1957,7 @@
                             <span class="logo-sub">Car Wash & Detailing</span>
                         </div>
                     </a>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Premium car wash, detailing, and ceramic protection services. Trusted by thousands since 2013.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-6">Premium car wash, detailing, and ceramic protection services. Trusted by thousands since 2013.</p>
                     <div class="flex gap-3 justify-center sm:justify-start">
                         <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
@@ -1904,7 +1967,7 @@
                 </div>
                 <div class="text-center sm:text-start">
                     <h3 class="text-white text-xl font-bold mb-6 pl-3" style="border-left: 3px solid #00B4D8;">Quick Links</h3>
-                    <ul class="space-y-3 text-gray-400 text-sm">
+                    <ul class="space-y-3 text-gray-300 text-sm">
                         <li><a href="about.html" class="hover:text-aqua transition block">About Us</a></li>
                         <li><a href="services.html" class="hover:text-aqua transition block">Services</a></li>
                         <li><a href="wash-packages.html" class="hover:text-aqua transition block">Wash Packages</a></li>
@@ -1913,7 +1976,7 @@
                 </div>
                 <div class="text-center sm:text-start">
                     <h3 class="text-white text-xl font-bold mb-6 pl-3" style="border-left: 3px solid #00B4D8;">Services</h3>
-                    <ul class="space-y-3 text-gray-400 text-sm">
+                    <ul class="space-y-3 text-gray-300 text-sm">
                         <li><a href="auto-detailing.html" class="hover:text-aqua transition block">Auto Detailing</a></li>
                         <li><a href="ceramic-protection.html" class="hover:text-aqua transition block">Ceramic Protection</a></li>
                         <li><a href="interior-care.html" class="hover:text-aqua transition block">Interior Care</a></li>
@@ -1922,7 +1985,7 @@
                 </div>
                 <div class="text-center sm:text-start">
                     <h3 class="text-white text-xl font-bold mb-6 pl-3" style="border-left: 3px solid #00B4D8;">Contact</h3>
-                    <ul class="space-y-4 text-gray-400 text-sm">
+                    <ul class="space-y-4 text-gray-300 text-sm">
                         <li class="flex gap-3 justify-center sm:justify-start">
                             <i class="fas fa-map-marker-alt text-aqua w-5 text-base"></i>
                             <span>456 Sparkle Ave, Los Angeles, CA</span>
@@ -1938,7 +2001,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="mt-12 pt-8 text-center text-gray-500 text-xs border-t border-navy/30 dark:border-aqua/10">
+            <div class="mt-12 pt-8 text-center text-gray-400 text-xs border-t border-navy/30 dark:border-aqua/10">
                 <p>© 2026 AquaShine Car Wash & Auto Detailing. All rights reserved.</p>
             </div>
         </div>
